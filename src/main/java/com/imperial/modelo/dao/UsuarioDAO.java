@@ -18,7 +18,7 @@ public class UsuarioDAO {
         if(conexionBD != null){
             String insert = "INSERT INTO usuario"
                     + " (nombre, apellidoPaterno, apellidoMaterno, correo, contrasena,"
-                    + " , idRol) VALUES"
+                    + " idRol) VALUES"
                     + " (?, ?, ?, ?, ?, ?);";
             
             PreparedStatement sentencia = conexionBD.prepareStatement(insert);
@@ -41,9 +41,9 @@ public class UsuarioDAO {
                 String consulta = "SELECT idUsuario, nombre, apellidoPaterno, apellidoMaterno, correo, contrasena, " +
                     ",estado, usuario.idRol, Rol " +
                     "FROM " +
-                    "profesor " +
+                    "usuario " +
                     "INNER JOIN " +
-                    "rol on rol.idRol = profesor.idRol;";
+                    "rol on rol.idRol = usuario.idRol;";
                 PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
                 return sentencia.executeQuery();
         }

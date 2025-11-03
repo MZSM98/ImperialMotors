@@ -1,4 +1,3 @@
-
 package com.imperial.modelo;
 
 import java.sql.Connection;
@@ -8,7 +7,10 @@ import java.sql.SQLException;
 
 public class ConexionBD {
     
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private ConexionBD(){
+        throw new UnsupportedOperationException("Esta clase no debe ser instanciada...");
+    }
+    
     private static final String NAME_BD = "imperialmotors";
     private static final String IP = "localhost";
     private static final String PORT  = "3306";
@@ -16,20 +18,19 @@ public class ConexionBD {
             + "?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=America/Mexico_City";
     private static final String USER = "admnistrador";
     private static final String PASSWORD = "<4DM1N1STR4D0R>";
-    private static Connection conexion = null;
+    private static Connection conexion = null; //
     
     public static Connection abrirConexion(){
 
         try{
-            Class.forName(DRIVER);
-            conexion = DriverManager.getConnection(URL, USER, PASSWORD);
             
-        }catch(ClassNotFoundException cnfe){
-            cnfe.printStackTrace();
-        }catch (SQLException sqle){
+            conexion = DriverManager.getConnection(URL, USER, PASSWORD); //
+            
+        }catch (SQLException sqle){ //
             sqle.printStackTrace();
         }
-        return conexion;
+        
+        return conexion; //
         
     }
     

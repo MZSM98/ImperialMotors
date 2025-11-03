@@ -19,7 +19,7 @@ public class AutenticacionImpl {
             
             if (resultado.next()){
                 Usuario usuarioSesion = new Usuario();
-                usuarioSesion.setIdUsuario(resultado.getInt("idProfesor"));
+                usuarioSesion.setIdUsuario(resultado.getInt("idUsuario"));
                 usuarioSesion.setNombre(resultado.getString("nombre"));
                 usuarioSesion.setApellidoPaterno(resultado.getString("apellidoPaterno"));
                 usuarioSesion.setApellidoMaterno(resultado.getString("apellidoMaterno"));

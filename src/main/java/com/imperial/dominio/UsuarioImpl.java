@@ -27,14 +27,14 @@ public class UsuarioImpl {
             
             while (resultado.next()){
                 Usuario usuario = new Usuario ();
-                usuario.setIdUsuario(resultado.getInt("idProfesor"));
+                usuario.setIdUsuario(resultado.getInt("idUsuario"));
                 usuario.setNombre(resultado.getString("nombre"));
                 usuario.setApellidoPaterno(resultado.getString("apellidoPaterno"));
                 usuario.setApellidoMaterno(resultado.getString("apellidoMaterno"));
                 usuario.setCorreo(resultado.getString("correo"));
                 usuario.setIdRol(resultado.getInt("idRol"));
                 usuario.setRol(resultado.getString("rol"));
-                usuario.setContrasena(resultado.getString("password"));
+                usuario.setContrasena(resultado.getString("contrasena"));
                 usuarios.add(usuario);
                 
             }
@@ -49,17 +49,17 @@ public class UsuarioImpl {
     }
     
     
-    public static HashMap<String, Object> registrarProfesor(Usuario profesor){
+    public static HashMap<String, Object> registrarProfesor(Usuario usuario){
         
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
         
         
         try{
-            int filasAfectadas = UsuarioDAO.registrarUsuario(profesor, ConexionBD.abrirConexion());
+            int filasAfectadas = UsuarioDAO.registrarUsuario(usuario, ConexionBD.abrirConexion());
             
             if (filasAfectadas > 0){
                 respuesta.put("error", false);
-                respuesta.put("mensaje", "El registro del profesor" + profesor.getNombre() +" fue guardado de manera exitosa");
+                respuesta.put("mensaje", "El registro del profesor" + usuario.getNombre() +" fue guardado de manera exitosa");
                 
             }else{
                 respuesta.put("error", true);

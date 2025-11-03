@@ -21,7 +21,7 @@ public class AutenticacionDAO {
             String consulta = "SELECT idUsuario, nombre, " +
                 "apellidoPaterno, apellidoMaterno, correo, u.idRol, rol " +
                 "FROM usuario u " +
-                "INNER JOIN rol r ON r.idRol = p.idRol " +
+                "INNER JOIN rol r ON r.idRol = u.idRol " +
                 "WHERE correo = ? " +
                 "AND contrasena = ?";
             PreparedStatement sentencia = conexionBD.prepareStatement(consulta);

@@ -91,9 +91,9 @@ public class InicioSesionController implements Initializable {
     
     private void irPantallaPrincipal(Usuario usuario){
 
-            if (usuario.getRol()== "Administrador"){
+            if ("Administrador".equals(usuario.getRol())){
                 irMenuPrincipalAdmin();
-            }else if(usuario.getRol() == "Vendedor"){
+            }else if("Vendedor".equals(usuario.getIdRol())){
                 irMenuPrincipalVendedor();
             }
             
