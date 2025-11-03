@@ -18,12 +18,18 @@ public class AutenticacionImpl {
                     contrasena, ConexionBD.abrirConexion());
             
             if (resultado.next()){
-                Usuario profesorSesion = new Usuario();
-                //set de datos
+                Usuario usuarioSesion = new Usuario();
+                usuarioSesion.setIdUsuario(resultado.getInt("idProfesor"));
+                usuarioSesion.setNombre(resultado.getString("nombre"));
+                usuarioSesion.setApellidoPaterno(resultado.getString("apellidoPaterno"));
+                usuarioSesion.setApellidoMaterno(resultado.getString("apellidoMaterno"));
+                usuarioSesion.setCorreo(resultado.getString("correo"));
+                usuarioSesion.setIdRol(resultado.getInt("idRol"));
+                usuarioSesion.setRol(resultado.getString("rol"));
                 
                 respuesta.put("Error", false);
                 respuesta.put("mensaje", "Credenciales correctas");
-                respuesta.put("Profesor", profesorSesion);
+                respuesta.put("Profesor", usuarioSesion);
             }else{
                 respuesta.put("Error", true);
                 respuesta.put("mensaje", "Las credenciales proporcionadas son incorrectas, por favor verifica la información");

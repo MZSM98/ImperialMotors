@@ -17,7 +17,7 @@ public class ImperialMotors extends Application {
     @Override
     public void start (Stage primaryStage){
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("vista/FXMLInicioSesion.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/com/imperial/vista/FXMLInicioSesion.fxml"));
             Scene scene = new Scene (parent);
             primaryStage.setScene(scene);
             primaryStage.show();
