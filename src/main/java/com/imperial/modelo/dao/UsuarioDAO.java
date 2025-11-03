@@ -38,8 +38,8 @@ public class UsuarioDAO {
         
         if (conexionBD != null){
            
-                String consulta = "SELECT idUsuario, nombre, apellidoPaterno, apellidoMaterno, correo, contrasena, " +
-                    ",estado, usuario.idRol, Rol " +
+                String consulta = "SELECT idUsuario, nombre, apellidoPaterno, apellidoMaterno, correo, contrasena" +
+                    ", estado, usuario.idRol, Rol " +
                     "FROM " +
                     "usuario " +
                     "INNER JOIN " +

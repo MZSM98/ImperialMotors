@@ -39,7 +39,7 @@ public class UsuarioImpl {
                 
             }
             respuesta.put("error", false);
-            respuesta.put("profesores", usuarios);
+            respuesta.put("usuarios", usuarios);
             ConexionBD.cerrarConexionBD();
         }catch(SQLException sqle){
             respuesta.put("error", true);
@@ -49,7 +49,7 @@ public class UsuarioImpl {
     }
     
     
-    public static HashMap<String, Object> registrarProfesor(Usuario usuario){
+    public static HashMap<String, Object> registrarUsuario(Usuario usuario){
         
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
         
@@ -59,7 +59,7 @@ public class UsuarioImpl {
             
             if (filasAfectadas > 0){
                 respuesta.put("error", false);
-                respuesta.put("mensaje", "El registro del profesor" + usuario.getNombre() +" fue guardado de manera exitosa");
+                respuesta.put("mensaje", "El registro del usuario" + usuario.getNombre() +" fue guardado de manera exitosa");
                 
             }else{
                 respuesta.put("error", true);
@@ -85,7 +85,7 @@ public class UsuarioImpl {
         }
     }
     
-    public static HashMap<String, Object> editarProfesor(Usuario usuario){
+    public static HashMap<String, Object> editarUsuario(Usuario usuario){
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
         
         try{
