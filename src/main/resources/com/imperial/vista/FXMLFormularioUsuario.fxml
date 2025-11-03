@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="513.0" prefWidth="794.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.imperial.controlador.FormularioUsuarioController">
+<AnchorPane id="AnchorPane" prefHeight="532.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.FormularioUsuarioController">
    <children>
       <Label layoutX="56.0" layoutY="56.0" text="Crear Usuario">
          <font>
@@ -65,7 +64,7 @@
             <Label text="Confirmar Contraseña:" GridPane.rowIndex="8" />
             <Label fx:id="labelErrorCorreo" textFill="RED" GridPane.rowIndex="2" />
             <Label fx:id="labelErrorNombre" textFill="RED" GridPane.rowIndex="5" />
-            <Label prefHeight="18.0" prefWidth="166.0" textFill="RED" GridPane.rowIndex="8">
+            <Label fx:id="labelErrorConfirmar" prefHeight="18.0" prefWidth="166.0" textFill="RED" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets left="125.0" />
                </GridPane.margin>
@@ -91,11 +90,13 @@
                   <Insets right="25.0" />
                </GridPane.margin>
             </TextField>
-            <Label textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="labelErrorApellidoPaterno" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label fx:id="labelErrorApellidoMaterno" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Button mnemonicParsing="false" onAction="#cerrarRegistro" prefHeight="26.0" prefWidth="200.0" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="11" />
             <Button mnemonicParsing="false" onAction="#crearRegistro" prefHeight="26.0" prefWidth="200.0" text="Crear" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+            <Label fx:id="labelErrorContrasena" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
+      <Label fx:id="labelErrorRol" layoutX="56.0" layoutY="491.0" textFill="RED" />
    </children>
 </AnchorPane>

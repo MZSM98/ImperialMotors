@@ -17,7 +17,7 @@ public class UsuarioImpl {
         
     }
     
-    public static HashMap<String, Object> obtenerProfesores(){
+    public static HashMap<String, Object> obtenerUsuarios(){
         
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
         try{
