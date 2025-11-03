@@ -16,9 +16,9 @@ public class ConexionBD {
     private static final String PORT  = "3306";
     private static final String URL = "jdbc:mysql://"+ IP + ":" + PORT + "/" + NAME_BD
             + "?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=America/Mexico_City";
-    private static final String USER = "admnistrador";
+    private static final String USER = "administrador";
     private static final String PASSWORD = "<4DM1N1STR4D0R>";
-    private static Connection conexion = null; //
+    private static Connection conexion = null; 
     
     public static Connection abrirConexion(){
 
@@ -26,11 +26,11 @@ public class ConexionBD {
             
             conexion = DriverManager.getConnection(URL, USER, PASSWORD); //
             
-        }catch (SQLException sqle){ //
+        }catch (SQLException sqle){ 
             sqle.printStackTrace();
         }
         
-        return conexion; //
+        return conexion; 
         
     }
     

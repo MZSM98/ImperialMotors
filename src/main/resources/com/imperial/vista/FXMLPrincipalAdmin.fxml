@@ -29,7 +29,7 @@
                   <RowConstraints maxHeight="138.2000183105469" minHeight="10.0" prefHeight="28.000036621093727" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="40.0" prefWidth="138.0" text="Cerrar Sesión" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button fx:id="botonCerrarSesion" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="40.0" prefWidth="138.0" text="Cerrar Sesión" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -62,7 +62,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#abrirGestionClientes" prefHeight="146.0" prefWidth="162.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button mnemonicParsing="false" onAction="#abrirGestionUsuarios" prefHeight="146.0" prefWidth="162.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>

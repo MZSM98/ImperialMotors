@@ -29,7 +29,7 @@ public class AutenticacionImpl {
                 
                 respuesta.put("Error", false);
                 respuesta.put("mensaje", "Credenciales correctas");
-                respuesta.put("Profesor", usuarioSesion);
+                respuesta.put("Usuario", usuarioSesion);
             }else{
                 respuesta.put("Error", true);
                 respuesta.put("mensaje", "Las credenciales proporcionadas son incorrectas, por favor verifica la información");

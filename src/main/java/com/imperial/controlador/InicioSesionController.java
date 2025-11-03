@@ -76,7 +76,7 @@ public class InicioSesionController implements Initializable {
         boolean error = (boolean) respuesta.get("Error");
         
         if (!error){
-            Usuario usuarioSesion = (Usuario)respuesta.get("Profesor");
+            Usuario usuarioSesion = (Usuario)respuesta.get("Usuario");
             Utilidades.mostrarAlerta("Credenciales Correctas", "Bienvenido(a) " +
                     usuarioSesion.getNombre() + ", al Sistema de Gestión Vehicular" ,Alert.AlertType.INFORMATION);
             irPantallaPrincipal(usuarioSesion);
@@ -93,8 +93,11 @@ public class InicioSesionController implements Initializable {
 
             if ("Administrador".equals(usuario.getRol())){
                 irMenuPrincipalAdmin();
-            }else if("Vendedor".equals(usuario.getIdRol())){
+            }else if("Vendedor".equals(usuario.getRol())){
                 irMenuPrincipalVendedor();
+            }else{
+                Utilidades.mostrarAlerta("Advertencia", "Por el momento no tenemos servicio, intenta más tarde"
+                    ,Alert.AlertType.WARNING);
             }
             
     }
