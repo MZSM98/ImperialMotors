@@ -9,13 +9,13 @@ import java.sql.SQLException;
 public class ConexionBD {
     
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String NAME_BD = "escolarpcs";
+    private static final String NAME_BD = "imperialmotors";
     private static final String IP = "localhost";
     private static final String PORT  = "3306";
     private static final String URL = "jdbc:mysql://"+ IP + ":" + PORT + "/" + NAME_BD
             + "?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=America/Mexico_City";
-    private static final String USER = "root";
-    private static final String PASSWORD = "S0n3r_P34_RG";
+    private static final String USER = "admnistrador";
+    private static final String PASSWORD = "<4DM1N1STR4D0R>";
     private static Connection conexion = null;
     
     public static Connection abrirConexion(){

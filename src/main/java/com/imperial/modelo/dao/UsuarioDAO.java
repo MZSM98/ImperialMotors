@@ -1,6 +1,7 @@
 
 package com.imperial.modelo.dao;
 
+import com.imperial.modelo.pojo.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,28 +10,76 @@ import java.sql.SQLException;
 
 public class UsuarioDAO {
 
-    public static ResultSet autenticarUsuario(String noPersonal,
-            String password, Connection conexionBD) throws SQLException{
+    private UsuarioDAO(){
+        throw new UnsupportedOperationException("Esta clase no debe ser instanciada...");
+    }
+    public static int registrarUsuario(Usuario usuario, Connection conexionBD) throws SQLException{
         
-        ResultSet resultado = null;
+        if(conexionBD != null){
+            String insert = "INSERT INTO usuario"
+                    + " (nombre, apellidoPaterno, apellidoMaterno, correo, contrasena,"
+                    + " , idRol) VALUES"
+                    + " (?, ?, ?, ?, ?, ?);";
+            
+            PreparedStatement sentencia = conexionBD.prepareStatement(insert);
+            sentencia.setString(1, usuario.getNombre());
+            sentencia.setString(2, usuario.getApellidoPaterno());
+            sentencia.setString(3, usuario.getApellidoMaterno());
+            sentencia.setString(4, usuario.getCorreo());
+            sentencia.setString(5, usuario.getContrasena());
+            sentencia.setInt(6, usuario.getIdRol());
+            return sentencia.executeUpdate();
+        }
+        throw new SQLException("Error de conexion con la base de datos");
+    }
+    
+    public static ResultSet obtenerUsuarios(Connection conexionBD)
+            throws SQLException{
+        
+        if (conexionBD != null){
+           
+                String consulta = "SELECT idUsuario, nombre, apellidoPaterno, apellidoMaterno, correo, contrasena, " +
+                    ",estado, usuario.idRol, Rol " +
+                    "FROM " +
+                    "profesor " +
+                    "INNER JOIN " +
+                    "rol on rol.idRol = profesor.idRol;";
+                PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
+                return sentencia.executeQuery();
+        }
+        throw new SQLException("No hay conexion a la base de datos.");
+        
+    }
+    
+    public static boolean verificarCorreo(Connection conexionBD, String correo) throws SQLException{
         
         if (conexionBD != null){
             
-            //Hay conexion con la BD
-            String consulta = "SELECT idUsuario, nombre, " +
-                "apellidoPaterno, apellidoMaterno, correo, u.idRol, rol " +
-                "FROM usuario u " +
-                "INNER JOIN rol r ON r.idRol = p.idRol " +
-                "WHERE correo = ? " +
-                "AND contrasena = ?";
-            PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
-            sentencia.setString(1, noPersonal);
-            sentencia.setString(2, password);
-            resultado = sentencia.executeQuery();
+            String consulta = "SELECT * FROM usuario WHERE correo = ?;";
             
-            return resultado;
+            PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
+            sentencia.setString(1, correo);
+            return sentencia.executeQuery().next();
+        }
+        throw new SQLException("No hay conexion a la base de datos");
+    }
+    
+    public static int editarUsuario(Usuario usuario, Connection conexionBD) throws SQLException{
+        
+        if (conexionBD != null ){
+            
+            return 0;
+        }
+        throw new SQLException();
+    }
+    
+    public static int eliminarUsuario(int idUsuario, Connection conexionBD) throws SQLException{
+        
+        if(conexionBD != null){
+            
+            return 0;
         }
         
-        return null;
+        throw new SQLException();
     }
 }

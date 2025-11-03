@@ -33,7 +33,7 @@
                <children>
                   <TextField fx:id="textCorreo" promptText="Ej. manolo@correo.com" GridPane.rowIndex="1" />
                   <Label text="Correo:" />
-                  <Label fx:id="labelErrorUsuario" textFill="RED" GridPane.rowIndex="2" />
+                  <Label fx:id="labelErrorCorreo" textFill="RED" GridPane.rowIndex="2" />
                   <Label text="Contraseña:" GridPane.rowIndex="3" />
                   <Label fx:id="labelErrorContrasena" textFill="RED" GridPane.rowIndex="5" />
                   <Button mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="26.0" prefWidth="86.0" text="Continuar" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
