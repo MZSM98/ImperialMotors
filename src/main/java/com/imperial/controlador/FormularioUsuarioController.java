@@ -2,6 +2,7 @@ package com.imperial.controlador;
 
 import com.imperial.dominio.UsuarioImpl;
 import com.imperial.modelo.pojo.Usuario;
+import com.imperial.utilidad.Encriptacion;
 import com.imperial.utilidad.Utilidades;
 import java.net.URL;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ public class FormularioUsuarioController implements Initializable {
     @FXML
     private TextField textCorreo;
     @FXML
-    private ComboBox<String> comboRoles; //Cambiado de <?> a <String>
+    private ComboBox<String> comboRoles; 
     @FXML
     private TextField textNombre;
     @FXML
@@ -40,13 +41,13 @@ public class FormularioUsuarioController implements Initializable {
     @FXML
     private Label labelErrorApellidoMaterno;
     @FXML
-    private Label labelErrorApellidoPaterno; // Asumo que tienes este label, si no, créalo
+    private Label labelErrorApellidoPaterno; 
     @FXML
-    private Label labelErrorContrasena; // Asumo que tienes este label
+    private Label labelErrorContrasena; 
     @FXML
-    private Label labelErrorConfirmar; // Asumo que tienes este label
+    private Label labelErrorConfirmar; 
     @FXML
-    private Label labelErrorRol; // Asumo que tienes este label
+    private Label labelErrorRol; 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -67,20 +68,20 @@ public class FormularioUsuarioController implements Initializable {
             usuario.setApellidoPaterno(textApellidoPaterno.getText());
             usuario.setApellidoMaterno(textApellidoMaterno.getText());
             usuario.setCorreo(textCorreo.getText());
-            usuario.setContrasena(textContrasena.getText());
+            String passwordPlano = textContrasena.getText();
+            String passwordHash = Encriptacion.hashPassword(passwordPlano);
+            usuario.setContrasena(passwordHash);
             
-            //Mapeo de Rol String a idRol (Asumiendo 1=Admin, 2=Vendedor)
             String rolSeleccionado = comboRoles.getValue();
             int idRol = "Administrador".equals(rolSeleccionado) ? 1 : 2;
             usuario.setIdRol(idRol);
             
-            //Usamos "registrarProfesor" por la inconsistencia
             registrarUsuario(usuario);
         }
     }
     
     private void configurarComboBoxRoles(){
-        //Como Rol.java está vacío, cargamos los roles manualmente
+        //por ahora manejaremos los roles de manera manual
         ObservableList<String> roles = FXCollections.observableArrayList("Administrador", "Vendedor");
         comboRoles.setItems(roles);
     }

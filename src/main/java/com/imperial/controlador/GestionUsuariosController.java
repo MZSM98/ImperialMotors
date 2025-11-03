@@ -64,10 +64,9 @@ public class GestionUsuariosController implements Initializable {
             Stage escenario = new Stage();
             escenario.setScene(escena);
             escenario.setTitle("Registrar Usuario");
-            escenario.initModality(Modality.APPLICATION_MODAL); //Bloquea la ventana anterior
-            escenario.showAndWait(); //Espera a que se cierre la ventana
+            escenario.initModality(Modality.APPLICATION_MODAL); 
+            escenario.showAndWait(); 
             
-            //Refresca la tabla después de cerrar
             llenarTablaUsuarios();
             
         }catch (IOException ioe){
@@ -79,15 +78,11 @@ public class GestionUsuariosController implements Initializable {
     //TODO: Implementar lógica de editar
     @FXML
     private void abrirFormularioEditarUsuarios(ActionEvent event) {
-        //Aquí iría la lógica para abrir el formulario en modo edición
-        //Necesitas verificar que un usuario esté seleccionado en la tabla
     }
     
     //TODO: Implementar lógica de eliminar
     @FXML
     private void eliminarUsuario(ActionEvent event) {
-        //Aquí iría la lógica para eliminar el usuario seleccionado
-        //Se verificará si hay un usuario seleccioando y se pedirá confirmación
     }
     
     private void configurarTablaUsuarios(){
@@ -101,7 +96,6 @@ public class GestionUsuariosController implements Initializable {
     }
     
     private void llenarTablaUsuarios(){
-        //Usamos el nombre "profesores" porque así está en tu UsuarioImpl
         HashMap<String, Object> respuesta = UsuarioImpl.obtenerUsuarios();
         boolean error = (boolean) respuesta.get("error");
         
