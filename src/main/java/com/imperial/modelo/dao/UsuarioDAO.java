@@ -82,4 +82,12 @@ public class UsuarioDAO {
         
         throw new SQLException();
     }
+    
+    public static int cambiarEstado(String estado, Connection conexionBD) throws SQLException{
+        
+        if(conexionBD != null){
+            return 0;
+        }
+        throw new SQLException();
+    }
 }

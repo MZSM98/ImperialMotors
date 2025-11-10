@@ -54,36 +54,6 @@ public class GestionUsuariosController implements Initializable {
         Stage escenario = (Stage) tablaUsuarios.getScene().getWindow();
         escenario.close();
     }
-
-    @FXML
-    private void abrirFormularioRegistroUsuarios(ActionEvent event) {
-        try{
-            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLFormularioUsuario.fxml");
-            Parent vista = cargador.load();
-            Scene escena = new Scene(vista);      
-            Stage escenario = new Stage();
-            escenario.setScene(escena);
-            escenario.setTitle("Registrar Usuario");
-            escenario.initModality(Modality.APPLICATION_MODAL); 
-            escenario.showAndWait(); 
-            
-            llenarTablaUsuarios();
-            
-        }catch (IOException ioe){
-            Utilidades.mostrarAlerta("Error", "No se pudo cargar la vista", Alert.AlertType.ERROR);
-            ioe.printStackTrace();
-        }
-    }
-    
-    //TODO: Implementar lógica de editar
-    @FXML
-    private void abrirFormularioEditarUsuarios(ActionEvent event) {
-    }
-    
-    //TODO: Implementar lógica de eliminar
-    @FXML
-    private void eliminarUsuario(ActionEvent event) {
-    }
     
     private void configurarTablaUsuarios(){
         usuarios = FXCollections.observableArrayList();
@@ -106,5 +76,34 @@ public class GestionUsuariosController implements Initializable {
         }else{
             Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
         }
+    }
+
+    @FXML
+    private void clicRegistrar(ActionEvent event) {
+        try{
+            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLFormularioUsuario.fxml");
+            Parent vista = cargador.load();
+            Scene escena = new Scene(vista);      
+            Stage escenario = new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Registrar Usuario");
+            escenario.initModality(Modality.APPLICATION_MODAL); 
+            escenario.showAndWait(); 
+            
+            llenarTablaUsuarios();
+            
+        }catch (IOException ioe){
+            Utilidades.mostrarAlerta("Error", "No se pudo cargar la vista", Alert.AlertType.ERROR);
+            ioe.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void clicEditar(ActionEvent event) {
+    }
+
+    @FXML
+    private void cambiarEstado(ActionEvent event) {
+        
     }
 }
