@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="454.0" prefWidth="661.0" style="-fx-background-color: GREY;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.imperial.controlador.FXMLGestionClienteController">
+   <children>
+      <Label layoutX="284.0" layoutY="36.0" text="Clientes">
+         <font>
+            <Font name="SansSerif Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="63.0" text="Buscar:" />
+      <TextField fx:id="textBuscar" layoutX="22.0" layoutY="85.0" prefHeight="26.0" prefWidth="406.0" promptText="Nombre del cliente" />
+      <Button layoutX="454.0" layoutY="85.0" mnemonicParsing="false" onAction="#clicRegistrar" prefHeight="26.0" prefWidth="82.0" text="Registrar" />
+      <Button layoutX="558.0" layoutY="85.0" mnemonicParsing="false" onAction="#clicEditar" prefHeight="26.0" prefWidth="82.0" text="Editar" />
+      <TableView fx:id="tablaProveedores" layoutX="22.0" layoutY="130.0" prefHeight="268.0" prefWidth="618.0">
+         <columns>
+            <TableColumn fx:id="columnaNombre" minWidth="123.0" prefWidth="78.0" text="Nombre" />
+            <TableColumn fx:id="columnaApPaterno" minWidth="123.0" prefWidth="113.0" text="Apellido paterno" />
+            <TableColumn fx:id="columnaApMaterno" minWidth="123.0" prefWidth="123.0" text="Apellido materno" />
+            <TableColumn fx:id="columnaTelefono" minWidth="123.0" prefWidth="123.0" text="Telefono" />
+            <TableColumn fx:id="columnaCorreo" minWidth="123.0" prefWidth="123.0" text="Correo" />
+         </columns>
+      </TableView>
+      <Button layoutX="22.0" layoutY="409.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="26.0" prefWidth="150.0" text="Regresar" />
+   </children>
+</AnchorPane>
