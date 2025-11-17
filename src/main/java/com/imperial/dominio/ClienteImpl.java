@@ -63,6 +63,7 @@ public class ClienteImpl {
             ResultSet resultado = ClienteDAO.obtenerClientes(ConexionBD.abrirConexion());
             while(resultado.next()){
                 Cliente cliente = new Cliente();
+                cliente.setIdCliente(resultado.getInt("idCliente"));
                 cliente.setNombre(resultado.getString("nombre"));
                 cliente.setApellidoPaterno(resultado.getString("apellidoPaterno"));
                 cliente.setApellidoMaterno(resultado.getString("apellidoMaterno"));
