@@ -39,6 +39,18 @@ public class PrincipalAdminController implements Initializable {
 
     @FXML
     private void abrirGestionClientes(ActionEvent event) {
+        try{
+            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLGestionCliente.fxml");
+            Parent vista = cargador.load();
+            Scene escena = new Scene(vista);      
+            Stage escenario = new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Clientes");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 
     @FXML

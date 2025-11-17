@@ -31,13 +31,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="textCorreo" promptText="Ej. manolo@correo.com" GridPane.rowIndex="1" />
                   <Label text="Correo:" />
+                  <TextField fx:id="textCorreo" promptText="Ej. manolo@correo.com" GridPane.rowIndex="1" />
                   <Label fx:id="labelErrorCorreo" textFill="RED" GridPane.rowIndex="2" />
                   <Label text="Contraseña:" GridPane.rowIndex="3" />
+                  <PasswordField fx:id="textContrasena" GridPane.rowIndex="4" />
                   <Label fx:id="labelErrorContrasena" textFill="RED" GridPane.rowIndex="5" />
                   <Button mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="26.0" prefWidth="86.0" text="Continuar" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
-                  <PasswordField fx:id="textContrasena" GridPane.rowIndex="4" />
                </children>
             </GridPane>
             <Label layoutX="204.0" layoutY="50.0" text="Iniciar Sesión">

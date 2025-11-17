@@ -8,17 +8,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="532.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.FormularioUsuarioController">
+<AnchorPane id="AnchorPane" prefHeight="532.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.FormularioUsuarioController">
    <children>
-      <Label layoutX="56.0" layoutY="56.0" text="Crear Usuario">
+      <Label layoutX="101.0" layoutY="59.0" text="Crear Usuario">
          <font>
             <Font name="SansSerif Bold" size="34.0" />
          </font>
       </Label>
-      <GridPane layoutX="56.0" layoutY="114.0" prefHeight="373.0" prefWidth="702.0">
+      <GridPane layoutX="105.0" layoutY="114.0" prefHeight="373.0" prefWidth="702.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="10.0" prefWidth="287.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.20001220703125" minWidth="10.0" prefWidth="271.0" />
@@ -93,10 +94,14 @@
             <Label fx:id="labelErrorApellidoPaterno" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label fx:id="labelErrorApellidoMaterno" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Button mnemonicParsing="false" onAction="#cerrarRegistro" prefHeight="26.0" prefWidth="200.0" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-            <Button mnemonicParsing="false" onAction="#crearRegistro" prefHeight="26.0" prefWidth="200.0" text="Crear" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+            <Button mnemonicParsing="false" onAction="#crearRegistro" prefHeight="26.0" prefWidth="200.0" text="Crear" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+               <GridPane.margin>
+                  <Insets right="25.0" />
+               </GridPane.margin></Button>
             <Label fx:id="labelErrorContrasena" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Label fx:id="labelErrorRol" layoutX="56.0" layoutY="491.0" textFill="RED" />
+      <Pane prefHeight="534.0" prefWidth="56.0" style="-fx-background-color: GREY;" />
    </children>
 </AnchorPane>

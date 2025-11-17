@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  *
  * @author User
  */
-public class FXMLFormularioProveedorController implements Initializable {
+public class FormularioProveedorController implements Initializable {
 
     @FXML
     private TextField textRFC;

@@ -56,8 +56,7 @@ public class FormularioUsuarioController implements Initializable {
 
     @FXML
     private void cerrarRegistro(ActionEvent event) {
-        Stage escenario = (Stage) textCorreo.getScene().getWindow();
-        escenario.close();
+        cerrarVentana();
     }
 
     @FXML
@@ -134,13 +133,12 @@ public class FormularioUsuarioController implements Initializable {
     }
     
     private void registrarUsuario(Usuario usuario){
-        //Usamos "registrarProfesor" por la inconsistencia
         HashMap<String, Object> respuesta = UsuarioImpl.registrarUsuario(usuario);
         boolean error = (boolean) respuesta.get("error");
         
         if(!error){
             Utilidades.mostrarAlerta("Registro Exitoso", (String) respuesta.get("mensaje"), Alert.AlertType.INFORMATION);
-            cerrarRegistro(null); //Cierra la ventana al registrar
+            cerrarRegistro(null); 
         }else{
             Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
         }
@@ -165,6 +163,11 @@ public class FormularioUsuarioController implements Initializable {
             labelErrorCorreo.setText("El correo ya está registrado");
         }
         return esValido; 
+    }
+    
+    private void cerrarVentana(){
+        Stage escenario = (Stage) textCorreo.getScene().getWindow();
+        escenario.close();
     }
     
 }

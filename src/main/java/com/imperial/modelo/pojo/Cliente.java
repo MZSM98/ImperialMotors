@@ -10,7 +10,6 @@ public class Cliente {
     private String apellidoMaterno;
     private String telefono;
     private String correo;
-    private String domicilio;
 
     public int getIdCliente() {
         return idCliente;
@@ -60,13 +59,7 @@ public class Cliente {
         this.correo = correo;
     }
 
-    public String getDomicilio() {
-        return domicilio;
+    public String getNombreCompleto(){
+        return (nombre+" "+apellidoPaterno+" "+apellidoMaterno);
     }
-
-    public void setDomicilio(String domicilio) {
-        this.domicilio = domicilio;
-    }
-    
-    
 }

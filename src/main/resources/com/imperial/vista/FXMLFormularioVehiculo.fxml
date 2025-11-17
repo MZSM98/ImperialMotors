@@ -8,18 +8,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="487.0" prefWidth="595.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.imperial.controlador.FormularioVehiculoController">
+<AnchorPane id="AnchorPane" prefHeight="486.0" prefWidth="651.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.FormularioVehiculoController">
    <children>
-      <Label layoutX="48.0" layoutY="32.0" text="Registrar Vehiculo">
+      <Label layoutX="88.0" layoutY="31.0" text="Registrar Vehiculo">
          <font>
             <Font name="SansSerif Bold" size="27.0" />
          </font>
       </Label>
-      <GridPane layoutX="48.0" layoutY="103.0" prefHeight="337.0" prefWidth="542.0">
+      <GridPane layoutX="88.0" layoutY="103.0" prefHeight="337.0" prefWidth="542.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -74,15 +74,16 @@
             <ComboBox fx:id="comboTipo" prefWidth="225.0" promptText="Tipo" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Button layoutX="472.0" layoutY="425.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" text="Registrar">
+      <Button layoutX="512.0" layoutY="440.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" text="Registrar">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="341.0" layoutY="425.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" text="Cancelar">
+      <Button layoutX="385.0" layoutY="440.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" text="Cancelar">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
+      <Pane layoutY="-1.0" prefHeight="487.0" prefWidth="56.0" style="-fx-background-color: GREY;" />
    </children>
 </AnchorPane>
