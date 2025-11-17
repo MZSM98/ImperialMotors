@@ -86,11 +86,11 @@ public class FormularioClienteController implements Initializable {
         }
         if(textApPaterno.getText() == null || textApPaterno.getText().isEmpty()){
             esValido = false;
-            textApPaterno.setText("Campo obligatorio");
+            labelErrorApPaterno.setText("Campo obligatorio");
         }
         if(textApMaterno.getText() == null || textApMaterno.getText().isEmpty()){
             esValido = false;
-            textApMaterno.setText("Campo obligatorio");
+            labelErrorApMaterno.setText("Campo obligatorio");
         }
         if(textCorreo.getText() == null || textCorreo.getText().isEmpty()){
             esValido = false;
