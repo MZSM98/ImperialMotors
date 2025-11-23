@@ -33,22 +33,21 @@ public class InventarioVehiculoController implements Initializable {
 
     @FXML
     private TableView<Vehiculo> tablaVehiculos;
-    @FXML
     private TableColumn columnVIN;
-    @FXML
     private TableColumn columnMarca;
-    @FXML
     private TableColumn columnModelo;
-    @FXML
     private TableColumn columnAnio;
-    @FXML
     private TableColumn columnPrecio;
-    @FXML
     private TableColumn columnTipo;
-    @FXML
     private TextField textBuscar;
     
     private ObservableList vehiculos;
+    @FXML
+    private TableColumn<?, ?> columnFecha;
+    @FXML
+    private TableColumn<?, ?> columnUsuario;
+    @FXML
+    private TableColumn<?, ?> columnTipoMovimiento;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -56,18 +55,10 @@ public class InventarioVehiculoController implements Initializable {
         llenarTablaVehiculos();
     }    
 
-    @FXML
     private void clicEnRegistrar(ActionEvent event) {
         abrirFormulario();
     }
 
-    @FXML
-    private void clicEnEditar(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicEnEliminar(ActionEvent event) {
-    }
 
     @FXML
     private void cerrarVentana(ActionEvent event) {
@@ -116,5 +107,9 @@ public class InventarioVehiculoController implements Initializable {
             Utilidades.mostrarAlerta("Error", "No se pudo cargar la vista", Alert.AlertType.ERROR);
             ioe.printStackTrace();
         }
+    }
+
+    @FXML
+    private void clicEnExportar(ActionEvent event) {
     }
 }

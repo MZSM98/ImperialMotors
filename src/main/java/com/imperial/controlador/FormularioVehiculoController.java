@@ -2,6 +2,7 @@ package com.imperial.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -52,5 +53,13 @@ public class FormularioVehiculoController implements Initializable {
     
     private void configurarComboColor(){
         
+    }
+
+    @FXML
+    private void clicEnRegistrar(ActionEvent event) {
+    }
+
+    @FXML
+    private void cerrarVentana(ActionEvent event) {
     }
 }

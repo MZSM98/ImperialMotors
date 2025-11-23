@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.AuditoriaLogsController">
+   <children>
+      <Label layoutX="294.0" layoutY="47.0" text="Registro de Actividades">
+         <font>
+            <Font name="SansSerif Regular" size="30.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tablaVehiculos" layoutX="27.0" layoutY="107.0" prefHeight="300.0" prefWidth="800.0">
+         <columns>
+            <TableColumn fx:id="columnFecha" prefWidth="266.66" text="Fecha" />
+            <TableColumn fx:id="columnUsuario" prefWidth="266.66" text="Usuario" />
+            <TableColumn fx:id="columnTipoMovimiento" prefWidth="266.66" text="Tipo de movimiento" />
+         </columns>
+      </TableView>
+      <Button layoutX="717.0" layoutY="430.0" mnemonicParsing="false" onAction="#clicEnExportar" prefHeight="26.0" prefWidth="110.0" text="Exportar" />
+      <Button layoutX="567.0" layoutY="430.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="26.0" prefWidth="110.0" text="Regresar" />
+   </children>
+</AnchorPane>
