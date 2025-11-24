@@ -7,19 +7,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<<<<<<< HEAD
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.RegistroVentaController">
+=======
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.RegistrarVentaController">
+>>>>>>> 2482da4db032d880ce15603e91357ce873386029
    <children>
       <Label layoutX="381.0" layoutY="44.0" text="Registro de Venta">
          <font>
             <Font name="SansSerif Regular" size="30.0" />
          </font>
       </Label>
-      <Pane prefHeight="664.0" prefWidth="56.0" style="-fx-background-color: GREY;" />
-      <GridPane layoutX="101.0" layoutY="119.0" prefHeight="90.0" prefWidth="449.0">
+      <Pane prefHeight="750.0" prefWidth="56.0" style="-fx-background-color: GREY;" />
+      <GridPane layoutX="101.0" layoutY="119.0" prefHeight="150.0" prefWidth="571.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="427.0" minWidth="10.0" prefWidth="349.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="5.0" prefWidth="10.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="31.0" minWidth="10.0" prefWidth="31.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="31.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -33,19 +37,21 @@
             <TextField fx:id="textVendedor" prefHeight="31.0" prefWidth="297.0" promptText="López Rodríguez Genaro" GridPane.rowIndex="1" />
             <Label text="Cliente" GridPane.rowIndex="3" />
             <TextField fx:id="textCliente" prefHeight="30.0" prefWidth="270.0" promptText="Ramiro López Hernández" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" onAction="#clicCambiarCliente" text="+" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" onAction="#clicElegirCliente" prefWidth="130.0" text="Elegir cliente" GridPane.columnIndex="2" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Button layoutX="101.0" layoutY="613.0" mnemonicParsing="false" onAction="#clicEnRegistrar" prefHeight="31.0" prefWidth="130.0" text="Registrar" />
-      <Button layoutX="771.0" layoutY="613.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="31.0" prefWidth="130.0" text="Cancelar" />
-      <Label layoutX="101.0" layoutY="525.0" text="Importe total" />
-      <TextField fx:id="textImporte" layoutX="101.0" layoutY="550.0" prefHeight="31.0" prefWidth="297.0" promptText="\$125,000.00" />
-      <TableView fx:id="tablaVehiculos" layoutX="101.0" layoutY="305.0" prefHeight="200.0" prefWidth="800.0">
+      <Button layoutX="102.0" layoutY="685.0" mnemonicParsing="false" onAction="#clicEnRegistrar" prefHeight="31.0" prefWidth="130.0" text="Registrar" />
+      <Button layoutX="772.0" layoutY="685.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="31.0" prefWidth="130.0" text="Cancelar" />
+      <Label layoutX="102.0" layoutY="597.0" text="Importe total" />
+      <TextField fx:id="textImporte" layoutX="102.0" layoutY="622.0" prefHeight="31.0" prefWidth="297.0" promptText="\$125,000.00" />
+      <TableView fx:id="tablaVehiculos" layoutX="101.0" layoutY="307.0" prefHeight="257.0" prefWidth="646.0">
          <columns>
-            <TableColumn fx:id="columnAuto" prefWidth="266.66" text="Auto" />
-            <TableColumn fx:id="columnTipo" prefWidth="266.66" text="Tipo" />
-            <TableColumn fx:id="columnImporte" prefWidth="266.66" text="Importe" />
+            <TableColumn fx:id="columnAuto" prefWidth="215.33" text="Auto" />
+            <TableColumn fx:id="columnTipo" prefWidth="215.33" text="Tipo" />
+            <TableColumn fx:id="columnImporte" prefWidth="215.33" text="Importe" />
          </columns>
       </TableView>
+      <Button layoutX="779.0" layoutY="307.0" mnemonicParsing="false" onAction="#clicEnAñadir" prefHeight="31.0" prefWidth="130.0" text="Añadir auto" />
+      <Button layoutX="779.0" layoutY="360.0" mnemonicParsing="false" onAction="#clicEnEliminar" prefHeight="31.0" prefWidth="130.0" text="Eliminar auto" />
    </children>
 </AnchorPane>
