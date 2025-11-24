@@ -33,8 +33,6 @@ public class FormularioVehiculoController implements Initializable {
     @FXML
     private Label labelErrorPrecio;
     @FXML
-    private ComboBox<?> comboColor;
-    @FXML
     private ComboBox<?> comboAnio;
     @FXML
     private ComboBox<?> comboEstado;
@@ -42,19 +40,12 @@ public class FormularioVehiculoController implements Initializable {
     private ComboBox<?> comboProveedor;
     @FXML
     private ComboBox<?> comboTipo;
-
-    /**
-     * Initializes the controller class.
-     */
+ 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        configurarComboColor();
     }    
     
-    private void configurarComboColor(){
-        
-    }
-
+    
     @FXML
     private void clicEnRegistrar(ActionEvent event) {
     }
