@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.RegistroVentaController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.RegistroVentaController">
    <children>
       <Label layoutX="381.0" layoutY="44.0" text="Registro de Venta">
          <font>
@@ -47,7 +52,7 @@
             <TableColumn fx:id="columnImporte" prefWidth="215.33" text="Importe" />
          </columns>
       </TableView>
-      <Button layoutX="779.0" layoutY="307.0" mnemonicParsing="false" onAction="#clicEnAñadir" prefHeight="31.0" prefWidth="130.0" text="Añadir auto" />
+      <Button layoutX="779.0" layoutY="307.0" mnemonicParsing="false" onAction="#clicEnAnadir" prefHeight="31.0" prefWidth="130.0" text="Añadir auto" />
       <Button layoutX="779.0" layoutY="360.0" mnemonicParsing="false" onAction="#clicEnEliminar" prefHeight="31.0" prefWidth="130.0" text="Eliminar auto" />
    </children>
 </AnchorPane>

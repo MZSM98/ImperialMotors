@@ -54,10 +54,21 @@ public class VehiculoDAO {
     
     public static ResultSet obtenerVehiculos(Connection conexionBD) throws SQLException{
         
-        if (conexionBD != null){
-            String consulta = "SELECT * from vehiculo;";
+        if (conexionBD != null) {
+            String consulta = "SELECT * FROM vehiculo WHERE estado = 'Disponible'";
             PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
             return sentencia.executeQuery();
+        }
+        throw new SQLException(Constantes.ERROR_BD);
+    }
+    
+    public static int actualizarEstado(String vin, String estado, Connection conexionBD) throws SQLException {
+        if (conexionBD != null) {
+            String consulta = "UPDATE vehiculo SET estado = ? WHERE VIN = ?";
+            PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
+            sentencia.setString(1, estado);
+            sentencia.setString(2, vin);
+            return sentencia.executeUpdate();
         }
         throw new SQLException(Constantes.ERROR_BD);
     }

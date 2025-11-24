@@ -17,8 +17,8 @@
       </Label>
       <Label layoutX="22.0" layoutY="63.0" text="Buscar:" />
       <TextField fx:id="textBuscar" layoutX="22.0" layoutY="85.0" prefHeight="26.0" prefWidth="406.0" promptText="Nombre del cliente" />
-      <Button layoutX="454.0" layoutY="85.0" mnemonicParsing="false" onAction="#clicRegistrar" prefHeight="26.0" prefWidth="82.0" text="Registrar" />
-      <Button layoutX="558.0" layoutY="85.0" mnemonicParsing="false" onAction="#clicEditar" prefHeight="26.0" prefWidth="82.0" text="Editar" />
+      <Button fx:id="botonRegistrar" layoutX="454.0" layoutY="85.0" mnemonicParsing="false" onAction="#clicRegistrar" prefHeight="26.0" prefWidth="82.0" text="Registrar" />
+      <Button fx:id="botonEditar" layoutX="558.0" layoutY="85.0" mnemonicParsing="false" onAction="#clicEditar" prefHeight="26.0" prefWidth="82.0" text="Editar" />
       <TableView fx:id="tablaClientes" layoutX="22.0" layoutY="130.0" prefHeight="268.0" prefWidth="618.0">
          <columns>
             <TableColumn fx:id="columnaNombre" minWidth="123.0" prefWidth="78.0" text="Nombre" />

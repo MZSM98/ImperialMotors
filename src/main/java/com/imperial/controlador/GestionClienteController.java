@@ -6,6 +6,7 @@ package com.imperial.controlador;
 
 import com.imperial.dominio.ClienteImpl;
 import com.imperial.modelo.pojo.Cliente;
+import com.imperial.utilidad.InterfazSeleccion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -49,16 +51,24 @@ public class GestionClienteController implements Initializable {
     private TableColumn columnaTelefono;
     @FXML
     private TableColumn columnaCorreo;
+    @FXML
+    private Button botonRegistrar;
+    @FXML
+    private Button botonEditar;
     
     ObservableList<Cliente> clientes;
-
-    /**
-     * Initializes the controller class.
-     */
+    private InterfazSeleccion<Cliente> observador;
+    private boolean modoSeleccion = false;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         llenarTabla();
+        tablaClientes.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 2 && modoSeleccion){
+                seleccionarCliente();
+            }
+        });
     }    
 
     @FXML
@@ -122,6 +132,25 @@ public class GestionClienteController implements Initializable {
         }catch (IOException ioe){
             Utilidades.mostrarAlerta("Error", "No se pudo cargar la vista", Alert.AlertType.ERROR);
             ioe.printStackTrace();
+        }
+    }
+    
+    public void iniciarModoSeleccion(InterfazSeleccion<Cliente> observador){
+        this.observador = observador;
+        this.modoSeleccion = true;
+        
+        if(botonRegistrar != null) botonRegistrar.setVisible(false);
+        if(botonEditar != null) botonEditar.setVisible(false);
+        
+    }
+    
+    private void seleccionarCliente(){
+        Cliente cliente = tablaClientes.getSelectionModel().getSelectedItem();
+        if(cliente != null){
+            observador.notificarSeleccion(cliente); 
+            cerrarVentana(null);
+        } else {
+            Utilidades.mostrarAlerta("Aviso", "Selecciona un cliente", Alert.AlertType.WARNING);
         }
     }
 }

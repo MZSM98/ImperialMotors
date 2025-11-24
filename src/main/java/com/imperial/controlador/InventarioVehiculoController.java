@@ -2,6 +2,7 @@ package com.imperial.controlador;
 
 import com.imperial.dominio.VehiculoImpl;
 import com.imperial.modelo.pojo.Vehiculo;
+import com.imperial.utilidad.InterfazSeleccion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -33,28 +35,44 @@ public class InventarioVehiculoController implements Initializable {
 
     @FXML
     private TableView<Vehiculo> tablaVehiculos;
+    @FXML
     private TableColumn columnVIN;
+    @FXML
     private TableColumn columnMarca;
+    @FXML
     private TableColumn columnModelo;
+    @FXML
     private TableColumn columnAnio;
+    @FXML
     private TableColumn columnPrecio;
+    @FXML
     private TableColumn columnTipo;
+    @FXML
     private TextField textBuscar;
-    
+    @FXML
+    private Button botonRegistrar;
+    @FXML
+    private Button botonEditar;
+    @FXML
+    private Button botonEliminar;
     private ObservableList vehiculos;
-    @FXML
-    private TableColumn<?, ?> columnFecha;
-    @FXML
-    private TableColumn<?, ?> columnUsuario;
-    @FXML
-    private TableColumn<?, ?> columnTipoMovimiento;
+    
+    private InterfazSeleccion<Vehiculo> observador;
+    private boolean modoSeleccion = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         llenarTablaVehiculos();
+        
+        tablaVehiculos.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 2 && modoSeleccion){
+                seleccionarVehiculo();
+            }
+        });
     }    
 
+    @FXML
     private void clicEnRegistrar(ActionEvent event) {
         abrirFormulario();
     }
@@ -109,7 +127,30 @@ public class InventarioVehiculoController implements Initializable {
         }
     }
 
+    
+    private void seleccionarVehiculo(){
+        Vehiculo auto = tablaVehiculos.getSelectionModel().getSelectedItem();
+        if(auto != null){
+            observador.notificarSeleccion(auto);
+            cerrarVentana(null);
+        }
+    }
+
+    public void iniciarModoSeleccion(InterfazSeleccion<Vehiculo> observador){
+        this.observador = observador;
+        this.modoSeleccion = true;
+        
+        if(botonRegistrar != null) botonRegistrar.setVisible(false);
+        if(botonEditar != null) botonEditar.setVisible(false);
+        if(botonEliminar != null) botonEliminar.setVisible(false);
+    }
+    
+    
     @FXML
-    private void clicEnExportar(ActionEvent event) {
+    private void clicEnEditar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicEnEliminar(ActionEvent event) {
     }
 }

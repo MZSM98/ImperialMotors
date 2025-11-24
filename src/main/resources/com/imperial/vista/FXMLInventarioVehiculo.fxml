@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="854.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.imperial.controlador.InventarioVehiculoController">
+<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.InventarioVehiculoController">
    <children>
       <Label layoutX="22.0" layoutY="45.0" text="Inventario">
          <font>
@@ -26,9 +25,9 @@
             <TableColumn fx:id="columnTipo" prefWidth="130.4000244140625" text="Tipo" />
         </columns>
       </TableView>
-      <Button layoutX="468.0" layoutY="98.0" mnemonicParsing="false" onAction="#clicEnRegistrar" prefHeight="26.0" prefWidth="110.0" text="Registrar" />
-      <Button layoutX="597.0" layoutY="98.0" mnemonicParsing="false" onAction="#clicEnEditar" prefHeight="26.0" prefWidth="109.0" text="Editar" />
-      <Button layoutX="727.0" layoutY="98.0" mnemonicParsing="false" onAction="#clicEnEliminar" prefHeight="26.0" prefWidth="110.0" text="Eliminar" />
+      <Button fx:id="botonRegistrar" layoutX="468.0" layoutY="98.0" mnemonicParsing="false" onAction="#clicEnRegistrar" prefHeight="26.0" prefWidth="110.0" text="Registrar" />
+      <Button fx:id="botonEditar" layoutX="597.0" layoutY="98.0" mnemonicParsing="false" onAction="#clicEnEditar" prefHeight="26.0" prefWidth="109.0" text="Editar" />
+      <Button fx:id="botonEliminar" layoutX="727.0" layoutY="98.0" mnemonicParsing="false" onAction="#clicEnEliminar" prefHeight="26.0" prefWidth="110.0" text="Eliminar" />
       <TextField fx:id="textBuscar" layoutX="22.0" layoutY="98.0" prefHeight="26.0" prefWidth="430.0" promptText="Buscar" />
       <Button layoutX="727.0" layoutY="473.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="26.0" prefWidth="110.0" text="Regresar" />
    </children>

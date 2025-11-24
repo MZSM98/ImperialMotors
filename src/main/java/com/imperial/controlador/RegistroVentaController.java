@@ -31,9 +31,6 @@ public class RegistroVentaController implements Initializable {
         
     }    
 
-    @FXML
-    private void clicCambiarCliente(ActionEvent event) {
-    }
 
     @FXML
     private void clicEnRegistrar(ActionEvent event) {
@@ -41,5 +38,17 @@ public class RegistroVentaController implements Initializable {
 
     @FXML
     private void cerrarVentana(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicElegirCliente(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicEnAñadir(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicEnEliminar(ActionEvent event) {
     }
 }
