@@ -1,15 +1,12 @@
 package com.imperial.controlador;
 
 import com.imperial.dominio.ProveedorImpl;
-import com.imperial.dominio.UsuarioImpl;
 import com.imperial.modelo.pojo.Proveedor;
-import com.imperial.modelo.pojo.Usuario;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Observable;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

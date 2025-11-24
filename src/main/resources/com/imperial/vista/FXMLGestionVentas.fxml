@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="488.0" prefWidth="854.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.imperial.controlador.GestionVentasController">
+<AnchorPane id="AnchorPane" prefHeight="488.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.GestionVentasController">
    <children>
       <Button layoutX="577.0" layoutY="434.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="26.0" prefWidth="110.0" text="Regresar" />
       <Button layoutX="717.0" layoutY="434.0" mnemonicParsing="false" onAction="#clicEnConsultar" prefHeight="26.0" prefWidth="110.0" text="Consultar" />
-      <TableView fx:id="tablaVehiculos" layoutX="27.0" layoutY="110.0" prefHeight="300.0" prefWidth="800.0">
+      <TableView fx:id="tablaVentas" layoutX="27.0" layoutY="110.0" prefHeight="300.0" prefWidth="800.0">
          <columns>
             <TableColumn fx:id="columnFecha" prefWidth="266.66" text="Fecha" />
             <TableColumn fx:id="columnCliente" prefWidth="266.66" text="Cliente" />
@@ -24,5 +23,6 @@
             <Font name="SansSerif Regular" size="30.0" />
          </font>
       </Label>
+      <Button layoutX="632.0" layoutY="57.0" mnemonicParsing="false" onAction="#clicEnRegistrarNueva" prefHeight="26.0" prefWidth="195.0" text="Registrar Nueva" />
    </children>
 </AnchorPane>

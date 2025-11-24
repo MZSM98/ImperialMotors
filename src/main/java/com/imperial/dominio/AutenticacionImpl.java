@@ -2,6 +2,7 @@ package com.imperial.dominio;
 import com.imperial.modelo.ConexionBD;
 import com.imperial.modelo.dao.AutenticacionDAO;
 import com.imperial.modelo.pojo.Usuario;
+import com.imperial.utilidad.Constantes;
 import com.imperial.utilidad.Encriptacion; // <--- IMPORTANTE
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,23 +10,23 @@ import java.util.HashMap;
 
 public class AutenticacionImpl {
     
+    private AutenticacionImpl(){
+        throw new UnsupportedOperationException(Constantes.ERROR_CLASE_UTILERIA);
+    }
+    
     public static HashMap<String, Object> verificarCredencialesUsuario(
             String correo, String contrasenaPlana){ 
         
         HashMap<String, Object> respuesta = new HashMap<>();
         
         try{
-            // 1. Buscamos al usuario SOLO por correo
             ResultSet resultado = AutenticacionDAO.getUsuarioPorCorreo(correo,
                     ConexionBD.abrirConexion());
             
-            // 2. Verificamos si el usuario (correo) existe
             if (resultado.next()){
                 
-                // 3. Si existe, obtenemos el hash guardado en la BD
                 String hashGuardado = resultado.getString("contrasena");
                 
-                // 4. Comparamos el hash de la BD con la contraseña en texto plano
                 if (Encriptacion.checkPassword(contrasenaPlana, hashGuardado)) {
                     
                     Usuario usuarioSesion = new Usuario();

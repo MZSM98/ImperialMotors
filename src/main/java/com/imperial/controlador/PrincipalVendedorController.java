@@ -1,5 +1,6 @@
 package com.imperial.controlador;
 
+import com.imperial.modelo.pojo.Usuario;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -11,9 +12,12 @@ import javafx.fxml.Initializable;
  */
 public class PrincipalVendedorController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    private Usuario usuarioSesion;
+    
+    public void setUsuario(Usuario usuario){
+        this.usuarioSesion = usuario;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

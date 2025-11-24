@@ -9,7 +9,16 @@ public class Venta {
     private float importe;
     private int idUsuario;
     private int idCliente;
+    private String nombreCliente;
 
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+    
     public int getIdVenta() {
         return idVenta;
     }

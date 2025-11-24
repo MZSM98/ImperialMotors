@@ -92,9 +92,9 @@ public class InicioSesionController implements Initializable {
     private void irPantallaPrincipal(Usuario usuario){
 
             if ("Administrador".equals(usuario.getRol())){
-                irMenuPrincipalAdmin();
+                irMenuPrincipalAdmin(usuario);
             }else if("Vendedor".equals(usuario.getRol())){
-                irMenuPrincipalVendedor();
+                irMenuPrincipalVendedor(usuario);
             }else{
                 Utilidades.mostrarAlerta("Advertencia", "Por el momento no tenemos servicio, intenta más tarde"
                     ,Alert.AlertType.WARNING);
@@ -102,37 +102,42 @@ public class InicioSesionController implements Initializable {
             
     }
     
-    private void irMenuPrincipalAdmin(){
-        
+    private void irMenuPrincipalAdmin(Usuario usuario){
         try{
-            
             FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLPrincipalAdmin.fxml");
             Parent vista = cargador.load();
+            
+            PrincipalAdminController ctrl = cargador.getController();
+            ctrl.setUsuario(usuario);
+            
             Scene escena = new Scene(vista);      
             Stage escenario = (Stage) textCorreo.getScene().getWindow();
             escenario.setScene(escena);
-            escenario.setTitle("Menu Principal");
+            escenario.setTitle("Menú Principal - Administrador");
             escenario.show();
             
-        }catch (IOException ioe){
-            ioe.printStackTrace();//Temporal, se cambiará por LOG4J
+        } catch (IOException ioe){
+            ioe.printStackTrace();
         }
     }
     
-    private void irMenuPrincipalVendedor(){
-        
+    private void irMenuPrincipalVendedor(Usuario usuario){
         try{
-            
             FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLPrincipalVendedor.fxml");
             Parent vista = cargador.load();
+            
+            // Recuperamos el controlador y le pasamos el usuario
+            PrincipalVendedorController ctrl = cargador.getController();
+            ctrl.setUsuario(usuario);
+            
             Scene escena = new Scene(vista);      
             Stage escenario = (Stage) textCorreo.getScene().getWindow();
             escenario.setScene(escena);
-            escenario.setTitle("Menu Principal");
+            escenario.setTitle("Menú Principal - Vendedor");
             escenario.show();
             
-        }catch (IOException ioe){
-            ioe.printStackTrace();//Temporal, se cambiará por LOG4J
+        } catch (IOException ioe){
+            ioe.printStackTrace();
         }
     }
 }

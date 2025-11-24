@@ -1,5 +1,6 @@
 package com.imperial.controlador;
 
+import com.imperial.modelo.pojo.Usuario;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import java.net.URL;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -20,6 +22,13 @@ import javafx.stage.Stage;
  * @author User
  */
 public class PrincipalAdminController implements Initializable {
+    
+    
+    private Usuario usuarioSesion; // Agregar esto
+
+    public void setUsuario(Usuario usuario){ // Agregar este setter
+        this.usuarioSesion = usuario;
+    }
 
     @FXML
     private Button botonCerrarSesion;
@@ -87,6 +96,21 @@ public class PrincipalAdminController implements Initializable {
 
     @FXML
     private void abrirGestionVentas(ActionEvent event) {
+        try {
+            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLGestionVentas.fxml");
+            Parent vista = cargador.load();
+            GestionVentasController ctrl = cargador.getController();
+            ctrl.setUsuario(this.usuarioSesion);
+            Scene escena = new Scene(vista);      
+            Stage escenario = new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Historial de Ventas");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            Utilidades.mostrarAlerta("Error", "No se pudo abrir el historial de ventas", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -102,6 +126,24 @@ public class PrincipalAdminController implements Initializable {
             escenario.showAndWait();
         }catch(IOException ioe){
             ioe.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void clicEnReportes(ActionEvent event) {
+        try {
+            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLAuditoriaLogs.fxml");
+            Parent vista = cargador.load();
+            Scene escena = new Scene(vista);      
+            Stage escenario = new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Auditoría y Reportes");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+            
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            Utilidades.mostrarAlerta("Error", "No se pudo abrir la ventana de reportes", Alert.AlertType.ERROR);
         }
     }
     
