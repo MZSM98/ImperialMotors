@@ -7,11 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<<<<<<< HEAD
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.RegistroVentaController">
-=======
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.RegistrarVentaController">
->>>>>>> 2482da4db032d880ce15603e91357ce873386029
    <children>
       <Label layoutX="381.0" layoutY="44.0" text="Registro de Venta">
          <font>
