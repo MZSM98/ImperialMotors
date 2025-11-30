@@ -24,9 +24,9 @@ import javafx.stage.Stage;
 public class PrincipalAdminController implements Initializable {
     
     
-    private Usuario usuarioSesion; // Agregar esto
-
-    public void setUsuario(Usuario usuario){ // Agregar este setter
+    private Usuario usuarioSesion; 
+    
+    public void setUsuario(Usuario usuario){ 
         this.usuarioSesion = usuario;
     }
 
