@@ -7,6 +7,7 @@ import com.imperial.modelo.pojo.DetalleVenta;
 import com.imperial.modelo.pojo.Usuario;
 import com.imperial.modelo.pojo.Vehiculo;
 import com.imperial.modelo.pojo.Venta;
+import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import java.net.URL;
@@ -48,22 +49,20 @@ public class RegistroVentaController implements Initializable {
     private TableColumn<Vehiculo, Double> columnImporte;
     
     private ObservableList<Vehiculo> carritoCompras;
-    private Usuario usuarioSesion;
     private Cliente clienteSeleccionado;
     private double totalVenta = 0.0;
+    Usuario usuarioSesion;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         configurarCamposSoloLectura();
-    }
-    
-    public void setUsuario(Usuario usuario){
-        this.usuarioSesion = usuario;
-        if(usuario != null){
-            textVendedor.setText(usuario.getNombre() + " " + usuario.getApellidoPaterno());
+        usuarioSesion = Sesion.getUsuario();
+        if (usuarioSesion != null) {
+            textVendedor.setText(usuarioSesion.getNombre() + " " + usuarioSesion.getApellidoPaterno());
         }
     }
+    
     
     private void configurarCamposSoloLectura(){
         textVendedor.setEditable(false);

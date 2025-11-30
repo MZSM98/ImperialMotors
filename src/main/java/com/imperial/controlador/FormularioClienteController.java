@@ -1,8 +1,11 @@
 
 package com.imperial.controlador;
 
+import com.imperial.dominio.BitacoraImpl;
 import com.imperial.dominio.ClienteImpl;
 import com.imperial.modelo.pojo.Cliente;
+import com.imperial.modelo.pojo.Usuario;
+import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.net.URL;
 import java.util.HashMap;
@@ -44,13 +47,12 @@ public class FormularioClienteController implements Initializable {
     private Label labelErrorApMaterno;
     
     Cliente clienteEdicion;
+    
+    private Usuario usuarioSesion;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        usuarioSesion = Sesion.getUsuario();
     }    
 
     @FXML
@@ -105,16 +107,17 @@ public class FormularioClienteController implements Initializable {
     }
     
     private void registrarCliente(Cliente cliente){
-        
         HashMap<String, Object> respuesta = ClienteImpl.registrarCliente(cliente);
-        
+
         if(!(boolean) respuesta.get("error")){
+            if(usuarioSesion != null){
+                 BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), usuarioSesion.getNombre(), "Registro de nuevo cliente: " + cliente.getNombreCompleto());
+            }
             Utilidades.mostrarAlerta("Registro Exitoso", (String) respuesta.get("mensaje"), Alert.AlertType.INFORMATION);
             cerrarVentana(); 
         }else{
             Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
         }
-        
     }
     
     private void registrarCliente(){

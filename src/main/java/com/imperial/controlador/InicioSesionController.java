@@ -1,11 +1,14 @@
 package com.imperial.controlador;
 
 import com.imperial.dominio.AutenticacionImpl;
+import com.imperial.dominio.BitacoraImpl;
 import com.imperial.modelo.pojo.Usuario;
+import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,11 +21,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author User
- */
 public class InicioSesionController implements Initializable {
 
     @FXML
@@ -34,38 +32,62 @@ public class InicioSesionController implements Initializable {
     @FXML
     private Label labelErrorCorreo;
 
-    /**
-     * Initializes the controller class.
-     */
+    private static final Map<String, Integer> intentosFallidos = new HashMap<>();
+    private static final Map<String, Long> tiempoBloqueo = new HashMap<>();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO 
     }    
 
     @FXML
     private void iniciarSesion(ActionEvent event) {
-        String noPersonal = textCorreo.getText();
+        String correo = textCorreo.getText();
         String contrasena = textContrasena.getText();
         
-        if (sonDatosValidos(noPersonal, contrasena)){
-            validarSesion(noPersonal, contrasena);
+        if (sonDatosValidos(correo, contrasena)){
+            if (verificarBloqueo(correo)) {
+                Utilidades.mostrarAlerta("Bloqueo Temporal", "Ha excedido el número de intentos. Espere 1 minuto.", Alert.AlertType.WARNING);
+                return;
+            }
+            validarSesion(correo, contrasena);
         }
     }
     
-    private boolean sonDatosValidos(String correo, String contrasena){
+    private boolean verificarBloqueo(String correo) {
+        if (tiempoBloqueo.containsKey(correo)) {
+            if (System.currentTimeMillis() < tiempoBloqueo.get(correo)) {
+                return true;
+            } else {
+                tiempoBloqueo.remove(correo);
+                intentosFallidos.remove(correo);
+            }
+        }
+        return false;
+    }
+
+    private void registrarFallo(String correo) {
+        int intentos = intentosFallidos.getOrDefault(correo, 0) + 1;
+        intentosFallidos.put(correo, intentos);
         
+        if (intentos >= 3) {
+            tiempoBloqueo.put(correo, System.currentTimeMillis() + 60000);
+            BitacoraImpl.registrar(0, correo, "Bloqueo de cuenta por exceso de intentos");
+        }
+    }
+
+    private boolean sonDatosValidos(String correo, String contrasena){
         boolean correctos = true;
         labelErrorCorreo.setText("");
         labelErrorContrasena.setText("");
         
         if (correo == null || correo.isEmpty()){
             correctos = false;
-            labelErrorCorreo.setText("Número de personal obligatorio");
+            labelErrorCorreo.setText("Campo obligatorio");
         }
         
         if (contrasena == null || contrasena.isEmpty()){
             correctos = false;
-            labelErrorContrasena.setText("Contraseña obligatoria");
+            labelErrorContrasena.setText("Campo obligatorio");
         }
         
         return correctos;
@@ -77,66 +99,49 @@ public class InicioSesionController implements Initializable {
         
         if (!error){
             Usuario usuarioSesion = (Usuario)respuesta.get("Usuario");
-            Utilidades.mostrarAlerta("Credenciales Correctas", "Bienvenido(a) " +
-                    usuarioSesion.getNombre() + ", al Sistema de Gestión Vehicular" ,Alert.AlertType.INFORMATION);
+            intentosFallidos.remove(correo);
+            tiempoBloqueo.remove(correo);
+            
+            BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), usuarioSesion.getNombre(), "Inicio de sesión exitoso");
+            
+            Utilidades.mostrarAlerta("Bienvenido", "Bienvenido(a) " + usuarioSesion.getNombre(), Alert.AlertType.INFORMATION);
             irPantallaPrincipal(usuarioSesion);
-            
         } else {
-            Utilidades.mostrarAlerta("Credenciales Incorrectas", "correo y/o contraseña"
-                    + " incorrectos, por favor verifique la información"
-                    ,Alert.AlertType.INFORMATION);
+            registrarFallo(correo);
+            BitacoraImpl.registrar(0, correo, "Intento de inicio de sesión fallido");
+            Utilidades.mostrarAlerta("Error", "Credenciales incorrectas", Alert.AlertType.ERROR);
         }
-        
     }
     
-    private void irPantallaPrincipal(Usuario usuario){
+    private void irPantallaPrincipal(Usuario usuario) {
+        try {
+            FXMLLoader cargador;
+            String titulo;
 
-            if ("Administrador".equals(usuario.getRol())){
-                irMenuPrincipalAdmin(usuario);
-            }else if("Vendedor".equals(usuario.getRol())){
-                irMenuPrincipalVendedor(usuario);
-            }else{
-                Utilidades.mostrarAlerta("Advertencia", "Por el momento no tenemos servicio, intenta más tarde"
-                    ,Alert.AlertType.WARNING);
+            if ("Administrador".equals(usuario.getRol())) {
+                cargador = Utilidades.obtenerVistaMemoria("vista/FXMLPrincipalAdmin.fxml");
+                titulo = "Menú Principal - Administrador";
+            } else {
+                cargador = Utilidades.obtenerVistaMemoria("vista/FXMLPrincipalVendedor.fxml");
+                titulo = "Menú Principal - Vendedor";
             }
-            
-    }
-    
-    private void irMenuPrincipalAdmin(Usuario usuario){
-        try{
-            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLPrincipalAdmin.fxml");
+
             Parent vista = cargador.load();
-            
-            PrincipalAdminController ctrl = cargador.getController();
-            ctrl.setUsuario(usuario);
-            
-            Scene escena = new Scene(vista);      
+            Scene escena = new Scene(vista);
+
+            escena.addEventFilter(javafx.scene.input.InputEvent.ANY, event -> {
+                Sesion.renovarTemporizador();
+            });
+
             Stage escenario = (Stage) textCorreo.getScene().getWindow();
             escenario.setScene(escena);
-            escenario.setTitle("Menú Principal - Administrador");
+            escenario.setTitle(titulo);
             escenario.show();
-            
-        } catch (IOException ioe){
-            ioe.printStackTrace();
-        }
-    }
-    
-    private void irMenuPrincipalVendedor(Usuario usuario){
-        try{
-            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLPrincipalVendedor.fxml");
-            Parent vista = cargador.load();
-            
-            // Recuperamos el controlador y le pasamos el usuario
-            PrincipalVendedorController ctrl = cargador.getController();
-            ctrl.setUsuario(usuario);
-            
-            Scene escena = new Scene(vista);      
-            Stage escenario = (Stage) textCorreo.getScene().getWindow();
-            escenario.setScene(escena);
-            escenario.setTitle("Menú Principal - Vendedor");
-            escenario.show();
-            
-        } catch (IOException ioe){
+
+            Sesion.iniciar(usuario, escenario);
+
+
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }

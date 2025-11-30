@@ -1,7 +1,10 @@
 package com.imperial.controlador;
 
+import com.imperial.dominio.BitacoraImpl;
 import com.imperial.dominio.ProveedorImpl;
 import com.imperial.modelo.pojo.Proveedor;
+import com.imperial.modelo.pojo.Usuario;
+import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.net.URL;
 import java.util.HashMap;
@@ -29,16 +32,17 @@ public class FormularioProveedorController implements Initializable {
     @FXML
     private TextField textCorreo;
 
-    /**
-     * Initializes the controller class.
-     */
+    private Usuario usuarioSesion;
+
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        usuarioSesion = Sesion.getUsuario();
     }    
 
     @FXML
     private void clicCancelar(ActionEvent event) {
+        cerrarVentana();
     }
 
     @FXML
@@ -57,16 +61,19 @@ public class FormularioProveedorController implements Initializable {
     }
     
     private void registrarProveedor(Proveedor proveedor){
-        HashMap<String, Object> respuesta = ProveedorImpl.registrarProveedor(proveedor);
-        boolean error = (boolean) respuesta.get("error");
-        
-        if(!error){
-            Utilidades.mostrarAlerta("Registro Exitoso", (String) respuesta.get("mensaje"), Alert.AlertType.INFORMATION);
-            cerrarVentana(); 
-        }else{
-            Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
+    HashMap<String, Object> respuesta = ProveedorImpl.registrarProveedor(proveedor);
+    boolean error = (boolean) respuesta.get("error");
+    
+    if(!error){
+        if(usuarioSesion != null){
+             BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), usuarioSesion.getNombre(), "Registro de nuevo proveedor: " + proveedor.getNombre());
         }
+        Utilidades.mostrarAlerta("Registro Exitoso", (String) respuesta.get("mensaje"), Alert.AlertType.INFORMATION);
+        cerrarVentana(); 
+    }else{
+        Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
     }
+}
     
     private void cerrarVentana(){
         Stage stage = (Stage)textRFC.getScene().getWindow();

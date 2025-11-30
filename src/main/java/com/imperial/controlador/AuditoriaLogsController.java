@@ -2,6 +2,7 @@ package com.imperial.controlador;
 
 import com.imperial.dominio.BitacoraImpl;
 import com.imperial.modelo.pojo.Bitacora;
+import com.imperial.modelo.pojo.Usuario;
 import com.imperial.utilidad.Utilidades;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -35,6 +36,14 @@ public class AuditoriaLogsController implements Initializable {
     private TableColumn<Bitacora, String> columnTipoMovimiento;
    
     private ObservableList<Bitacora> listaLogs;
+    private Usuario usuarioSesion;
+
+    public void setUsuario(Usuario usuario){
+        this.usuarioSesion = usuario;
+        if(usuario != null){
+            BitacoraImpl.registrar(usuario.getIdUsuario(), usuario.getNombre(), "Consulta de Reportes/Bitácora");
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -44,6 +53,9 @@ public class AuditoriaLogsController implements Initializable {
 
     @FXML
     private void clicEnExportar(ActionEvent event) {
+        if(usuarioSesion != null){
+            BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), usuarioSesion.getNombre(), "Exportación de Bitácora a CSV");
+        }
         exportarReporteCSV();
     }
 
@@ -58,13 +70,11 @@ public class AuditoriaLogsController implements Initializable {
         columnFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         columnUsuario.setCellValueFactory(new PropertyValueFactory<>("usuarioNombre"));
         columnTipoMovimiento.setCellValueFactory(new PropertyValueFactory<>("accion"));
-        
         tablaBitacora.setItems(listaLogs);
     }
     
     private void cargarDatosTabla(){
         HashMap<String, Object> respuesta = BitacoraImpl.obtenerBitacora();
-        
         if(!(boolean) respuesta.get("error")){
             ArrayList<Bitacora> logsBD = (ArrayList<Bitacora>) respuesta.get("logs");
             listaLogs.clear();
@@ -78,10 +88,8 @@ public class AuditoriaLogsController implements Initializable {
         FileChooser dialogoSeleccion = new FileChooser();
         dialogoSeleccion.setTitle("Guardar Reporte de Actividades");
         dialogoSeleccion.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos CSV", "*.csv"));
-        
         Stage escenario = (Stage) tablaBitacora.getScene().getWindow();
         File archivo = dialogoSeleccion.showSaveDialog(escenario);
-        
         if(archivo != null){
             guardarArchivo(archivo);
         }
@@ -91,21 +99,12 @@ public class AuditoriaLogsController implements Initializable {
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(archivo))) {
             escritor.write("Fecha,Usuario,Accion");
             escritor.newLine();
-
             for (Bitacora log : listaLogs) {
-                String nombreLimpio = log.getUsuarioNombre().replace(",", " ");
-                String accionLimpia = log.getAccion().replace(",", " ");
-                
-                String linea = String.format("%s,%s,%s", 
-                    log.getFecha(), 
-                    nombreLimpio, 
-                    accionLimpia
-                );
+                String linea = String.format("%s,%s,%s", log.getFecha(), log.getUsuarioNombre().replace(",", " "), log.getAccion().replace(",", " "));
                 escritor.write(linea);
                 escritor.newLine();
             }
             Utilidades.mostrarAlerta("Éxito", "Reporte exportado correctamente", Alert.AlertType.INFORMATION);
-            
         } catch (IOException e) {
             Utilidades.mostrarAlerta("Error", "No se pudo guardar el archivo: " + e.getMessage(), Alert.AlertType.ERROR);
         }

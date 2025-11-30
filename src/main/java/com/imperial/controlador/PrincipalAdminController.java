@@ -24,18 +24,9 @@ import javafx.stage.Stage;
 public class PrincipalAdminController implements Initializable {
     
     
-    private Usuario usuarioSesion; 
-    
-    public void setUsuario(Usuario usuario){ 
-        this.usuarioSesion = usuario;
-    }
-
     @FXML
     private Button botonCerrarSesion;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -99,8 +90,6 @@ public class PrincipalAdminController implements Initializable {
         try {
             FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLGestionVentas.fxml");
             Parent vista = cargador.load();
-            GestionVentasController ctrl = cargador.getController();
-            ctrl.setUsuario(this.usuarioSesion);
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
             escenario.setScene(escena);

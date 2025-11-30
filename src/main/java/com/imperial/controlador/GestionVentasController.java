@@ -3,6 +3,7 @@ package com.imperial.controlador;
 import com.imperial.dominio.VentaImpl;
 import com.imperial.modelo.pojo.Usuario;
 import com.imperial.modelo.pojo.Venta;
+import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import java.net.URL;
@@ -38,14 +39,11 @@ public class GestionVentasController implements Initializable {
     private ObservableList<Venta> listaVentas;
     private Usuario usuarioSesion;
     
-    public void setUsuario(Usuario usuario){
-        this.usuarioSesion = usuario;
-    }
-   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         cargarVentas();
+        usuarioSesion = Sesion.getUsuario();
     }    
 
     private void configurarTabla() {
@@ -96,10 +94,6 @@ public class GestionVentasController implements Initializable {
         try {
             FXMLLoader loader = Utilidades.obtenerVistaMemoria("vista/FXMLRegistroVenta.fxml");
             Parent root = loader.load();
-            
-            RegistroVentaController controller = loader.getController();
-            
-            controller.setUsuario(this.usuarioSesion); 
             
             Scene scene = new Scene(root);
             Stage stage = new Stage();

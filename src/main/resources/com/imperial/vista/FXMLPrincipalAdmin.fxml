@@ -30,7 +30,7 @@
                   <RowConstraints maxHeight="138.2000183105469" minHeight="10.0" prefHeight="28.000036621093727" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="botonCerrarSesion" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="40.0" prefWidth="138.0" text="Cerrar Sesión" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button fx:id="botonCerrarSesion" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="40.0" prefWidth="138.0" text="Cerrar Sesión" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -123,12 +123,19 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#clicEnReportes" prefHeight="146.0" prefWidth="162.0" text="REPORTES" GridPane.columnIndex="3">
+                  <Button mnemonicParsing="false" onAction="#clicEnReportes" prefHeight="146.0" prefWidth="162.0" GridPane.columnIndex="3">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
+                     <graphic>
+                        <ImageView fitHeight="113.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../recurso/reporte.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Label text="Proovedores" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <Label text="Reportes" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>

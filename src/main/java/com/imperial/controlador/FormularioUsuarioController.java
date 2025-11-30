@@ -1,8 +1,10 @@
 package com.imperial.controlador;
 
+import com.imperial.dominio.BitacoraImpl; 
 import com.imperial.dominio.UsuarioImpl;
 import com.imperial.modelo.pojo.Usuario;
 import com.imperial.utilidad.Encriptacion;
+import com.imperial.utilidad.Sesion; 
 import com.imperial.utilidad.Utilidades;
 import java.net.URL;
 import java.util.HashMap;
@@ -80,7 +82,6 @@ public class FormularioUsuarioController implements Initializable {
     }
     
     private void configurarComboBoxRoles(){
-        //por ahora manejaremos los roles de manera manual
         ObservableList<String> roles = FXCollections.observableArrayList("Administrador", "Vendedor");
         comboRoles.setItems(roles);
     }
@@ -137,6 +138,12 @@ public class FormularioUsuarioController implements Initializable {
         boolean error = (boolean) respuesta.get("error");
         
         if(!error){
+            Usuario usuarioSesion = Sesion.getUsuario();
+            if(usuarioSesion != null){
+                BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), 
+                                     usuarioSesion.getNombre(), 
+                                     "Registro de nuevo usuario: " + usuario.getCorreo());
+            }
             Utilidades.mostrarAlerta("Registro Exitoso", (String) respuesta.get("mensaje"), Alert.AlertType.INFORMATION);
             cerrarRegistro(null); 
         }else{
