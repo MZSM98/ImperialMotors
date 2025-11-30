@@ -135,7 +135,12 @@ public class FormularioClienteController implements Initializable {
         Cliente clienteEdicion = obtenerCliente();
         clienteEdicion.setIdCliente(this.clienteEdicion.getIdCliente());
         HashMap<String, Object> resultado = ClienteImpl.editarCliente(clienteEdicion);
-        if(!(boolean)resultado.get(("error"))){
+        if(!(boolean)resultado.get("error")){
+            if(usuarioSesion != null){
+                 BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), 
+                                      usuarioSesion.getNombre(), 
+                                      "Edición de cliente: " + clienteEdicion.getNombreCompleto());
+            }
             Utilidades.mostrarAlerta("Cliente actualizado correctamente", resultado.get("mensaje").toString(), Alert.AlertType.INFORMATION);
             cerrarVentana();
         }else{

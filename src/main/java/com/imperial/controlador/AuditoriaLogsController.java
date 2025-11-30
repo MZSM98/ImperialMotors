@@ -3,6 +3,7 @@ package com.imperial.controlador;
 import com.imperial.dominio.BitacoraImpl;
 import com.imperial.modelo.pojo.Bitacora;
 import com.imperial.modelo.pojo.Usuario;
+import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -38,17 +39,14 @@ public class AuditoriaLogsController implements Initializable {
     private ObservableList<Bitacora> listaLogs;
     private Usuario usuarioSesion;
 
-    public void setUsuario(Usuario usuario){
-        this.usuarioSesion = usuario;
-        if(usuario != null){
-            BitacoraImpl.registrar(usuario.getIdUsuario(), usuario.getNombre(), "Consulta de Reportes/Bitácora");
-        }
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         cargarDatosTabla();
+        usuarioSesion = Sesion.getUsuario();
+        if(usuarioSesion != null){
+            BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), usuarioSesion.getNombre(), "Consulta de Reportes/Bitácora");
+        }
     }    
 
     @FXML

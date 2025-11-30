@@ -80,30 +80,63 @@ public class GestionUsuariosController implements Initializable {
 
     @FXML
     private void clicRegistrar(ActionEvent event) {
-        try{
-            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLFormularioUsuario.fxml");
-            Parent vista = cargador.load();
-            Scene escena = new Scene(vista);      
-            Stage escenario = new Stage();
-            escenario.setScene(escena);
-            escenario.setTitle("Registrar Usuario");
-            escenario.initModality(Modality.APPLICATION_MODAL); 
-            escenario.showAndWait(); 
-            
-            llenarTablaUsuarios();
-            
-        }catch (IOException ioe){
-            Utilidades.mostrarAlerta("Error", "No se pudo cargar la vista", Alert.AlertType.ERROR);
-            ioe.printStackTrace();
-        }
+        abrirFormulario(null);
     }
 
     @FXML
     private void clicEditar(ActionEvent event) {
+        Usuario usuario = tablaUsuarios.getSelectionModel().getSelectedItem();
+        if (usuario != null) {
+            abrirFormulario(usuario);
+        } else {
+            Utilidades.mostrarAlerta("Selección requerida", "Debe seleccionar un usuario para editar", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void cambiarEstado(ActionEvent event) {
-        
+        Usuario usuario = tablaUsuarios.getSelectionModel().getSelectedItem();
+        if (usuario != null) {
+            // Alternar estado (asumiendo que manejas "Activo" e "Inactivo")
+            String nuevoEstado = "Activo".equals(usuario.getEstado()) ? "Inactivo" : "Activo";
+            usuario.setEstado(nuevoEstado);
+            
+            // Reutilizamos editarUsuario para guardar el cambio de estado
+            HashMap<String, Object> respuesta = UsuarioImpl.editarUsuario(usuario);
+            
+            if (!(boolean) respuesta.get("error")) {
+                Utilidades.mostrarAlerta("Éxito", "El estado del usuario se actualizó correctamente", Alert.AlertType.INFORMATION);
+                llenarTablaUsuarios();
+            } else {
+                Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
+            }
+        } else {
+            Utilidades.mostrarAlerta("Selección requerida", "Selecciona un usuario para cambiar su estado", Alert.AlertType.WARNING);
+        }
+    }
+
+    private void abrirFormulario(Usuario usuarioEdicion) {
+        try {
+            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLFormularioUsuario.fxml");
+            Parent vista = cargador.load();
+
+            if (usuarioEdicion != null) {
+                FormularioUsuarioController ctrl = cargador.getController();
+                ctrl.inicializarDatos(usuarioEdicion); // Asegúrate de tener este método en tu formulario
+            }
+
+            Scene escena = new Scene(vista);
+            Stage escenario = new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle(usuarioEdicion == null ? "Registrar Usuario" : "Editar Usuario");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+
+            llenarTablaUsuarios();
+            
+        } catch (IOException ioe) {
+            Utilidades.mostrarAlerta("Error", "No se pudo cargar la vista", Alert.AlertType.ERROR);
+            ioe.printStackTrace();
+        }
     }
 }

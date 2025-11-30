@@ -58,15 +58,6 @@ public class GestionProveedorController implements Initializable {
         escenario.close();
     }
 
-    @FXML
-    private void clicRegistrar(ActionEvent event) {
-        abrirFormulario();
-    }
-
-    @FXML
-    private void clicEditar(ActionEvent event) {
-    }
-    
     private void configurarTabla(){
         proveedores = FXCollections.observableArrayList();
         columnaRFC.setCellValueFactory( new PropertyValueFactory("RFC"));
@@ -74,25 +65,6 @@ public class GestionProveedorController implements Initializable {
         columnaNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         columnaTelefono.setCellValueFactory(new PropertyValueFactory("telefono"));
         tablaProveedores.setItems(proveedores);
-    }
-    
-    private void abrirFormulario(){
-        try{
-            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLFormularioProveedor.fxml");
-            Parent vista = cargador.load();
-            Scene escena = new Scene(vista);      
-            Stage escenario = new Stage();
-            escenario.setScene(escena);
-            escenario.setTitle("Registrar Proveedor");
-            escenario.initModality(Modality.APPLICATION_MODAL); 
-            escenario.showAndWait(); 
-            
-            llenarTablaProveedores();
-            
-        }catch (IOException ioe){
-            Utilidades.mostrarAlerta("Error", "No se pudo cargar la vista", Alert.AlertType.ERROR);
-            ioe.printStackTrace();
-        }
     }
     
     private void llenarTablaProveedores(){
@@ -105,6 +77,47 @@ public class GestionProveedorController implements Initializable {
             proveedores.addAll(listaProveedores);
         }else{
             Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
+        }
+    }
+    
+    @FXML
+    private void clicRegistrar(ActionEvent event) {
+        abrirFormulario(null); // Pasamos null para indicar registro nuevo
+    }
+
+    @FXML
+    private void clicEditar(ActionEvent event) {
+        Proveedor proveedor = tablaProveedores.getSelectionModel().getSelectedItem();
+        if (proveedor != null) {
+            abrirFormulario(proveedor); // Pasamos el proveedor seleccionado para editar
+        } else {
+            Utilidades.mostrarAlerta("Selección requerida", "Debe seleccionar un proveedor de la lista para editarlo", Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void abrirFormulario(Proveedor proveedorEdicion){
+        try{
+            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLFormularioProveedor.fxml");
+            Parent vista = cargador.load();
+            
+            // Si es edición, pasamos los datos al controlador del formulario
+            if (proveedorEdicion != null) {
+                FormularioProveedorController ctrl = cargador.getController();
+                ctrl.inicializarDatos(proveedorEdicion); // Asegúrate de tener este método en tu formulario
+            }
+            
+            Scene escena = new Scene(vista);      
+            Stage escenario = new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle(proveedorEdicion == null ? "Registrar Proveedor" : "Editar Proveedor");
+            escenario.initModality(Modality.APPLICATION_MODAL); 
+            escenario.showAndWait(); 
+            
+            llenarTablaProveedores();
+            
+        }catch (IOException ioe){
+            Utilidades.mostrarAlerta("Error", "No se pudo cargar la vista del formulario", Alert.AlertType.ERROR);
+            ioe.printStackTrace();
         }
     }
 }
