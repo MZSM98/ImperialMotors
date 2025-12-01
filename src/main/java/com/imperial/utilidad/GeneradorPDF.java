@@ -1,5 +1,8 @@
 package com.imperial.utilidad;
 
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfPCell;
+import java.util.List;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -107,5 +110,59 @@ public class GeneradorPDF {
                     (document.right() - document.left()) / 2 + document.leftMargin(),
                     document.bottom() - 10, 0);
         }
+    }
+    
+    public static void generarReporteTabla(File archivo, String tituloReporte, List<String> encabezados, List<List<String>> datos) throws DocumentException, IOException {
+        Document documento = new Document();
+        PdfWriter writer = PdfWriter.getInstance(documento, new FileOutputStream(archivo));
+        
+        Membrete eventoMembrete = new Membrete();
+        writer.setPageEvent(eventoMembrete);
+
+        documento.open();
+
+        crearPortada(documento, tituloReporte);
+        
+        documento.newPage();
+
+        Paragraph tituloSeccion = new Paragraph("Detalle de Inventario", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.DARK_GRAY));
+        tituloSeccion.setSpacingAfter(20);
+        documento.add(tituloSeccion);
+
+        PdfPTable tabla = new PdfPTable(encabezados.size());
+        tabla.setWidthPercentage(100); // Ancho completo
+        tabla.setSpacingBefore(10f);
+        tabla.setSpacingAfter(10f);
+
+        Font fuenteCabecera = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.WHITE);
+        Font fuenteDatos = FontFactory.getFont(FontFactory.HELVETICA, 9, BaseColor.BLACK);
+
+        for (String encabezado : encabezados) {
+            PdfPCell celda = new PdfPCell(new Phrase(encabezado, fuenteCabecera));
+            celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+            celda.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            celda.setBackgroundColor(BaseColor.DARK_GRAY);
+            celda.setPadding(8);
+            tabla.addCell(celda);
+        }
+
+        for (List<String> fila : datos) {
+            for (String dato : fila) {
+                PdfPCell celda = new PdfPCell(new Phrase(dato, fuenteDatos));
+                celda.setPadding(5);
+                celda.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                
+                if (dato.startsWith("$") || dato.matches("\\d+")) {
+                    celda.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                } else {
+                    celda.setHorizontalAlignment(Element.ALIGN_LEFT);
+                }
+                
+                tabla.addCell(celda);
+            }
+        }
+
+        documento.add(tabla);
+        documento.close();
     }
 }

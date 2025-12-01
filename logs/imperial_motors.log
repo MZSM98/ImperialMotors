@@ -51,3 +51,5 @@
 2025-11-30 22:01:12 [Thread-183] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Registro de nuevo proveedor: Hyundai
 2025-11-30 22:06:25 [Thread-436] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Edición de cliente: Martin Bolaños Cobos
 2025-11-30 22:06:53 [Thread-437] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Edición de cliente: Martin Bolaños Cobos
+2025-11-30 22:42:33 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-11-30 22:42:42 [Thread-91] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Exportó PDF (Tabla): Inventario Vehicular

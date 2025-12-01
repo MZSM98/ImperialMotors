@@ -1,5 +1,12 @@
 package com.imperial.controlador;
 
+import com.imperial.utilidad.GeneradorPDF;
+import com.imperial.dominio.BitacoraImpl;
+import com.imperial.modelo.pojo.Usuario;
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import javafx.stage.FileChooser;
 import com.imperial.dominio.VehiculoImpl;
 import com.imperial.modelo.pojo.Vehiculo;
 import com.imperial.utilidad.InterfazSeleccion;
@@ -147,6 +154,7 @@ public class InventarioVehiculoController implements Initializable {
         if(botonRegistrar != null) botonRegistrar.setVisible(false);
         if(botonEditar != null) botonEditar.setVisible(false);
         if(botonEliminar != null) botonEliminar.setVisible(false);
+        if(botonExportar != null) botonExportar.setVisible(false);
     }
     
     
@@ -160,5 +168,55 @@ public class InventarioVehiculoController implements Initializable {
 
     @FXML
     private void clicExportar(ActionEvent event) {
+        
+        if (vehiculos == null || vehiculos.isEmpty()) {
+            Utilidades.mostrarAlerta("Sin datos", "No hay vehículos para exportar.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar Reporte de Inventario");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf"));
+        
+        Stage stageActual = (Stage) tablaVehiculos.getScene().getWindow();
+        File archivo = fileChooser.showSaveDialog(stageActual);
+
+        if (archivo != null) {
+            try {
+                List<String> encabezados = Arrays.asList("VIN", "Marca", "Modelo", "Año", "Tipo", "Precio", "Estado");
+
+                List<List<String>> datosTabla = new ArrayList<>();
+
+                for (Object obj : vehiculos) {
+                    Vehiculo v = (Vehiculo) obj;
+                    List<String> fila = new ArrayList<>();
+                    
+                    fila.add(v.getVIN() != null ? v.getVIN() : "");
+                    fila.add(v.getMarca() != null ? v.getMarca() : "");
+                    fila.add(v.getModelo() != null ? v.getModelo() : "");
+                    fila.add(v.getAnio() != null ? v.getAnio() : "");
+                    fila.add(v.getTipo() != null ? v.getTipo() : "");
+                    fila.add(String.format("$%,.2f", v.getPrecio())); // Formato moneda
+                    fila.add(v.getEstado() != null ? v.getEstado() : "Disponible");
+                    
+                    datosTabla.add(fila);
+                }
+
+                GeneradorPDF.generarReporteTabla(archivo, "Inventario General", encabezados, datosTabla);
+
+                Usuario usuarioSesion = Sesion.getUsuario();
+                if (usuarioSesion != null) {
+                    BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), 
+                                         usuarioSesion.getNombre(), 
+                                         "Exportó PDF (Tabla): Inventario Vehicular");
+                }
+
+                Utilidades.mostrarAlerta("Éxito", "Reporte generado correctamente.", Alert.AlertType.INFORMATION);
+
+            } catch (Exception e) {
+                Utilidades.mostrarAlerta("Error", "Error al generar PDF: " + e.getMessage(), Alert.AlertType.ERROR);
+                e.printStackTrace();
+            }
+        }
     }
 }
