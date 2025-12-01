@@ -73,7 +73,7 @@ public class GestionProveedorController implements Initializable {
         boolean error = (boolean) respuesta.get("error");
         
         if(!error){
-            ArrayList<Proveedor> listaProveedores = (ArrayList<Proveedor>) respuesta.get("proveedor");
+            ArrayList<Proveedor> listaProveedores = (ArrayList<Proveedor>) respuesta.get("proveedores");
             proveedores.clear();
             proveedores.addAll(listaProveedores);
         }else{

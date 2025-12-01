@@ -23,10 +23,5 @@
       </TableView>
       <Button layoutX="717.0" layoutY="430.0" mnemonicParsing="false" onAction="#clicEnExportar" prefHeight="26.0" prefWidth="110.0" text="Exportar" />
       <Button layoutX="567.0" layoutY="430.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="26.0" prefWidth="110.0" text="Regresar" />
-      <Button layoutX="27.0" layoutY="431.0" mnemonicParsing="false" onAction="#clicEnReportes" prefHeight="26.0" prefWidth="283.0" style="-fx-background-color: green;" text="Reportes Financieros" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

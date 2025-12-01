@@ -60,6 +60,8 @@ public class InventarioVehiculoController implements Initializable {
     
     private InterfazSeleccion<Vehiculo> observador;
     private boolean modoSeleccion = false;
+    @FXML
+    private Button botonExportar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -154,5 +156,9 @@ public class InventarioVehiculoController implements Initializable {
 
     @FXML
     private void clicEnEliminar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicExportar(ActionEvent event) {
     }
 }

@@ -19,5 +19,6 @@
       <VBox fx:id="contenedorGrafica" layoutX="40.0" layoutY="130.0" prefHeight="350.0" prefWidth="720.0" style="-fx-border-color: lightgrey; -fx-background-color: WHITE;" />
       <Button layoutX="630.0" layoutY="500.0" mnemonicParsing="false" onAction="#clicPDF" prefWidth="130.0" text="Exportar PDF" />
       <Button layoutX="480.0" layoutY="500.0" mnemonicParsing="false" onAction="#cerrarVentana" prefWidth="130.0" text="Cerrar" />
+      <Button layoutX="40.0" layoutY="500.0" mnemonicParsing="false" onAction="#clicEnReportes" prefHeight="26.0" prefWidth="232.0" style="-fx-background-color: #9DFF00;" text="Auditoria/Logs" />
    </children>
 </AnchorPane>

@@ -7,6 +7,7 @@ import com.imperial.utilidad.GeneradorPDF;
 import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +16,10 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -24,6 +28,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ReportesFinancierosController implements Initializable {
@@ -157,5 +162,26 @@ public class ReportesFinancierosController implements Initializable {
     @FXML
     private void cerrarVentana(ActionEvent event) {
         ((Stage) contenedorGrafica.getScene().getWindow()).close();
+    }
+
+    @FXML
+    private void clicEnReportes(ActionEvent event) {
+        try {
+            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLAuditoriaLogs.fxml");
+            Parent vista = cargador.load();
+            Scene escena = new Scene(vista);      
+            Stage escenario = new Stage();
+            Sesion.registrarVentana(escenario); 
+            escenario.setScene(escena);
+            escenario.setTitle("Auditoria y LOGS");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            
+            Sesion.registrarVentana(escenario); 
+            escenario.showAndWait();
+            
+        } catch (IOException ioe) {
+            Utilidades.mostrarAlerta("Error", "No se pudo abrir la ventana", Alert.AlertType.ERROR);
+            ioe.printStackTrace();
+        }
     }
 }

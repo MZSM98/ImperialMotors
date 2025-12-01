@@ -24,7 +24,7 @@ public class ProveedorDAO {
             sentencia.setString(2, proveedor.getTelefono());
             sentencia.setString(3, proveedor.getCorreo());
             sentencia.setString(4, proveedor.getRFC());
-            
+            return sentencia.executeUpdate();
         }
         throw new SQLException(Constantes.ERROR_BD);
     }

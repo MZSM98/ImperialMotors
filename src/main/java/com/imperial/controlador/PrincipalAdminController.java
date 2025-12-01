@@ -1,6 +1,5 @@
 package com.imperial.controlador;
 
-import com.imperial.modelo.pojo.Usuario;
 import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
@@ -109,7 +108,6 @@ public class PrincipalAdminController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
-            Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle("Gestión de Usuarios");
             escenario.initModality(Modality.APPLICATION_MODAL);
@@ -122,19 +120,21 @@ public class PrincipalAdminController implements Initializable {
     @FXML
     private void clicEnReportes(ActionEvent event) {
         try {
-            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLAuditoriaLogs.fxml");
+            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLReportesFinancieros.fxml");
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
             Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
-            escenario.setTitle("Auditoría y Reportes");
+            escenario.setTitle("Reportes y KPIs");
             escenario.initModality(Modality.APPLICATION_MODAL);
+            
+            Sesion.registrarVentana(escenario); 
             escenario.showAndWait();
             
         } catch (IOException ioe) {
+            Utilidades.mostrarAlerta("Error", "No se pudo abrir la ventana", Alert.AlertType.ERROR);
             ioe.printStackTrace();
-            Utilidades.mostrarAlerta("Error", "No se pudo abrir la ventana de reportes", Alert.AlertType.ERROR);
         }
     }
     
