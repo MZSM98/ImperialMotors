@@ -134,6 +134,7 @@ public class InicioSesionController implements Initializable {
             });
 
             Stage escenario = (Stage) textCorreo.getScene().getWindow();
+            Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle(titulo);
             escenario.show();

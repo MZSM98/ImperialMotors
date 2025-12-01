@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.AuditoriaLogsController">
+<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="854.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.AuditoriaLogsController">
    <children>
       <Label layoutX="294.0" layoutY="47.0" text="Registro de Actividades">
          <font>
@@ -23,5 +23,10 @@
       </TableView>
       <Button layoutX="717.0" layoutY="430.0" mnemonicParsing="false" onAction="#clicEnExportar" prefHeight="26.0" prefWidth="110.0" text="Exportar" />
       <Button layoutX="567.0" layoutY="430.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="26.0" prefWidth="110.0" text="Regresar" />
+      <Button layoutX="27.0" layoutY="431.0" mnemonicParsing="false" onAction="#clicEnReportes" prefHeight="26.0" prefWidth="283.0" style="-fx-background-color: green;" text="Reportes Financieros" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

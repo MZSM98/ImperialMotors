@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="800.0" style="-fx-background-color: GREY;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.ReportesFinancierosController">
+   <children>
+      <Label layoutX="270.0" layoutY="30.0" text="Reportes Financieros">
+         <font>
+            <Font name="SansSerif Bold" size="26.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboReporte" layoutX="40.0" layoutY="80.0" prefWidth="250.0" promptText="Seleccione reporte" />
+      <Button layoutX="310.0" layoutY="80.0" mnemonicParsing="false" onAction="#clicGenerar" text="Generar Vista" />
+      <VBox fx:id="contenedorGrafica" layoutX="40.0" layoutY="130.0" prefHeight="350.0" prefWidth="720.0" style="-fx-border-color: lightgrey; -fx-background-color: WHITE;" />
+      <Button layoutX="630.0" layoutY="500.0" mnemonicParsing="false" onAction="#clicPDF" prefWidth="130.0" text="Exportar PDF" />
+      <Button layoutX="480.0" layoutY="500.0" mnemonicParsing="false" onAction="#cerrarVentana" prefWidth="130.0" text="Cerrar" />
+   </children>
+</AnchorPane>

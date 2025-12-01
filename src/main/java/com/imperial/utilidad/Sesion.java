@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.scene.control.Alert;
@@ -16,9 +18,11 @@ public class Sesion {
     private Sesion(){
         throw new UnsupportedOperationException(Constantes.ERROR_CLASE_UTILERIA);
     }
+    
     private static Usuario usuarioActual;
     private static Timer timer;
     private static Stage stageActual; 
+    private static final List<Stage> ventanasAbiertas = new ArrayList<>();
 
     public static void iniciar(Usuario usuario, Stage stage) {
         usuarioActual = usuario;
@@ -32,6 +36,11 @@ public class Sesion {
     
     public static void setStageActual(Stage stage){
         stageActual = stage;
+    }
+    
+    public static void registrarVentana(Stage stage) {
+        ventanasAbiertas.add(stage);
+        stage.setOnHidden(e -> ventanasAbiertas.remove(stage));
     }
 
     public static void renovarTemporizador() {
@@ -54,6 +63,14 @@ public class Sesion {
     private static void cerrarSesionPorInactividad() {
         Platform.runLater(() -> {
             try {
+                List<Stage> copiaVentanas = new ArrayList<>(ventanasAbiertas);
+                for (Stage s : copiaVentanas) {
+                    if (s.isShowing()) {
+                        s.close();
+                    }
+                }
+                ventanasAbiertas.clear();
+
                 if (stageActual != null) {
                     Utilidades.mostrarAlerta("Sesión Expirada", "Su sesión se cerró por 10 minutos de inactividad.", Alert.AlertType.INFORMATION);
                     
@@ -76,5 +93,6 @@ public class Sesion {
     public static void cerrarSesionManual() {
         if (timer != null) timer.cancel();
         usuarioActual = null;
+        ventanasAbiertas.clear();
     }
 }

@@ -1,6 +1,7 @@
 package com.imperial.controlador;
 
 import com.imperial.modelo.pojo.Usuario;
+import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import java.net.URL;
@@ -16,11 +17,6 @@ import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author User
- */
 public class PrincipalAdminController implements Initializable {
     
     
@@ -29,12 +25,12 @@ public class PrincipalAdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
     
     
     @FXML
     private void cerrarSesion(ActionEvent event) {
+        ((Stage) botonCerrarSesion.getScene().getWindow()).close();
     }
 
     @FXML
@@ -44,6 +40,7 @@ public class PrincipalAdminController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
+            Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle("Clientes");
             escenario.initModality(Modality.APPLICATION_MODAL);
@@ -60,6 +57,7 @@ public class PrincipalAdminController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
+            Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle("Inventario");
             escenario.initModality(Modality.APPLICATION_MODAL);
@@ -76,6 +74,7 @@ public class PrincipalAdminController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
+            Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle("Gestion de Proveedores");
             escenario.initModality(Modality.APPLICATION_MODAL);
@@ -92,6 +91,7 @@ public class PrincipalAdminController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
+            Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle("Historial de Ventas");
             escenario.initModality(Modality.APPLICATION_MODAL);
@@ -109,6 +109,7 @@ public class PrincipalAdminController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
+            Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle("Gestión de Usuarios");
             escenario.initModality(Modality.APPLICATION_MODAL);
@@ -125,6 +126,7 @@ public class PrincipalAdminController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
+            Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle("Auditoría y Reportes");
             escenario.initModality(Modality.APPLICATION_MODAL);

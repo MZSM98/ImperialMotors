@@ -95,12 +95,13 @@ public class GestionVentasController implements Initializable {
             FXMLLoader loader = Utilidades.obtenerVistaMemoria("vista/FXMLRegistroVenta.fxml");
             Parent root = loader.load();
             
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Registrar Nueva Venta");
-            stage.setScene(scene);
-            stage.showAndWait();
+            Scene escena = new Scene(root);
+            Stage escenario = new Stage();
+            Sesion.registrarVentana(escenario); 
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.setTitle("Registrar Nueva Venta");
+            escenario.setScene(escena);
+            escenario.showAndWait();
             
             cargarVentas();
             

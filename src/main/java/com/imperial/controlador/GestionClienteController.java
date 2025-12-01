@@ -7,6 +7,7 @@ package com.imperial.controlador;
 import com.imperial.dominio.ClienteImpl;
 import com.imperial.modelo.pojo.Cliente;
 import com.imperial.utilidad.InterfazSeleccion;
+import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import java.net.URL;
@@ -122,6 +123,7 @@ public class GestionClienteController implements Initializable {
             controlador.inicializarDatos(cliente);
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
+            Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle("Registrar Cliente");
             escenario.initModality(Modality.APPLICATION_MODAL); 

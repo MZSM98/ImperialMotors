@@ -2,6 +2,7 @@ package com.imperial.controlador;
 
 import com.imperial.dominio.UsuarioImpl;
 import com.imperial.modelo.pojo.Usuario;
+import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import java.net.URL;
@@ -97,11 +98,9 @@ public class GestionUsuariosController implements Initializable {
     private void cambiarEstado(ActionEvent event) {
         Usuario usuario = tablaUsuarios.getSelectionModel().getSelectedItem();
         if (usuario != null) {
-            // Alternar estado (asumiendo que manejas "Activo" e "Inactivo")
             String nuevoEstado = "Activo".equals(usuario.getEstado()) ? "Inactivo" : "Activo";
             usuario.setEstado(nuevoEstado);
             
-            // Reutilizamos editarUsuario para guardar el cambio de estado
             HashMap<String, Object> respuesta = UsuarioImpl.editarUsuario(usuario);
             
             if (!(boolean) respuesta.get("error")) {
@@ -127,6 +126,7 @@ public class GestionUsuariosController implements Initializable {
 
             Scene escena = new Scene(vista);
             Stage escenario = new Stage();
+            Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle(usuarioEdicion == null ? "Registrar Usuario" : "Editar Usuario");
             escenario.initModality(Modality.APPLICATION_MODAL);

@@ -3,6 +3,7 @@ package com.imperial.controlador;
 import com.imperial.dominio.VehiculoImpl;
 import com.imperial.modelo.pojo.Vehiculo;
 import com.imperial.utilidad.InterfazSeleccion;
+import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import java.net.URL;
@@ -114,6 +115,7 @@ public class InventarioVehiculoController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
+            Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle("Registrar Vehiculo");
             escenario.initModality(Modality.APPLICATION_MODAL); 

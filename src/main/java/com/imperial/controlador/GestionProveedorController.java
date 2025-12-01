@@ -2,6 +2,7 @@ package com.imperial.controlador;
 
 import com.imperial.dominio.ProveedorImpl;
 import com.imperial.modelo.pojo.Proveedor;
+import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +43,7 @@ public class GestionProveedorController implements Initializable {
     @FXML
     private TextField textBuscar;
     @FXML
-    private TableColumn<?, ?> columnaTelefono;
+    private TableColumn columnaTelefono;
     
     private ObservableList<Proveedor> proveedores;
 
@@ -82,14 +83,14 @@ public class GestionProveedorController implements Initializable {
     
     @FXML
     private void clicRegistrar(ActionEvent event) {
-        abrirFormulario(null); // Pasamos null para indicar registro nuevo
+        abrirFormulario(null); 
     }
 
     @FXML
     private void clicEditar(ActionEvent event) {
         Proveedor proveedor = tablaProveedores.getSelectionModel().getSelectedItem();
         if (proveedor != null) {
-            abrirFormulario(proveedor); // Pasamos el proveedor seleccionado para editar
+            abrirFormulario(proveedor); 
         } else {
             Utilidades.mostrarAlerta("Selección requerida", "Debe seleccionar un proveedor de la lista para editarlo", Alert.AlertType.WARNING);
         }
@@ -100,14 +101,14 @@ public class GestionProveedorController implements Initializable {
             FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLFormularioProveedor.fxml");
             Parent vista = cargador.load();
             
-            // Si es edición, pasamos los datos al controlador del formulario
             if (proveedorEdicion != null) {
                 FormularioProveedorController ctrl = cargador.getController();
-                ctrl.inicializarDatos(proveedorEdicion); // Asegúrate de tener este método en tu formulario
+                ctrl.inicializarDatos(proveedorEdicion); 
             }
             
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
+            Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle(proveedorEdicion == null ? "Registrar Proveedor" : "Editar Proveedor");
             escenario.initModality(Modality.APPLICATION_MODAL); 

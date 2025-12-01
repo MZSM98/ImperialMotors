@@ -17,12 +17,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class AuditoriaLogsController implements Initializable {
@@ -105,6 +109,26 @@ public class AuditoriaLogsController implements Initializable {
             Utilidades.mostrarAlerta("Éxito", "Reporte exportado correctamente", Alert.AlertType.INFORMATION);
         } catch (IOException e) {
             Utilidades.mostrarAlerta("Error", "No se pudo guardar el archivo: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+    
+    @FXML
+    private void clicEnReportes(ActionEvent event) {
+        try {
+            FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLReportesFinancieros.fxml");
+            Parent vista = cargador.load();
+            Scene escena = new Scene(vista);      
+            Stage escenario = new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Reportes y KPIs");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            
+            Sesion.registrarVentana(escenario); 
+            escenario.showAndWait();
+            
+        } catch (IOException ioe) {
+            Utilidades.mostrarAlerta("Error", "No se pudo abrir la ventana", Alert.AlertType.ERROR);
+            ioe.printStackTrace();
         }
     }
 }
