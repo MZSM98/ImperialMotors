@@ -43,6 +43,8 @@ public class GestionUsuariosController implements Initializable {
     private TextField textBuscar;
 
     private ObservableList<Usuario> usuarios;
+    @FXML
+    private TableColumn<?, ?> columnEstado;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -63,6 +65,7 @@ public class GestionUsuariosController implements Initializable {
         columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         columnaCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
         columnaRol.setCellValueFactory(new PropertyValueFactory<>("rol"));
+        columnEstado.setCellValueFactory(new PropertyValueFactory("estado"));
         tablaUsuarios.setItems(usuarios);
     }
     
@@ -98,7 +101,7 @@ public class GestionUsuariosController implements Initializable {
     private void cambiarEstado(ActionEvent event) {
         Usuario usuario = tablaUsuarios.getSelectionModel().getSelectedItem();
         if (usuario != null) {
-            String nuevoEstado = "Activo".equals(usuario.getEstado()) ? "Inactivo" : "Activo";
+            String nuevoEstado = "ACTIVO".equalsIgnoreCase(usuario.getEstado()) ? "INACTIVO" : "ACTIVO";
             usuario.setEstado(nuevoEstado);
             
             HashMap<String, Object> respuesta = UsuarioImpl.editarUsuario(usuario);
@@ -121,7 +124,7 @@ public class GestionUsuariosController implements Initializable {
 
             if (usuarioEdicion != null) {
                 FormularioUsuarioController ctrl = cargador.getController();
-                ctrl.inicializarDatos(usuarioEdicion); // Asegúrate de tener este método en tu formulario
+                ctrl.inicializarDatos(usuarioEdicion);
             }
 
             Scene escena = new Scene(vista);

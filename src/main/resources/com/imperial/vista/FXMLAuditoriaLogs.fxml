@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="854.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.AuditoriaLogsController">
+<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="854.0" stylesheets="@../recurso/estilos.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.AuditoriaLogsController">
    <children>
-      <Label layoutX="294.0" layoutY="47.0" text="Registro de Actividades">
+      <Label layoutX="279.0" layoutY="47.0" style="-fx-font-size: 30;" text="Registro de Actividades">
          <font>
             <Font name="SansSerif Regular" size="30.0" />
          </font>

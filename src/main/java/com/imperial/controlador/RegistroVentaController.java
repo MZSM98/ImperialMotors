@@ -25,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -53,6 +54,14 @@ public class RegistroVentaController implements Initializable {
     private Cliente clienteSeleccionado;
     private double totalVenta = 0.0;
     Usuario usuarioSesion;
+    @FXML
+    private Button btnElegirCliente;
+    @FXML
+    private Button btnRegistrar;
+    @FXML
+    private Button btnAnadirAuto;
+    @FXML
+    private Button btnEliminarAuto;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -206,8 +215,22 @@ public class RegistroVentaController implements Initializable {
         stage.close();
     }
 
-    @FXML
     private void clicCambiarCliente(ActionEvent event) {
         clicElegirCliente(event);
+    }
+    
+    public void inicializarConsulta(Venta venta) {
+        textCliente.setText(venta.getNombreCliente());
+        textImporte.setText(String.format("$ %.2f", venta.getImporte()));
+        
+        ArrayList<Vehiculo> listaAutos = VentaImpl.obtenerVehiculosVenta(venta.getIdVenta());
+        carritoCompras.setAll(listaAutos);
+        
+        textCliente.setDisable(true);
+        
+        if(btnElegirCliente != null) btnElegirCliente.setVisible(false);
+        if(btnAnadirAuto != null) btnAnadirAuto.setVisible(false);
+        if(btnEliminarAuto != null) btnEliminarAuto.setVisible(false);
+        if(btnRegistrar != null) btnRegistrar.setVisible(false);
     }
 }

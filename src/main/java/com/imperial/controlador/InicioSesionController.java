@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class InicioSesionController implements Initializable {
-    
+
     @FXML
     private TextField textCorreo;
     @FXML
@@ -36,7 +36,7 @@ public class InicioSesionController implements Initializable {
 
     private static final Map<String, Integer> intentosFallidos = new HashMap<>();
     private static final Map<String, Long> tiempoBloqueo = new HashMap<>();
-    
+
     public static final String ERROR_INICIO_SESION = "!Ups¡ algo salió mal, "
             + " no tenemos servicio por el momento, intenta más tarde";
     @Override
@@ -59,7 +59,7 @@ public class InicioSesionController implements Initializable {
             validarSesion(correo, contrasena);
         }
     }
-    
+
     private boolean verificarBloqueo(String correo) {
         if (tiempoBloqueo.containsKey(correo)) {
             if (System.currentTimeMillis() < tiempoBloqueo.get(correo)) {
@@ -99,7 +99,7 @@ public class InicioSesionController implements Initializable {
         
         return correctos;
     }
-    
+
     private void validarSesion(String correo, String contrasena){
         
         HashMap<String, Object> respuesta = AutenticacionImpl.verificarCredencialesUsuario(correo, contrasena);
@@ -120,42 +120,38 @@ public class InicioSesionController implements Initializable {
             Utilidades.mostrarAlerta("Error", "Credenciales incorrectas", Alert.AlertType.ERROR);
         }
     }
-    
+
     private void irPantallaPrincipal(Usuario usuario) {
         try {
             FXMLLoader cargador;
             String titulo;
-
             if ("Administrador".equals(usuario.getRol())) {
-                cargador = Utilidades.obtenerVistaMemoria("vista/FXMLPrincipalAdmin.fxml");
+                cargador = Utilidades.obtenerVistaMemoria("vista/FXMLPrincipalAdmin.fxml"); //
                 titulo = "Menú Principal - Administrador";
             } else {
                 cargador = Utilidades.obtenerVistaMemoria("vista/FXMLPrincipalVendedor.fxml");
                 titulo = "Menú Principal - Vendedor";
             }
-
-            Parent vista = cargador.load();
+            Stage escenario = (Stage) textCorreo.getScene().getWindow();
+            Sesion.iniciar(usuario, escenario); 
+            Parent vista = cargador.load(); 
             Scene escena = new Scene(vista);
-
             escena.addEventFilter(javafx.scene.input.InputEvent.ANY, event -> {
                 Sesion.renovarTemporizador();
             });
-
-            Stage escenario = (Stage) textCorreo.getScene().getWindow();
             Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
             escenario.setTitle(titulo);
+            escenario.centerOnScreen();
             escenario.show();
-
-            Sesion.iniciar(usuario, escenario);
 
         } catch (IOException ioe) {
             Utilidades.mostrarAlerta("Error", ERROR_INICIO_SESION, Alert.AlertType.ERROR);
         }
     }
-    
+
     private void aplicarRestricciones (){
-        RestriccionCampos.limitarLongitud(textContrasena);
+        RestriccionCampos.limitarLongitud(textCorreo);
         RestriccionCampos.limitarLongitud(textContrasena);
     }
 }

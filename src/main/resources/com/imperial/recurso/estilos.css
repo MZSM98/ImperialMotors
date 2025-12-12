@@ -1,0 +1,151 @@
+.root {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #E0EAFC 0%, #CFDEF3 100%);
+    
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 14px;
+}
+/* --- ETIQUETAS (LABELS) --- */
+.label {
+    -fx-text-fill: #2C3E50;
+    -fx-font-weight: bold;
+}
+
+/* Títulos más grandes (puedes usar un id específico si quieres uno gigante) */
+.label-titulo { 
+    -fx-font-size: 24px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}
+
+/* --- BOTONES (BUTTONS) --- */
+/* Se aplica a TODOS los botones automáticamente */
+.button {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #34495E;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+    -fx-padding: 8 15 8 15; /* Arriba Der Abajo Izq */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);
+    -fx-transition: all 0.3s;
+}
+
+.button:hover {
+    -fx-background-color: #ECF0F1;
+    -fx-border-color: #3498DB;
+    -fx-text-fill: #2980B9;
+    -fx-effect: dropshadow(three-pass-box, rgba(52, 152, 219, 0.2), 8, 0, 0, 3);
+}
+
+.button:pressed {
+    -fx-background-color: #D6DBDF;
+    -fx-translate-y: 1; /* Efecto de presionar */
+}
+
+/* --- CAMPOS DE TEXTO (TEXTFIELDS) --- */
+.text-field {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 5;
+    -fx-border-color: #BDC3C7;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-padding: 8;
+}
+
+.text-field:focused {
+    -fx-border-color: #3498DB;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, rgba(52, 152, 219, 0.3), 5, 0, 0, 0);
+}
+
+/* --- COMBO BOX --- */
+.combo-box {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 5;
+    -fx-border-color: #BDC3C7;
+    -fx-border-radius: 5;
+}
+
+.combo-box:hover {
+    -fx-border-color: #3498DB;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #2C3E50;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+}
+
+/* --- TABLAS (TABLE VIEW) --- */
+.table-view {
+    -fx-background-color: #FFFFFF; /* Fondo blanco para que no se vea transparente/raro si está vacía */
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 1;
+    /* Sombra suave */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);
+    /* Quitar padding extra interno que a veces descuadra */
+    -fx-padding: 0; 
+}
+
+/* El fondo detrás de los títulos de las columnas */
+.table-view .column-header-background {
+    -fx-background-color: #2C3E50;
+    /* Redondeamos solo arriba para encajar con la tabla */
+    -fx-background-radius: 7 7 0 0; 
+    -fx-background-insets: 0 0 0 0; /* Asegura que toque los bordes */
+}
+
+/* "Filler" es el espacio vacío a la derecha de las columnas */
+.table-view .filler {
+    -fx-background-color: #2C3E50; /* Mismo color que la cabecera para que se vea continuo */
+    -fx-background-radius: 0 7 0 0; /* Redondear esquina superior derecha */
+}
+
+/* Cada celda de título individual */
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-size: 40px; /* Altura un poco mayor para que respire */
+    -fx-border-color: transparent #34495E transparent transparent; /* Separador sutil entre títulos */
+}
+
+/* El texto dentro del título */
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 0 10; /* Espacio a la izquierda para que no se vea "chueco" o pegado */
+}
+
+/* Filas y Celdas */
+.table-row-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent transparent #ECF0F1 transparent; /* Línea separadora horizontal */
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #F8F9F9; /* Filas alternas */
+}
+
+/* Efecto al pasar el mouse sobre una fila */
+.table-row-cell:hover {
+    -fx-background-color: #EBF5FB;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+}
+
+/* Mensaje de "Tabla sin contenido" */
+.table-view .placeholder .label {
+    -fx-text-fill: #95A5A6;
+    -fx-font-size: 14px;
+}

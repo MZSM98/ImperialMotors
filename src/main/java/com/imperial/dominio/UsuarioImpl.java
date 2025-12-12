@@ -1,32 +1,30 @@
-
 package com.imperial.dominio;
 
 import com.imperial.modelo.ConexionBD;
 import com.imperial.modelo.dao.UsuarioDAO;
 import com.imperial.modelo.pojo.Usuario;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-
 public class UsuarioImpl {
     
     private UsuarioImpl(){
-        
     }
     
     public static HashMap<String, Object> obtenerUsuarios(){
         
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
+        Connection conexion = ConexionBD.abrirConexion();
         try{
-            
-            ResultSet resultado = UsuarioDAO.obtenerUsuarios(ConexionBD.abrirConexion());
+            ResultSet resultado = UsuarioDAO.obtenerUsuarios(conexion);
             ArrayList<Usuario> usuarios = new ArrayList<>();
             
             while (resultado.next()){
-                Usuario usuario = new Usuario ();
+                Usuario usuario = new Usuario();
                 usuario.setIdUsuario(resultado.getInt("idUsuario"));
                 usuario.setNombre(resultado.getString("nombre"));
                 usuario.setApellidoPaterno(resultado.getString("apellidoPaterno"));
@@ -35,73 +33,99 @@ public class UsuarioImpl {
                 usuario.setIdRol(resultado.getInt("idRol"));
                 usuario.setRol(resultado.getString("rol"));
                 usuario.setContrasena(resultado.getString("contrasena"));
+                usuario.setEstado(resultado.getString("estado")); 
                 usuarios.add(usuario);
-                
             }
             respuesta.put("error", false);
             respuesta.put("usuarios", usuarios);
-            ConexionBD.cerrarConexionBD();
-        }catch(SQLException sqle){
+        } catch(SQLException sqle){
             respuesta.put("error", true);
-            respuesta.put("mensaje", sqle.getMessage());
+            respuesta.put("mensaje", "Error al obtener usuarios: " + sqle.getMessage());
+        } finally {
+            ConexionBD.cerrarConexionBD();
         }
         return respuesta;
     }
     
-    
     public static HashMap<String, Object> registrarUsuario(Usuario usuario){
-        
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
-        
-        
+        Connection conexion = ConexionBD.abrirConexion();
         try{
-            int filasAfectadas = UsuarioDAO.registrarUsuario(usuario, ConexionBD.abrirConexion());
-            
+            if(UsuarioDAO.verificarCorreo(conexion, usuario.getCorreo())){
+                respuesta.put("error", true);
+                respuesta.put("mensaje", "El correo electrónico ya está registrado en el sistema.");
+                return respuesta;
+            }
+
+            int filasAfectadas = UsuarioDAO.registrarUsuario(usuario, conexion);
             if (filasAfectadas > 0){
                 respuesta.put("error", false);
-                respuesta.put("mensaje", "El registro del usuario" + usuario.getNombre() +" fue guardado de manera exitosa");
-                
-            }else{
+                respuesta.put("mensaje", "Usuario " + usuario.getNombre() + " registrado exitosamente.");
+            } else {
                 respuesta.put("error", true);
-                respuesta.put("mensaje", "No se pudo guardar la información, inténtelo más tarde");
+                respuesta.put("mensaje", "No se pudo registrar el usuario.");
             }
-            
-        }catch(SQLException sqle){
+        } catch(SQLException sqle){
             respuesta.put("error", true);
-            respuesta.put("mensaje", sqle.getMessage());
+            respuesta.put("mensaje", "Error en base de datos: " + sqle.getMessage());
+        } finally {
+            ConexionBD.cerrarConexionBD();
         }
         return respuesta;
     }
     
     public static boolean verificarDuplicado(String correo){
-           
+        boolean existe = false;
+        Connection conexion = ConexionBD.abrirConexion();
         try {
-            return UsuarioDAO.verificarCorreo(ConexionBD.abrirConexion(), correo);
-        }catch (SQLException sqle){
-            sqle.printStackTrace();//Tengo que cambiar esto
-            return false;
-        }finally{
+            existe = UsuarioDAO.verificarCorreo(conexion, correo);
+        } catch (SQLException sqle){
+            sqle.printStackTrace();
+        } finally {
             ConexionBD.cerrarConexionBD();
         }
+        return existe;
     }
     
     public static HashMap<String, Object> editarUsuario(Usuario usuario){
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
-        
+        Connection conexion = ConexionBD.abrirConexion();
         try{
-            int filasAfectadas = UsuarioDAO.editarUsuario(usuario, ConexionBD.abrirConexion());
             
+            int filasAfectadas = UsuarioDAO.editarUsuario(usuario, conexion);
             if (filasAfectadas > 0){
                 respuesta.put("error", false);
-                respuesta.put("mensaje", "El registro del usuario" + usuario.getNombre() +" fue modificado de manera exitosa");
-            }else{
+                respuesta.put("mensaje", "Información del usuario actualizada correctamente.");
+            } else {
                 respuesta.put("error", true);
-                respuesta.put("mensaje", "No se pudo modificar la información, inténtelo más tarde");
+                respuesta.put("mensaje", "No se pudo actualizar la información.");
             }
+        } catch (SQLException sqle){
+            respuesta.put("error", true);
+            respuesta.put("mensaje", "Error al editar: " + sqle.getMessage());
+        } finally {
             ConexionBD.cerrarConexionBD();
-        }catch (SQLException sqle){
+        }
+        return respuesta;
+    }
+    
+    public static HashMap<String, Object> cambiarEstadoUsuario(int idUsuario, String nuevoEstado){
+        HashMap<String, Object> respuesta = new LinkedHashMap<>();
+        Connection conexion = ConexionBD.abrirConexion();
+        try{
+            int filas = UsuarioDAO.cambiarEstado(idUsuario, nuevoEstado, conexion);
+            if(filas > 0){
+                respuesta.put("error", false);
+                respuesta.put("mensaje", "Estado del usuario actualizado a: " + nuevoEstado);
+            } else {
+                respuesta.put("error", true);
+                respuesta.put("mensaje", "No se pudo cambiar el estado.");
+            }
+        } catch(SQLException sqle){
             respuesta.put("error", true);
             respuesta.put("mensaje", sqle.getMessage());
+        } finally {
+            ConexionBD.cerrarConexionBD();
         }
         return respuesta;
     }

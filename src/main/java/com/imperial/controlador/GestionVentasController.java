@@ -3,6 +3,7 @@ package com.imperial.controlador;
 import com.imperial.dominio.VentaImpl;
 import com.imperial.modelo.pojo.Usuario;
 import com.imperial.modelo.pojo.Venta;
+import com.imperial.utilidad.Constantes;
 import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
@@ -86,7 +87,30 @@ public class GestionVentasController implements Initializable {
 
     @FXML
     private void clicEnConsultar(ActionEvent event) {
-        //TODO
+        Venta ventaSeleccionada = tablaVentas.getSelectionModel().getSelectedItem();
+        
+        if (ventaSeleccionada != null) {
+            try {
+                FXMLLoader loader = Utilidades.obtenerVistaMemoria("vista/FXMLRegistroVenta.fxml");
+                Parent root = loader.load();
+                
+                RegistroVentaController controller = loader.getController();
+                controller.inicializarConsulta(ventaSeleccionada);
+                
+                Scene escena = new Scene(root);
+                Stage escenario = new Stage();
+                Sesion.registrarVentana(escenario);
+                escenario.initModality(Modality.APPLICATION_MODAL);
+                escenario.setTitle("Detalle de Venta (Solo Lectura)");
+                escenario.setScene(escena);
+                escenario.showAndWait();
+                
+            } catch (IOException ex) {
+                Utilidades.mostrarAlerta("Error", Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
+            }
+        } else {
+            Utilidades.mostrarAlerta("Selección requerida", "Selecciona una venta de la tabla para ver sus detalles.", Alert.AlertType.WARNING);
+        }
     }
     
     @FXML
@@ -106,8 +130,7 @@ public class GestionVentasController implements Initializable {
             cargarVentas();
             
         } catch (IOException ex) {
-            Utilidades.mostrarAlerta("Error", "No se pudo abrir la ventana de registro", Alert.AlertType.ERROR);
-            ex.printStackTrace();
+            Utilidades.mostrarAlerta("Error", Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
         }
     }
-}
+}   

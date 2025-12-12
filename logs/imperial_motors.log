@@ -58,3 +58,41 @@
 2025-12-12 00:23:21 [Thread-394] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Consulta de Reportes/Bitácora
 2025-12-12 00:30:25 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
 2025-12-12 00:46:13 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 01:48:02 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: <p th:utext="'Hello, ' + ${name} + '!'" /> | Accion: Intento de inicio de sesión fallido
+2025-12-12 01:48:05 [Thread-6] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: <p th:utext="'Hello, ' + ${name} + '!'" /> | Accion: Intento de inicio de sesión fallido
+2025-12-12 02:13:20 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 02:17:10 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 02:19:11 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 02:20:13 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 02:21:10 [Thread-318] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Venta Registrada - Folio: 3 - Total: 2600000.0
+2025-12-12 02:35:09 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 02:35:09 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 02:39:33 [Thread-131] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Venta Registrada - Folio: 4 - Total: 1240000.0
+2025-12-12 02:39:49 [Thread-246] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Generó vista previa: KPIs y Anomalías
+2025-12-12 02:39:52 [Thread-247] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Generó vista previa: Ventas del Mes
+2025-12-12 02:53:33 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 02:53:34 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 04:16:27 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 04:16:27 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 04:40:51 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 04:40:51 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 04:44:00 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 04:44:01 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 04:51:40 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 04:51:41 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 05:06:29 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 05:06:30 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 05:54:09 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 05:54:10 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 06:06:56 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 06:06:57 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: admin | Accion: Intento de inicio de sesión fallido
+2025-12-12 06:07:05 [Thread-6] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: admin | Accion: Intento de inicio de sesión fallido
+2025-12-12 06:07:07 [Thread-7] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: admin | Accion: Bloqueo de cuenta por exceso de intentos
+2025-12-12 06:07:07 [Thread-8] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: admin | Accion: Intento de inicio de sesión fallido
+2025-12-12 06:07:17 [Thread-9] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 06:07:44 [Thread-174] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Edición de usuario: admin@ejemplo.com
+2025-12-12 06:09:17 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 06:09:18 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Inicio de sesión exitoso
+2025-12-12 06:09:51 [Thread-238] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Generó vista previa: Ventas por Semana
+2025-12-12 06:09:54 [Thread-239] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Generó vista previa: Ventas del Mes
+2025-12-12 06:09:55 [Thread-240] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Consulta de Reportes/Bitácora

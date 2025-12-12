@@ -60,4 +60,18 @@ public class VentaDAO {
         }
         throw new SQLException(Constantes.ERROR_BD);
     }
+    
+    public static ResultSet obtenerDetallesVenta(Connection conexion, int idVenta) throws SQLException {
+        if (conexion != null) {
+            String consulta = "SELECT v.VIN, v.marca, v.modelo, v.anio, dv.precioUnitario AS precio, v.tipo, v.estado, v.idProveedor " +
+                            "FROM vehiculo v " +
+                            "INNER JOIN detalleventa dv ON v.VIN = dv.VIN " +
+                            "WHERE dv.idVenta = ?";
+            PreparedStatement sentencia = conexion.prepareStatement(consulta);
+            sentencia.setInt(1, idVenta);
+            return sentencia.executeQuery();
+            }
+            throw new SQLException(Constantes.ERROR_BD);
+    }
 }
+    

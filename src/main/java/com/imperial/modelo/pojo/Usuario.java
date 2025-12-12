@@ -11,7 +11,7 @@ public class Usuario {
     private String correo;
     private String contrasena;
     private int idRol;
-    private String Rol;
+    private String rol;
     private String estado;
 
     public int getIdUsuario() {
@@ -71,11 +71,11 @@ public class Usuario {
     }
 
     public String getRol() {
-        return Rol;
+        return rol;
     }
 
-    public void setRol(String Rol) {
-        this.Rol = Rol;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public String getEstado() {
@@ -86,6 +86,11 @@ public class Usuario {
         this.estado = estado;
     }
     
-    
-    private enum Estado {ACTIVO, INACTIVO}
+    public String getNombreCompleto() {
+        if (apellidoMaterno != null && !apellidoMaterno.isEmpty()) {
+            return nombre + " " + apellidoPaterno + " " + apellidoMaterno;
+        } else {
+            return nombre + " " + apellidoPaterno;
+        }
+    }
 }

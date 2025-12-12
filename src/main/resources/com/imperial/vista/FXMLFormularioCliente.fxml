@@ -7,18 +7,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="382.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.FormularioClienteController">
+<AnchorPane id="AnchorPane" prefHeight="381.0" prefWidth="603.0" stylesheets="@../recurso/estilos.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.FormularioClienteController">
    <children>
-      <Label layoutX="89.0" layoutY="50.0" text="Registrar Cliente">
+      <Label layoutX="44.0" layoutY="50.0" style="-fx-font-size: 30;" text="Registrar Cliente">
          <font>
             <Font name="SansSerif Bold" size="25.0" />
          </font>
       </Label>
-      <GridPane layoutX="89.0" layoutY="116.0" prefHeight="234.0" prefWidth="511.0">
+      <GridPane layoutX="44.0" layoutY="116.0" prefHeight="234.0" prefWidth="511.0">
          <children>
             <TextField fx:id="textNombre" GridPane.rowIndex="1">
                <GridPane.margin>
@@ -50,10 +49,10 @@
                </GridPane.margin></TextField>
             <Button mnemonicParsing="false" onAction="#clicCancelar" prefHeight="26.0" prefWidth="100.0" text="Cancelar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                <GridPane.margin>
-                  <Insets right="100.0" />
+                  <Insets right="152.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#clicRegistrar" prefHeight="26.0" prefWidth="89.0" text="Registrar" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+            <Button mnemonicParsing="false" onAction="#clicRegistrar" prefHeight="36.0" prefWidth="122.0" text="Registrar" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -81,6 +80,5 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Pane prefHeight="387.0" prefWidth="56.0" style="-fx-background-color: GREY;" />
    </children>
 </AnchorPane>

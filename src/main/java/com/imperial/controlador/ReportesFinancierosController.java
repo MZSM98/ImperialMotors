@@ -26,6 +26,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -40,6 +41,8 @@ public class ReportesFinancierosController implements Initializable {
     private BarChart<String, Number> graficaBarras;
     private List<String> datosTexto;
     private Usuario usuarioSesion;
+    @FXML
+    private Button botonAuditoria;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -4,6 +4,7 @@ import com.imperial.modelo.ConexionBD;
 import com.imperial.modelo.dao.VehiculoDAO;
 import com.imperial.modelo.dao.VentaDAO;
 import com.imperial.modelo.pojo.DetalleVenta;
+import com.imperial.modelo.pojo.Vehiculo;
 import com.imperial.modelo.pojo.Venta;
 import com.imperial.utilidad.Constantes;
 import java.sql.Connection;
@@ -82,4 +83,30 @@ public class VentaImpl {
         }
         return respuesta;
     }
+    
+    public static ArrayList<Vehiculo> obtenerVehiculosVenta(int idVenta) {
+        ArrayList<com.imperial.modelo.pojo.Vehiculo> vehiculos = new ArrayList<>();
+        Connection conexion = ConexionBD.abrirConexion();
+        try {
+            ResultSet rs = VentaDAO.obtenerDetallesVenta(conexion, idVenta);
+            while (rs.next()) {
+                com.imperial.modelo.pojo.Vehiculo v = new com.imperial.modelo.pojo.Vehiculo();
+                v.setVIN(rs.getString("VIN"));
+                v.setMarca(rs.getString("marca"));
+                v.setModelo(rs.getString("modelo"));
+                v.setAnio(rs.getString("anio"));
+                v.setPrecio(rs.getDouble("precio")); 
+                v.setTipo(rs.getString("tipo"));
+                v.setEstado(rs.getString("estado"));
+                v.setIdProveedor(rs.getInt("idProveedor"));
+                vehiculos.add(v);
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } finally {
+            ConexionBD.cerrarConexionBD();
+        }
+        return vehiculos;
+    }
+
 }

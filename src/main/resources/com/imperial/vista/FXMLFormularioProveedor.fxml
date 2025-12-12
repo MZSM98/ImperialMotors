@@ -7,18 +7,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="349.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.FormularioProveedorController">
+<AnchorPane id="AnchorPane" prefHeight="384.0" prefWidth="624.0" stylesheets="@../recurso/estilos.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.FormularioProveedorController">
    <children>
-      <Label layoutX="85.0" layoutY="39.0" text="Registrar  Proveedor">
+      <Label layoutX="62.0" layoutY="39.0" style="-fx-font-size: 30;" text="Registrar  Proveedor">
          <font>
             <Font name="SansSerif Bold" size="25.0" />
          </font>
       </Label>
-      <GridPane layoutX="85.0" layoutY="89.0" prefHeight="210.0" prefWidth="511.0">
+      <GridPane layoutX="62.0" layoutY="110.0" prefHeight="210.0" prefWidth="511.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -60,16 +59,15 @@
             </TextField>
             <Button mnemonicParsing="false" onAction="#clicCancelar" prefHeight="26.0" prefWidth="100.0" text="Cancelar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                <GridPane.margin>
-                  <Insets right="100.0" />
+                  <Insets right="160.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#clicRegistrar" prefHeight="26.0" prefWidth="89.0" text="Registrar" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+            <Button mnemonicParsing="false" onAction="#clicRegistrar" prefHeight="36.0" prefWidth="126.0" text="Registrar" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Button>
          </children>
       </GridPane>
-      <Pane prefHeight="349.0" prefWidth="56.0" style="-fx-background-color: GREY;" />
    </children>
 </AnchorPane>

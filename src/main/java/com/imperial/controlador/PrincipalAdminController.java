@@ -1,5 +1,8 @@
 package com.imperial.controlador;
 
+import com.imperial.dominio.BitacoraImpl;
+import com.imperial.modelo.pojo.Usuario;
+import com.imperial.utilidad.Constantes;
 import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
@@ -13,23 +16,34 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class PrincipalAdminController implements Initializable {
     
-    
     @FXML
     private Button botonCerrarSesion;
+    private static final String ERROR = "Error";
+
+    @FXML
+    private Label labelNombre;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    }    
-    
-    
+        configurarUsuario();
+    }
+
     @FXML
     private void cerrarSesion(ActionEvent event) {
         ((Stage) botonCerrarSesion.getScene().getWindow()).close();
+    }
+
+    private void configurarUsuario(){
+        Usuario usuario = Sesion.getUsuario();
+        if (usuario != null) {
+            labelNombre.setText(usuario.getNombreCompleto());
+        }
     }
 
     @FXML
@@ -45,7 +59,7 @@ public class PrincipalAdminController implements Initializable {
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
         }catch(IOException ioe){
-            ioe.printStackTrace();
+            Utilidades.mostrarAlerta(ERROR, Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
         }
     }
 
@@ -62,7 +76,7 @@ public class PrincipalAdminController implements Initializable {
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
         }catch(IOException ioe){
-            ioe.printStackTrace();
+            Utilidades.mostrarAlerta(ERROR, Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
         }
     }
 
@@ -79,7 +93,7 @@ public class PrincipalAdminController implements Initializable {
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
         }catch(IOException ioe){
-            ioe.printStackTrace();
+            Utilidades.mostrarAlerta(ERROR, Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
         }
     }
 
@@ -96,8 +110,7 @@ public class PrincipalAdminController implements Initializable {
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
         } catch (IOException ioe) {
-            ioe.printStackTrace();
-            Utilidades.mostrarAlerta("Error", "No se pudo abrir el historial de ventas", Alert.AlertType.ERROR);
+            Utilidades.mostrarAlerta(ERROR, Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
         }
     }
 
@@ -113,10 +126,10 @@ public class PrincipalAdminController implements Initializable {
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
         }catch(IOException ioe){
-            ioe.printStackTrace();
+            Utilidades.mostrarAlerta(ERROR, Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
         }
     }
-    
+
     @FXML
     private void clicEnReportes(ActionEvent event) {
         try {
@@ -133,9 +146,7 @@ public class PrincipalAdminController implements Initializable {
             escenario.showAndWait();
             
         } catch (IOException ioe) {
-            Utilidades.mostrarAlerta("Error", "No se pudo abrir la ventana", Alert.AlertType.ERROR);
-            ioe.printStackTrace();
+            Utilidades.mostrarAlerta(ERROR, Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
         }
     }
-    
 }

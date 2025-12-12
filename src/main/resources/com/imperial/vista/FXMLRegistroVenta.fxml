@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -8,23 +9,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.RegistroVentaController">
+<AnchorPane id="AnchorPane" prefHeight="736.0" prefWidth="887.0" stylesheets="@../recurso/estilos.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imperial.controlador.RegistroVentaController">
    <children>
-      <Label layoutX="381.0" layoutY="44.0" text="Registro de Venta">
+      <Label layoutX="317.0" layoutY="50.0" style="-fx-font-size: 30;" text="Registro de Venta">
          <font>
             <Font name="SansSerif Regular" size="30.0" />
          </font>
       </Label>
-      <Pane prefHeight="750.0" prefWidth="56.0" style="-fx-background-color: GREY;" />
-      <GridPane layoutX="101.0" layoutY="119.0" prefHeight="150.0" prefWidth="571.0">
+      <GridPane layoutX="46.0" layoutY="117.0" prefHeight="152.0" prefWidth="646.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="427.0" minWidth="10.0" prefWidth="349.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="5.0" prefWidth="10.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="31.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="484.0000244140625" minWidth="10.0" prefWidth="484.0000244140625" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="137.5999755859375" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -38,21 +36,24 @@
             <TextField fx:id="textVendedor" prefHeight="31.0" prefWidth="297.0" promptText="López Rodríguez Genaro" GridPane.rowIndex="1" />
             <Label text="Cliente" GridPane.rowIndex="3" />
             <TextField fx:id="textCliente" prefHeight="30.0" prefWidth="270.0" promptText="Ramiro López Hernández" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" onAction="#clicElegirCliente" prefWidth="130.0" text="Elegir cliente" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button fx:id="btnElegirCliente" mnemonicParsing="false" onAction="#clicElegirCliente" prefWidth="130.0" text="Elegir cliente" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></Button>
          </children>
       </GridPane>
-      <Button layoutX="102.0" layoutY="685.0" mnemonicParsing="false" onAction="#clicEnRegistrar" prefHeight="31.0" prefWidth="130.0" text="Registrar" />
-      <Button layoutX="772.0" layoutY="685.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="31.0" prefWidth="130.0" text="Cancelar" />
-      <Label layoutX="102.0" layoutY="597.0" text="Importe total" />
-      <TextField fx:id="textImporte" layoutX="102.0" layoutY="622.0" prefHeight="31.0" prefWidth="297.0" promptText="\$125,000.00" />
-      <TableView fx:id="tablaVehiculos" layoutX="101.0" layoutY="307.0" prefHeight="257.0" prefWidth="646.0">
+      <Button fx:id="btnRegistrar" layoutX="721.0" layoutY="659.0" mnemonicParsing="false" onAction="#clicEnRegistrar" prefHeight="36.0" prefWidth="130.0" style="-fx-background-color: #9DFF00;" text="Registrar" />
+      <Button layoutX="46.0" layoutY="659.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="31.0" prefWidth="130.0" text="Cancelar" />
+      <Label layoutX="46.0" layoutY="579.0" text="Importe total" />
+      <TextField fx:id="textImporte" layoutX="46.0" layoutY="597.0" prefHeight="31.0" prefWidth="297.0" promptText="\$125,000.00" />
+      <TableView fx:id="tablaVehiculos" layoutX="46.0" layoutY="307.0" prefHeight="257.0" prefWidth="646.0">
          <columns>
             <TableColumn fx:id="columnAuto" prefWidth="215.33" text="Auto" />
             <TableColumn fx:id="columnTipo" prefWidth="215.33" text="Tipo" />
             <TableColumn fx:id="columnImporte" prefWidth="215.33" text="Importe" />
          </columns>
       </TableView>
-      <Button layoutX="779.0" layoutY="307.0" mnemonicParsing="false" onAction="#clicEnAnadir" prefHeight="31.0" prefWidth="130.0" text="Añadir auto" />
-      <Button layoutX="779.0" layoutY="360.0" mnemonicParsing="false" onAction="#clicEnEliminar" prefHeight="31.0" prefWidth="130.0" text="Eliminar auto" />
+      <Button fx:id="btnAnadirAuto" layoutX="721.0" layoutY="307.0" mnemonicParsing="false" onAction="#clicEnAnadir" prefHeight="31.0" prefWidth="130.0" text="Añadir auto" />
+      <Button fx:id="btnEliminarAuto" layoutX="721.0" layoutY="361.0" mnemonicParsing="false" onAction="#clicEnEliminar" prefHeight="31.0" prefWidth="130.0" text="Eliminar auto" />
    </children>
 </AnchorPane>
