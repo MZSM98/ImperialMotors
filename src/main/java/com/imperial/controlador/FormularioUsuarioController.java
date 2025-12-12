@@ -52,8 +52,8 @@ public class FormularioUsuarioController implements Initializable {
     @FXML
     private Label labelErrorRol; 
     
-    private static final String CAMPO_OBLIGATORIO = "Campos obligatorios";
-    private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    private static final String CAMPO_OBLIGATORIO = "Campo obligatorios*";
+    private static final String EMAIL_REGEX = "(?i)^[a-zA-Z0-9._%+-]+@imperialmotors\\.com$";
     
     private Usuario usuarioEdicion; 
     
@@ -81,7 +81,12 @@ public class FormularioUsuarioController implements Initializable {
 
     @FXML
     private void cerrarRegistro(ActionEvent event) {
-        cerrarVentana();
+        boolean confirmacion = Utilidades.mostrarAlertaConfirmacion("Confirmar cancelación de registro",
+                "¿Está seguro de cancelar el registro?", "Los cambios no se guardarán");
+        
+        if (confirmacion){
+            cerrarVentana();
+        }
     }
 
     @FXML
@@ -98,7 +103,17 @@ public class FormularioUsuarioController implements Initializable {
     private void registrarNuevoUsuario() {
         Usuario usuario = new Usuario();
         llenarDatosUsuario(usuario);
-        
+        boolean confirmacion = Utilidades.mostrarAlertaConfirmacion("Confirmación",
+                "¿Está seguro de continuar?",
+                "Verifique la información, si es correcta prosiga con el registro" +
+                        "\nNombre: "+ textNombre.getText()+
+                        "\nApellido Paterno:" + textApellidoPaterno.getText() +
+                        "\nApellido Materno:" + textApellidoMaterno.getText() +
+                        "\nCorreo:" + textCorreo.getText()
+                        );
+        if(!confirmacion){
+            return;
+        }
         String passwordHash = Encriptacion.hashPassword(textContrasena.getText());
         usuario.setContrasena(passwordHash);
 
@@ -119,10 +134,10 @@ public class FormularioUsuarioController implements Initializable {
     }
 
     private void llenarDatosUsuario(Usuario usuario) {
-        usuario.setNombre(textNombre.getText());
-        usuario.setApellidoPaterno(textApellidoPaterno.getText());
-        usuario.setApellidoMaterno(textApellidoMaterno.getText());
-        usuario.setCorreo(textCorreo.getText());
+        usuario.setNombre(textNombre.getText().trim() );
+        usuario.setApellidoPaterno(textApellidoPaterno.getText().trim());
+        usuario.setApellidoMaterno(textApellidoMaterno.getText().trim());
+        usuario.setCorreo(textCorreo.getText().trim());
         
         String rolSeleccionado = comboRoles.getValue();
         int idRol = "Administrador".equals(rolSeleccionado) ? 1 : 2; 
@@ -154,7 +169,7 @@ public class FormularioUsuarioController implements Initializable {
         boolean esValido = true;
         limpiarErrores();
 
-        if(esVacio(textNombre)) { labelErrorNombre.setText(CAMPO_OBLIGATORIO); esValido = false; }
+        if(esVacio(textNombre)) { labelErrorNombre.setText(CAMPO_OBLIGATORIO); esValido = false;}
         if(esVacio(textApellidoPaterno)) { labelErrorApellidoPaterno.setText(CAMPO_OBLIGATORIO); esValido = false; }
         if(esVacio(textApellidoMaterno)) { labelErrorApellidoMaterno.setText(CAMPO_OBLIGATORIO); esValido = false; }
         if(esVacio(textCorreo)) { labelErrorCorreo.setText(CAMPO_OBLIGATORIO); esValido = false; }
@@ -189,7 +204,7 @@ public class FormularioUsuarioController implements Initializable {
     
     private boolean validarFormatos(){
         
-        if(textCorreo.getText().matches(EMAIL_REGEX)){
+        if(!textCorreo.getText().matches(EMAIL_REGEX)){
             labelErrorCorreo.setText("Formato de correo no válido");
             return false;
         }
@@ -213,7 +228,8 @@ public class FormularioUsuarioController implements Initializable {
     private boolean esVacio(TextField campo) {
         return campo.getText() == null || campo.getText().trim().isEmpty();
     }
-
+    
+    
     private void cerrarVentana(){
         Stage escenario = (Stage) textCorreo.getScene().getWindow();
         escenario.close();

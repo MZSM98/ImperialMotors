@@ -19,7 +19,7 @@ public class AutenticacionDAO {
                 "apellidoPaterno, apellidoMaterno, correo, contrasena, u.idRol, rol " +
                 "FROM usuario u " +
                 "INNER JOIN rol r ON r.idRol = u.idRol " +
-                "WHERE correo = ?";
+                "WHERE correo = ? AND estado = 'ACTIVO'";
             PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
             sentencia.setString(1, correo);
             return sentencia.executeQuery();

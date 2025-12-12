@@ -67,11 +67,11 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Button>
-            <Label fx:id="labelErrorRFC" text="Label" GridPane.rowIndex="2" />
-            <Label fx:id="labelErrorCorreo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="labelErrorNombre" text="Label" GridPane.rowIndex="5" />
+            <Label fx:id="labelErrorRFC" styleClass="label-error" textFill="RED" GridPane.rowIndex="2" />
+            <Label fx:id="labelErrorCorreo" styleClass="label-error" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="labelErrorNombre" styleClass="label-error" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Label fx:id="labelErrorTelefono" layoutX="62.0" layoutY="328.0" text="Label" />
+      <Label fx:id="labelErrorTelefono" layoutX="62.0" layoutY="328.0" styleClass="label-error" />
    </children>
 </AnchorPane>

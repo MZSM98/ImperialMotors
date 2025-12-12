@@ -124,3 +124,14 @@
 2025-12-12 07:55:47 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: admin@ejemplo.com | Accion: Intento de inicio de sesión fallido
 2025-12-12 07:55:49 [Thread-6] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Inicio de sesión exitoso
 2025-12-12 07:56:02 [Thread-59] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Edición de proveedor: Mustang
+2025-12-12 08:23:34 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 08:23:34 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Inicio de sesión exitoso
+2025-12-12 08:35:42 [Thread-239] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Inicio de sesión exitoso
+2025-12-12 08:50:06 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 08:50:07 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Inicio de sesión exitoso
+2025-12-12 08:53:37 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 08:53:37 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Inicio de sesión exitoso
+2025-12-12 08:54:38 [Thread-239] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Generó vista previa: Ventas por Día
+2025-12-12 08:54:42 [Thread-240] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Consulta de Reportes/Bitácora
+2025-12-12 09:00:37 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 09:00:38 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: admin@ejemplo.com | Accion: Intento de inicio de sesión fallido

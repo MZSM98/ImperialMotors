@@ -149,3 +149,11 @@
     -fx-text-fill: #95A5A6;
     -fx-font-size: 14px;
 }
+
+/* --- ETIQUETAS DE ERROR --- */
+.label-error {
+    -fx-text-fill: #E74C3C; /* Rojo intenso (coincide con el botón de salir/cancelar) */
+    -fx-font-weight: bold;
+    -fx-font-size: 12px; /* Un poco más pequeño si prefieres */
+    -fx-effect: none; /* Quitamos sombras para que se lea nítido */
+}

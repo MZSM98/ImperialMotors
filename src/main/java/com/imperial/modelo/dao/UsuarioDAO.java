@@ -52,7 +52,6 @@ public class UsuarioDAO {
         throw new SQLException(Constantes.ERROR_BD);
     }
     
-    // Método implementado
     public static int editarUsuario(Usuario usuario, Connection conexionBD) throws SQLException{
         if (conexionBD != null ){
             String update = "UPDATE usuario SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, " +

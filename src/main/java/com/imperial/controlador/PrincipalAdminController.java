@@ -121,6 +121,9 @@ public class PrincipalAdminController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
+            
+            Sesion.registrarVentana(escenario); 
+            
             escenario.setScene(escena);
             escenario.setTitle("Gestión de Usuarios");
             escenario.initModality(Modality.APPLICATION_MODAL);

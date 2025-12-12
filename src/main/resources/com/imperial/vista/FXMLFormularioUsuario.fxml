@@ -62,9 +62,9 @@
             <Label text="Nombre:" GridPane.rowIndex="3" />
             <Label text="Contraseña:  (Al menos 6 caracteres)" GridPane.rowIndex="6" />
             <Label text="Confirmar Contraseña:" GridPane.rowIndex="8" />
-            <Label fx:id="labelErrorCorreo" textFill="RED" GridPane.rowIndex="2" />
-            <Label fx:id="labelErrorNombre" textFill="RED" GridPane.rowIndex="5" />
-            <Label fx:id="labelErrorConfirmar" prefHeight="18.0" prefWidth="166.0" textFill="RED" GridPane.rowIndex="8">
+            <Label fx:id="labelErrorCorreo" styleClass="label-error" textFill="RED" GridPane.rowIndex="2" />
+            <Label fx:id="labelErrorNombre" styleClass="label-error" textFill="RED" GridPane.rowIndex="5" />
+            <Label fx:id="labelErrorConfirmar" prefHeight="18.0" prefWidth="166.0" styleClass="label-error" textFill="RED" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets left="125.0" />
                </GridPane.margin>
@@ -90,14 +90,14 @@
                   <Insets right="25.0" />
                </GridPane.margin>
             </TextField>
-            <Label fx:id="labelErrorApellidoPaterno" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label fx:id="labelErrorApellidoMaterno" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label fx:id="labelErrorApellidoPaterno" styleClass="label-error" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="labelErrorApellidoMaterno" styleClass="label-error" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Button mnemonicParsing="false" onAction="#cerrarRegistro" prefHeight="26.0" prefWidth="200.0" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="11" />
             <Button mnemonicParsing="false" onAction="#crearRegistro" prefHeight="26.0" prefWidth="200.0" text="Crear" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
                <GridPane.margin>
                   <Insets right="25.0" />
                </GridPane.margin></Button>
-            <Label fx:id="labelErrorContrasena" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label fx:id="labelErrorContrasena" styleClass="label-error" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Label fx:id="labelErrorRol" layoutX="56.0" layoutY="491.0" textFill="RED" />

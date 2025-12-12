@@ -69,15 +69,22 @@ public class GestionUsuariosController implements Initializable {
         tablaUsuarios.setItems(usuarios);
     }
     
-    private void llenarTablaUsuarios(){
+    private void llenarTablaUsuarios() {
         HashMap<String, Object> respuesta = UsuarioImpl.obtenerUsuarios();
         boolean error = (boolean) respuesta.get("error");
         
-        if(!error){
+        if (!error) {
             ArrayList<Usuario> listaUsuarios = (ArrayList<Usuario>) respuesta.get("usuarios");
+            
+            Usuario usuarioActual = Sesion.getUsuario();
+            listaUsuarios.removeIf(usuario -> 
+                usuario.getIdUsuario() == 0 ||
+                (usuarioActual != null && usuario.getIdUsuario() == usuarioActual.getIdUsuario()) // Excluir usuario actual
+            );
+
             usuarios.clear();
             usuarios.addAll(listaUsuarios);
-        }else{
+        } else {
             Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
         }
     }
