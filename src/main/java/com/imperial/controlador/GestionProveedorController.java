@@ -9,8 +9,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,6 +55,7 @@ public class GestionProveedorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         llenarTablaProveedores();
+        configurarBusqueda();
     }    
 
     @FXML
@@ -119,6 +124,39 @@ public class GestionProveedorController implements Initializable {
         }catch (IOException ioe){
             Utilidades.mostrarAlerta("Error", "No se pudo cargar la vista del formulario", Alert.AlertType.ERROR);
             ioe.printStackTrace();
+        }
+    }
+    
+    private void configurarBusqueda() {
+        if (proveedores.size() > 0) {
+            FilteredList<Proveedor> filtrado = new FilteredList<>(proveedores, p -> true);
+            
+            textBuscar.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    filtrado.setPredicate(proveedor -> {
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lower = newValue.toLowerCase();
+                        
+                        if (proveedor.getNombre().toLowerCase().contains(lower)) {
+                            return true;
+                        }
+                        if (proveedor.getRFC().toLowerCase().contains(lower)) {
+                            return true;
+                        }
+                        if (proveedor.getCorreo() != null && proveedor.getCorreo().toLowerCase().contains(lower)) {
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+            });
+            
+            SortedList<Proveedor> ordenados = new SortedList<>(filtrado);
+            ordenados.comparatorProperty().bind(tablaProveedores.comparatorProperty());
+            tablaProveedores.setItems(ordenados);
         }
     }
 }

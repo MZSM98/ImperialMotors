@@ -82,4 +82,15 @@ public class VehiculoDAO {
         }
         throw new SQLException(Constantes.ERROR_BD);
     }
+    
+    public static boolean verificarExistenciaVin(String vin, Connection conexionBD) throws SQLException {
+        if (conexionBD != null) {
+            String consulta = "SELECT VIN FROM vehiculo WHERE VIN = ? LIMIT 1;";
+            PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
+            sentencia.setString(1, vin);
+            ResultSet resultado = sentencia.executeQuery();
+            return resultado.next(); // Retorna true si encontró un registro
+        }
+        throw new SQLException(Constantes.ERROR_BD);
+    }
 }

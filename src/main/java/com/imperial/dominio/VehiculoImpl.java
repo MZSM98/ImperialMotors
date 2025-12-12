@@ -109,4 +109,18 @@ public class VehiculoImpl {
         }
         return respuesta;
     }
+    
+
+    public static boolean comprobarExistenciaVin(String vin) {
+        Connection conexion = ConexionBD.abrirConexion();
+        boolean existe = false;
+        try {
+            existe = VehiculoDAO.verificarExistenciaVin(vin, conexion);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConexionBD.cerrarConexionBD();
+        }
+        return existe;
+    }
 }

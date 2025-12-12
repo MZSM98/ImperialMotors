@@ -9,8 +9,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +54,7 @@ public class GestionUsuariosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         configurarTablaUsuarios();
         llenarTablaUsuarios();
+        configurarBusqueda();
     }    
 
     @FXML
@@ -147,6 +152,39 @@ public class GestionUsuariosController implements Initializable {
         } catch (IOException ioe) {
             Utilidades.mostrarAlerta("Error", "No se pudo cargar la vista", Alert.AlertType.ERROR);
             ioe.printStackTrace();
+        }
+    }
+    
+    private void configurarBusqueda() {
+        if (usuarios.size() > 0) {
+            FilteredList<Usuario> filtrado = new FilteredList<>(usuarios, p -> true);
+            
+            textBuscar.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    filtrado.setPredicate(usuario -> {
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lower = newValue.toLowerCase();
+                        
+                        if (usuario.getNombre().toLowerCase().contains(lower)) {
+                            return true;
+                        }
+                        if (usuario.getApellidoPaterno().toLowerCase().contains(lower)) {
+                            return true;
+                        }
+                        if (usuario.getCorreo().toLowerCase().contains(lower)) {
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+            });
+            
+            SortedList<Usuario> ordenados = new SortedList<>(filtrado);
+            ordenados.comparatorProperty().bind(tablaUsuarios.comparatorProperty());
+            tablaUsuarios.setItems(ordenados);
         }
     }
 }

@@ -37,6 +37,8 @@ public class PrincipalAdminController implements Initializable {
     @FXML
     private void cerrarSesion(ActionEvent event) {
         ((Stage) botonCerrarSesion.getScene().getWindow()).close();
+        irAMenu();
+        Sesion.cerrarSesionManual();
     }
 
     private void configurarUsuario(){
@@ -150,6 +152,21 @@ public class PrincipalAdminController implements Initializable {
             
         } catch (IOException ioe) {
             Utilidades.mostrarAlerta(ERROR, Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
+        }
+    }
+    
+    private void irAMenu() {
+        try {
+            Stage stageActual = (Stage) labelNombre.getScene().getWindow();
+            FXMLLoader loader = Utilidades.obtenerVistaMemoria("vista/FXMLInicioSesion.fxml");
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stageActual.setScene(scene);
+            stageActual.setTitle("Inicio Sesion");
+            stageActual.centerOnScreen();
+            stageActual.show();
+        } catch (IOException ioe) {
+            Utilidades.mostrarAlerta("No podemos navegar", Constantes.ERROR_ABRIR_VENTANA , Alert.AlertType.ERROR);
         }
     }
 }

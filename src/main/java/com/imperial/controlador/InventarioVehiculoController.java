@@ -18,8 +18,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,7 +68,7 @@ public class InventarioVehiculoController implements Initializable {
     private Button botonEditar;
     @FXML
     private Button botonEliminar;
-    private ObservableList vehiculos;
+    private ObservableList<Vehiculo> vehiculos;
     private InterfazSeleccion<Vehiculo> observador;
     private boolean modoSeleccion = false;
     @FXML
@@ -80,11 +84,12 @@ public class InventarioVehiculoController implements Initializable {
                 seleccionarVehiculo();
             }
         });
+        configurarBusqueda();
     }    
 
     @FXML
     private void clicEnRegistrar(ActionEvent event) {
-        abrirFormulario(null); // null indica registro nuevo
+        abrirFormulario(null); 
     }
 
     @FXML
@@ -135,7 +140,7 @@ public class InventarioVehiculoController implements Initializable {
             escenario.initModality(Modality.APPLICATION_MODAL); 
             escenario.showAndWait(); 
             
-            llenarTablaVehiculos(); // Refrescar al cerrar
+            llenarTablaVehiculos(); 
             
         } catch (IOException ioe) {
             Utilidades.mostrarAlerta("Error", "No se pudo cargar la vista", Alert.AlertType.ERROR);
@@ -165,7 +170,7 @@ public class InventarioVehiculoController implements Initializable {
     private void clicEnEditar(ActionEvent event) {
         Vehiculo seleccionado = tablaVehiculos.getSelectionModel().getSelectedItem();
         if (seleccionado != null) {
-            abrirFormulario(seleccionado); // Pasamos el vehículo a editar
+            abrirFormulario(seleccionado); 
         } else {
             Utilidades.mostrarAlerta("Selección requerida", "Selecciona un vehículo para editar", Alert.AlertType.WARNING);
         }
@@ -257,6 +262,39 @@ public class InventarioVehiculoController implements Initializable {
                                             .collect(Collectors.toList());
 
             vehiculos.removeIf(obj -> vinesOcultos.contains(((Vehiculo) obj).getVIN()));
+        }
+    }
+    
+    private void configurarBusqueda() {
+        if (vehiculos.size() > 0) {
+            FilteredList<Vehiculo> filtrado = new FilteredList<>(vehiculos, p -> true);
+            
+            textBuscar.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    filtrado.setPredicate(vehiculo -> {
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lower = newValue.toLowerCase();
+                        
+                        if (vehiculo.getMarca().toLowerCase().contains(lower)) {
+                            return true;
+                        }
+                        if (vehiculo.getModelo().toLowerCase().contains(lower)) {
+                            return true;
+                        }
+                        if (vehiculo.getVIN().toLowerCase().contains(lower)) {
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+            });
+            
+            SortedList<Vehiculo> ordenados = new SortedList<>(filtrado);
+            ordenados.comparatorProperty().bind(tablaVehiculos.comparatorProperty());
+            tablaVehiculos.setItems(ordenados);
         }
     }
 }

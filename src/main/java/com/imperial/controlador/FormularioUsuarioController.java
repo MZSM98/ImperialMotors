@@ -154,7 +154,7 @@ public class FormularioUsuarioController implements Initializable {
                                      accionBitacora);
             }
             Utilidades.mostrarAlerta(tituloAlerta, (String) respuesta.get("mensaje"), Alert.AlertType.INFORMATION);
-            cerrarRegistro(null); 
+            cerrarVentana(); 
         } else {
             Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
         }

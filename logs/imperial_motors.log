@@ -135,3 +135,63 @@
 2025-12-12 08:54:42 [Thread-240] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Consulta de Reportes/Bitácora
 2025-12-12 09:00:37 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
 2025-12-12 09:00:38 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: admin@ejemplo.com | Accion: Intento de inicio de sesión fallido
+2025-12-12 09:00:44 [Thread-6] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Inicio de sesión exitoso
+2025-12-12 09:01:42 [Thread-70] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Registro de nuevo usuario: jaime@imperialmotors.com
+2025-12-12 09:05:55 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 09:05:55 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Inicio de sesión exitoso
+2025-12-12 09:08:05 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 09:08:06 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Inicio de sesión exitoso
+2025-12-12 09:08:37 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 09:08:38 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Inicio de sesión exitoso
+2025-12-12 09:09:28 [Thread-100] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Registro de nuevo usuario: marcos@imperialmotors.com
+2025-12-12 09:12:49 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 09:12:50 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Inicio de sesión exitoso
+2025-12-12 09:13:22 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 09:13:23 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Inicio de sesión exitoso
+2025-12-12 09:13:54 [Thread-93] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Registro de nuevo usuario: jorge@imperialmotors.com
+2025-12-12 09:14:20 [Thread-94] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Edición de usuario: jorge@imperialmotors.com
+2025-12-12 09:14:42 [Thread-95] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Edición de usuario: jorge@imperialmotors.com
+2025-12-12 09:15:50 [Thread-174] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Registró vehículo: 4Y1SL65848Z411439
+2025-12-12 09:34:44 [Thread-175] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Inicio de sesión exitoso
+2025-12-12 09:36:19 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 09:36:20 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Inicio de sesión exitoso
+2025-12-12 09:57:07 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 09:57:07 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: marcos@iperialmotors.com | Accion: Intento de inicio de sesión fallido
+2025-12-12 09:57:16 [Thread-6] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Inicio de sesión exitoso
+2025-12-12 09:57:59 [Thread-132] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Registró vehículo: 1G1RC6E47BU118981
+2025-12-12 12:33:43 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 12:33:43 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: marcoszenon@imperialmotors.com | Accion: Intento de inicio de sesión fallido
+2025-12-12 12:33:53 [Thread-6] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Inicio de sesión exitoso
+2025-12-12 12:37:00 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 12:37:01 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Inicio de sesión exitoso
+2025-12-12 12:41:35 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 12:41:35 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 11 | Nombre: Jorge Manuel | Accion: Inicio de sesión exitoso
+2025-12-12 12:42:08 [Thread-104] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 11 | Nombre: Jorge Manuel | Accion: Venta Registrada - Folio: 6 - Total: 230000.0
+2025-12-12 12:45:09 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 12:45:10 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: jorge@vendedor.com | Accion: Intento de inicio de sesión fallido
+2025-12-12 12:45:20 [Thread-6] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 11 | Nombre: Jorge Manuel | Accion: Inicio de sesión exitoso
+2025-12-12 12:45:48 [Thread-59] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 11 | Nombre: Jorge Manuel | Accion: Venta Registrada - Folio: 7 - Total: 260000.0
+2025-12-12 13:14:01 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 13:14:02 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Inicio de sesión exitoso
+2025-12-12 13:17:43 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 13:17:43 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Inicio de sesión exitoso
+2025-12-12 13:31:08 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 13:31:09 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: admin@ejemplo.com | Accion: Intento de inicio de sesión fallido
+2025-12-12 13:31:11 [Thread-6] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: admin@ejemplo.com | Accion: Intento de inicio de sesión fallido
+2025-12-12 13:31:12 [Thread-8] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: admin@ejemplo.com | Accion: Intento de inicio de sesión fallido
+2025-12-12 13:31:12 [Thread-7] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: admin@ejemplo.com | Accion: Bloqueo de cuenta por exceso de intentos
+2025-12-12 13:31:40 [Thread-9] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 0 | Nombre: marcos@ejemplo.com | Accion: Intento de inicio de sesión fallido
+2025-12-12 13:31:58 [Thread-10] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Inicio de sesión exitoso
+2025-12-12 13:32:14 [Thread-182] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Consulta de Reportes/Bitácora
+2025-12-12 13:32:44 [Thread-183] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Generó vista previa: Ventas por Semana
+2025-12-12 13:32:48 [Thread-184] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Consulta de Reportes/Bitácora
+2025-12-12 13:33:48 [Thread-186] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Exportó PDF: Ventas por Semana
+2025-12-12 13:34:40 [Thread-187] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Consulta de Reportes/Bitácora
+2025-12-12 13:37:00 [Thread-188] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Exportación de Bitácora a CSV
+2025-12-12 13:43:00 [Thread-395] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Registró vehículo: JT2AM81A050012398
+2025-12-12 13:43:14 [Thread-396] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Exportó PDF (Tabla): Inventario Vehicular
+2025-12-12 13:45:03 [Thread-496] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Registro de nuevo usuario: cosa@imperialmotors.com
+2025-12-12 13:46:10 [Thread-704] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 10 | Nombre: Marcos Zenón | Accion: Venta Registrada - Folio: 8 - Total: 439999.0
+2025-12-12 13:46:54 [Thread-803] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 11 | Nombre: Jorge Manuel | Accion: Inicio de sesión exitoso
+2025-12-12 13:47:16 [Thread-953] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 11 | Nombre: Jorge Manuel | Accion: Generó vista previa: KPIs y Anomalías
+2025-12-12 13:47:19 [Thread-954] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 11 | Nombre: Jorge Manuel | Accion: Generó vista previa: Ventas del Mes

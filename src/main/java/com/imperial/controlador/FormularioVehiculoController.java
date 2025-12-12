@@ -39,10 +39,12 @@ public class FormularioVehiculoController implements Initializable {
     @FXML private ComboBox<String> comboAnio;
     @FXML private ComboBox<Proveedor> comboProveedor;
     @FXML private ComboBox<String> comboTipo;
- 
+    
     private Usuario usuarioSesion;
     private Vehiculo vehiculoEdicion;
     private static final String CAMPO_REQUERIDO = "Campo requerido";
+    private static final int LIMITE_VIN = 17;
+    private static final String VIN_REGEX = "(?i)^[A-HJ-NPR-Z0-9]{17}$";
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,7 +55,7 @@ public class FormularioVehiculoController implements Initializable {
     
     private void configurarCombos() {
         ObservableList<String> anios = FXCollections.observableArrayList();
-        for (int i = 2026; i >= 1980; i--) {
+        for (int i = 2026; i >= 1990; i--) {
             anios.add(String.valueOf(i));
         }
         comboAnio.setItems(anios);
@@ -93,37 +95,45 @@ public class FormularioVehiculoController implements Initializable {
         }
     }
 
-    @FXML
-    private void clicEnRegistrar(ActionEvent event) {
-        if (validarCampos()) {
-            Vehiculo vehiculo = new Vehiculo();
-            vehiculo.setVIN(vehiculoEdicion != null ? vehiculoEdicion.getVIN() : textVin.getText());
-            vehiculo.setMarca(textMarca.getText());
-            vehiculo.setModelo(textModelo.getText());
-            vehiculo.setAnio(comboAnio.getValue());
-            vehiculo.setPrecio(Double.parseDouble(textPrecio.getText()));
-            vehiculo.setTipo(comboTipo.getValue());
-            vehiculo.setIdProveedor(comboProveedor.getValue().getIdProveedor());
+    // En com.imperial.controlador.FormularioVehiculoController
 
-            HashMap<String, Object> respuesta;
-            if (vehiculoEdicion == null) {
-                respuesta = VehiculoImpl.registrarVehiculo(vehiculo);
-            } else {
-                respuesta = VehiculoImpl.editarVehiculo(vehiculo);
-            }
+@FXML
+private void clicEnRegistrar(ActionEvent event) {
+    if (validarCampos()) {
+        
+        if (vehiculoEdicion == null && VehiculoImpl.comprobarExistenciaVin(textVin.getText())) {
+                labelErrorVIN.setText("VIN ya registrado");
+                return; 
+        }
 
-            if (!(boolean) respuesta.get("error")) {
-                Utilidades.mostrarAlerta("Éxito", (String) respuesta.get("mensaje"), Alert.AlertType.INFORMATION);
-                if (usuarioSesion != null) {
-                    String accion = (vehiculoEdicion == null) ? "Registró vehículo: " : "Editó vehículo: ";
-                    BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), usuarioSesion.getNombre(), accion + vehiculo.getVIN());
-                }
-                cerrarVentana(null);
-            } else {
-                Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
+        Vehiculo vehiculo = new Vehiculo();
+        vehiculo.setVIN(vehiculoEdicion != null ? vehiculoEdicion.getVIN() : textVin.getText());
+        vehiculo.setMarca(textMarca.getText());
+        vehiculo.setModelo(textModelo.getText());
+        vehiculo.setAnio(comboAnio.getValue());
+        vehiculo.setPrecio(Double.parseDouble(textPrecio.getText()));
+        vehiculo.setTipo(comboTipo.getValue());
+        vehiculo.setIdProveedor(comboProveedor.getValue().getIdProveedor());
+
+        HashMap<String, Object> respuesta;
+        if (vehiculoEdicion == null) {
+            respuesta = VehiculoImpl.registrarVehiculo(vehiculo);
+        } else {
+            respuesta = VehiculoImpl.editarVehiculo(vehiculo);
+        }
+
+        if (!(boolean) respuesta.get("error")) {
+            Utilidades.mostrarAlerta("Éxito", (String) respuesta.get("mensaje"), Alert.AlertType.INFORMATION);
+            if (usuarioSesion != null) {
+                String accion = (vehiculoEdicion == null) ? "Registró vehículo: " : "Editó vehículo: ";
+                BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), usuarioSesion.getNombre(), accion + vehiculo.getVIN());
             }
+            cerrarVentana(null);
+        } else {
+            Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
         }
     }
+}
     
     private boolean validarCampos() {
         boolean valido = true;
@@ -140,9 +150,15 @@ public class FormularioVehiculoController implements Initializable {
             labelErrorPrecio.setText("Debe ser numérico");
             valido = false;
         }
+        
+        if(!textVin.getText().matches(VIN_REGEX)){
+            labelErrorVIN.setText("Formato no valido");
+            valido = false;
+        }
 
         if (comboProveedor.getValue() == null || comboAnio.getValue() == null || comboTipo.getValue() == null) {
-            Utilidades.mostrarAlerta("Campos vacíos", "Por favor seleccione todos los campos desplegables.", Alert.AlertType.WARNING);
+            Utilidades.mostrarAlerta("Campos vacíos", "Por favor seleccione"
+                    + " todas las caracteristicas", Alert.AlertType.WARNING);
             valido = false;
         }
         return valido;
@@ -158,6 +174,6 @@ public class FormularioVehiculoController implements Initializable {
         RestriccionCampos.soloNumeros(textPrecio);
         RestriccionCampos.soloLetras(textMarca);
         RestriccionCampos.limitarLongitud(textModelo);
-        RestriccionCampos.limitarLongitud(textVin);
+        RestriccionCampos.limitarLongitudCampo(textVin, LIMITE_VIN );
     }
 }

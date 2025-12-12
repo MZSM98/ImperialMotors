@@ -152,6 +152,15 @@ public class RegistroVentaController implements Initializable {
 
     @FXML
     private void clicEnRegistrar(ActionEvent event) {
+        boolean confirmacion = Utilidades.mostrarAlertaConfirmacion("Confirmar Venta",
+                "¿Está seguro de registrar la venta?"
+                , "Está a punto de registrar una venta,"
+                        + " verifique que los datos sean correctos antes de continuar, la información no se puede modificar");
+        
+        if(!confirmacion){
+            return;
+        }
+        
         if(validarVenta()){
             Venta venta = new Venta();
             venta.setIdUsuario(usuarioSesion.getIdUsuario());
@@ -177,7 +186,7 @@ public class RegistroVentaController implements Initializable {
                                        usuarioSesion.getNombre(), 
                                        "Venta Registrada - Folio: " + folio + " - Total: " + totalVenta);
                 
-                cerrarVentana(null);
+                cerrar();
             } else {
                 Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
             }
@@ -211,10 +220,18 @@ public class RegistroVentaController implements Initializable {
 
     @FXML
     private void cerrarVentana(ActionEvent event) {
+        boolean confirmacion = Utilidades.mostrarAlertaConfirmacion("Confirmar cancelación de venta",
+                "¿Está seguro de cancelar la venta?", "Los cambios no se guardarán");
+        
+        if (confirmacion){
+            cerrar();
+        }
+    }
+    
+    private void cerrar(){
         Stage stage = (Stage) textVendedor.getScene().getWindow();
         stage.close();
     }
-
     private void clicCambiarCliente(ActionEvent event) {
         clicElegirCliente(event);
     }

@@ -62,10 +62,10 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </TextField>
-            <Label fx:id="labelErrorVIN" GridPane.rowIndex="2" />
-            <Label fx:id="labelErrorMarca" GridPane.rowIndex="5" />
-            <Label fx:id="labelErrorModelo" GridPane.rowIndex="8" />
-            <Label fx:id="labelErrorPrecio" GridPane.rowIndex="11" />
+            <Label fx:id="labelErrorVIN" styleClass="label-error" GridPane.rowIndex="2" />
+            <Label fx:id="labelErrorMarca" styleClass="label-error" GridPane.rowIndex="5" />
+            <Label fx:id="labelErrorModelo" styleClass="label-error" GridPane.rowIndex="8" />
+            <Label fx:id="labelErrorPrecio" styleClass="label-error" GridPane.rowIndex="11" />
             <ComboBox fx:id="comboAnio" prefHeight="30.0" prefWidth="251.0" promptText="Año" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <ComboBox fx:id="comboProveedor" prefHeight="30.0" prefWidth="250.0" promptText="Proveedor" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
             <ComboBox fx:id="comboTipo" prefHeight="30.0" prefWidth="248.0" promptText="Tipo" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />

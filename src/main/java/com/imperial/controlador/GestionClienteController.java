@@ -14,8 +14,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,6 +74,7 @@ public class GestionClienteController implements Initializable {
                 seleccionarCliente();
             }
         });
+        configurarBusqueda();
     }    
 
     @FXML
@@ -153,6 +158,39 @@ public class GestionClienteController implements Initializable {
             cerrarVentana(null);
         } else {
             Utilidades.mostrarAlerta("Aviso", "Selecciona un cliente", Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void configurarBusqueda() {
+        if (clientes.size() > 0) {
+            FilteredList<Cliente> filtrado = new FilteredList<>(clientes, p -> true);
+            
+            textBuscar.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    filtrado.setPredicate(cliente -> {
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lower = newValue.toLowerCase();
+                        
+                        if (cliente.getNombre().toLowerCase().contains(lower)) {
+                            return true;
+                        }
+                        if (cliente.getApellidoPaterno().toLowerCase().contains(lower)) {
+                            return true;
+                        }
+                        if (cliente.getApellidoMaterno() != null && cliente.getApellidoMaterno().toLowerCase().contains(lower)) {
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+            });
+            
+            SortedList<Cliente> ordenados = new SortedList<>(filtrado);
+            ordenados.comparatorProperty().bind(tablaClientes.comparatorProperty());
+            tablaClientes.setItems(ordenados);
         }
     }
 }

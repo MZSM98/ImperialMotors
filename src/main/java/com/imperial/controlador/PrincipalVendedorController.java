@@ -38,7 +38,7 @@ public class PrincipalVendedorController implements Initializable {
 
     private void actualizarEtiqueta() {
         if (usuarioSesion != null) {
-            labelNombre.setText("Bienvenido: " + usuarioSesion.getNombreCompleto());
+            labelNombre.setText(usuarioSesion.getNombreCompleto());
         }
     }
 
@@ -112,6 +112,28 @@ public class PrincipalVendedorController implements Initializable {
             escenario.showAndWait();
         } catch (IOException ioe) {
             Utilidades.mostrarAlerta("Error", Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void clicCerrarSesion(ActionEvent event) {
+        ((Stage) labelNombre.getScene().getWindow()).close();
+        irAMenu();
+        Sesion.cerrarSesionManual();
+    }
+    
+    private void irAMenu() {
+        try {
+            Stage stageActual = (Stage) labelNombre.getScene().getWindow();
+            FXMLLoader loader = Utilidades.obtenerVistaMemoria("vista/FXMLInicioSesion.fxml");
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stageActual.setScene(scene);
+            stageActual.setTitle("Inicio Sesion");
+            stageActual.centerOnScreen();
+            stageActual.show();
+        } catch (IOException ioe) {
+            Utilidades.mostrarAlerta("No podemos navegar", Constantes.ERROR_ABRIR_VENTANA , Alert.AlertType.ERROR);
         }
     }
 }

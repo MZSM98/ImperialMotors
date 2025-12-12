@@ -92,7 +92,7 @@
             <Font size="31.0" />
          </font>
       </Label>
-      <Button layoutX="470.0" layoutY="392.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="142.0" text="Cerrar Sesion">
+      <Button layoutX="470.0" layoutY="392.0" mnemonicParsing="false" onAction="#clicCerrarSesion" prefHeight="38.0" prefWidth="142.0" text="Cerrar Sesion">
          <font>
             <Font size="16.0" />
          </font>
