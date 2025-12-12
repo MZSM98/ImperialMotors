@@ -12,7 +12,6 @@
         <exec.mainClass>com.imperial.ImperialMotors</exec.mainClass>
     </properties>
     <dependencies>
-    
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

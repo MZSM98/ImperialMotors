@@ -1,4 +1,5 @@
 package com.imperial.modelo.dao;
+import com.imperial.utilidad.Constantes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,23 +13,18 @@ public class AutenticacionDAO {
     
     public static ResultSet getUsuarioPorCorreo(String correo, Connection conexionBD) throws SQLException{
         
-        ResultSet resultado = null;
         
         if (conexionBD != null){
-            
             String consulta = "SELECT idUsuario, nombre, " +
                 "apellidoPaterno, apellidoMaterno, correo, contrasena, u.idRol, rol " +
                 "FROM usuario u " +
                 "INNER JOIN rol r ON r.idRol = u.idRol " +
                 "WHERE correo = ?";
-            
             PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
             sentencia.setString(1, correo);
-            resultado = sentencia.executeQuery();
-            
-            return resultado;
+            return sentencia.executeQuery();
         }
         
-        return null;
+       throw new SQLException (Constantes.ERROR_BD);
     }
 }

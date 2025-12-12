@@ -3,7 +3,8 @@ package com.imperial.controlador;
 import com.imperial.dominio.BitacoraImpl;
 import com.imperial.dominio.ReporteImpl;
 import com.imperial.modelo.pojo.Usuario;
-import com.imperial.utilidad.GeneradorPDF;
+import com.imperial.utilidad.Constantes;
+import com.imperial.utilidad.GeneracionPDF;
 import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.File;
@@ -82,9 +83,7 @@ public class ReportesFinancierosController implements Initializable {
         } else if ("KPIs y Anomalías".equals(seleccion)) {
             cargarKPI(serie);
         }
-        
         graficaBarras.getData().add(serie);
-        
         if (usuarioSesion != null) {
             BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), usuarioSesion.getNombre(), "Generó vista previa: " + seleccion);
         }
@@ -147,7 +146,7 @@ public class ReportesFinancierosController implements Initializable {
 
         if (archivo != null) {
             try {
-                GeneradorPDF.generarReporte(archivo, "Reporte: " + comboReporte.getValue(), datosTexto, graficaBarras);
+                GeneracionPDF.generarReporte(archivo, "Reporte: " + comboReporte.getValue(), datosTexto, graficaBarras);
                 if (usuarioSesion != null) {
                     BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), usuarioSesion.getNombre(), "Exportó PDF: " + comboReporte.getValue());
                 }
@@ -180,7 +179,7 @@ public class ReportesFinancierosController implements Initializable {
             escenario.showAndWait();
             
         } catch (IOException ioe) {
-            Utilidades.mostrarAlerta("Error", "No se pudo abrir la ventana", Alert.AlertType.ERROR);
+            Utilidades.mostrarAlerta("Error", Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
             ioe.printStackTrace();
         }
     }

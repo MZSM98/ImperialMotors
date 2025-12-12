@@ -7,6 +7,7 @@ import com.imperial.modelo.pojo.DetalleVenta;
 import com.imperial.modelo.pojo.Usuario;
 import com.imperial.modelo.pojo.Vehiculo;
 import com.imperial.modelo.pojo.Venta;
+import com.imperial.utilidad.Constantes;
 import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
@@ -86,10 +87,10 @@ public class RegistroVentaController implements Initializable {
 
     @FXML
     private void clicElegirCliente(ActionEvent event) {
+        
         try {
             FXMLLoader loader = Utilidades.obtenerVistaMemoria("vista/FXMLGestionCliente.fxml");
             Parent root = loader.load();
-            
             GestionClienteController controller = loader.getController();
             controller.iniciarModoSeleccion((cliente) -> {
                 this.clienteSeleccionado = cliente;
@@ -97,9 +98,8 @@ public class RegistroVentaController implements Initializable {
             });
             
             abrirModal(root, "Seleccionar Cliente");
-            
         } catch (IOException ex) {
-            Utilidades.mostrarAlerta("Error", "No se pudo abrir la lista de clientes", Alert.AlertType.ERROR);
+            Utilidades.mostrarAlerta("Error", Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
             ex.printStackTrace();
         }
     }
@@ -109,22 +109,16 @@ public class RegistroVentaController implements Initializable {
         try {
             FXMLLoader loader = Utilidades.obtenerVistaMemoria("vista/FXMLInventarioVehiculo.fxml");
             Parent root = loader.load();
-            
             InventarioVehiculoController controller = loader.getController();
+            controller.setVehiculosExcluidos(new ArrayList<>(carritoCompras));
             controller.iniciarModoSeleccion((vehiculo) -> {
-                if(!carritoCompras.contains(vehiculo)){
-                    carritoCompras.add(vehiculo);
-                    calcularTotal();
-                } else {
-                    Utilidades.mostrarAlerta("Aviso", "El vehículo ya está en la lista", Alert.AlertType.WARNING);
-                }
+                carritoCompras.add(vehiculo);
+                calcularTotal();
             });
-            
             abrirModal(root, "Seleccionar Vehículo");
-            
         } catch (IOException ex) {
-            Utilidades.mostrarAlerta("Error", "No se pudo abrir el inventario", Alert.AlertType.ERROR);
-            ex.printStackTrace();
+            Utilidades.mostrarAlerta("Error", Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
+            
         }
     }
 

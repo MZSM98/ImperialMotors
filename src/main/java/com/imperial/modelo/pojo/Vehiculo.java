@@ -1,6 +1,8 @@
 
 package com.imperial.modelo.pojo;
 
+import java.util.Objects;
+
 
 public class Vehiculo {
     private String VIN;
@@ -74,6 +76,23 @@ public class Vehiculo {
 
     public void setIdProveedor(int idProveedor) {
         this.idProveedor = idProveedor;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vehiculo other = (Vehiculo) obj;
+        return Objects.equals(this.VIN, other.VIN);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.VIN);
     }
     
 }

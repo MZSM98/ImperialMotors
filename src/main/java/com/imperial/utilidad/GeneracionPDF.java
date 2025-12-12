@@ -2,7 +2,6 @@ package com.imperial.utilidad;
 
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPCell;
-import java.util.List;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -27,9 +26,10 @@ import javafx.scene.chart.Chart;
 import javafx.scene.image.WritableImage;
 import javax.imageio.ImageIO;
 
-public class GeneradorPDF {
+public class GeneracionPDF {
 
-    private GeneradorPDF() {
+    private GeneracionPDF() {
+        throw new UnsupportedOperationException(Constantes.ERROR_CLASE_UTILERIA);
     }
 
     public static void generarReporte(File archivo, String tituloReporte, List<String> datosTexto, Chart grafica) throws DocumentException, IOException {

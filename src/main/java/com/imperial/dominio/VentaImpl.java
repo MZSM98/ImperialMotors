@@ -5,6 +5,7 @@ import com.imperial.modelo.dao.VehiculoDAO;
 import com.imperial.modelo.dao.VentaDAO;
 import com.imperial.modelo.pojo.DetalleVenta;
 import com.imperial.modelo.pojo.Venta;
+import com.imperial.utilidad.Constantes;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import java.util.LinkedHashMap;
 public class VentaImpl {
     
     private VentaImpl(){
+        throw new UnsupportedOperationException(Constantes.ERROR_CLASE_UTILERIA);
     }
     
     public static HashMap<String, Object> registrarVenta(Venta venta, ArrayList<DetalleVenta> detalles) {
@@ -24,20 +26,15 @@ public class VentaImpl {
         if (conexion != null) {
             try {
                 conexion.setAutoCommit(false);
-                
                 int idVentaGenerada = VentaDAO.registrarVenta(conexion, venta);
-                
                 for (DetalleVenta detalle : detalles) {
                     detalle.setIdVenta(idVentaGenerada);
                     VentaDAO.registrarDetalleVenta(conexion, detalle);
-                    
                     VehiculoDAO.actualizarEstado(detalle.getVIN(), "Vendido", conexion);
                 }
                 conexion.commit();
-                
                 respuesta.put("error", false);
-                respuesta.put("mensaje", String.valueOf(idVentaGenerada)); // Retornamos el folio
-                
+                respuesta.put("mensaje", String.valueOf(idVentaGenerada)); 
             } catch (SQLException e) {
                 try {
                     conexion.rollback();
@@ -53,7 +50,6 @@ public class VentaImpl {
             respuesta.put("error", true);
             respuesta.put("mensaje", "No hay conexión a la base de datos");
         }
-        
         return respuesta;
     }
     
@@ -73,15 +69,16 @@ public class VentaImpl {
                 
                 String nombreCompleto = resultado.getString("nombre") + " " + resultado.getString("apellidoPaterno");
                 venta.setNombreCliente(nombreCompleto);
-                
                 ventas.add(venta);
             }
             respuesta.put("error", false);
             respuesta.put("ventas", ventas);
-            ConexionBD.cerrarConexionBD();
+            
         } catch (SQLException sqle) {
             respuesta.put("error", true);
             respuesta.put("mensaje", sqle.getMessage());
+        } finally {
+            ConexionBD.cerrarConexionBD();
         }
         return respuesta;
     }

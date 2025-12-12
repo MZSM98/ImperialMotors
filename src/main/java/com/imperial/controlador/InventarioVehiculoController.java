@@ -1,6 +1,6 @@
 package com.imperial.controlador;
 
-import com.imperial.utilidad.GeneradorPDF;
+import com.imperial.utilidad.GeneracionPDF;
 import com.imperial.dominio.BitacoraImpl;
 import com.imperial.modelo.pojo.Usuario;
 import java.io.File;
@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -64,7 +65,6 @@ public class InventarioVehiculoController implements Initializable {
     @FXML
     private Button botonEliminar;
     private ObservableList vehiculos;
-    
     private InterfazSeleccion<Vehiculo> observador;
     private boolean modoSeleccion = false;
     @FXML
@@ -86,7 +86,6 @@ public class InventarioVehiculoController implements Initializable {
     private void clicEnRegistrar(ActionEvent event) {
         abrirFormulario();
     }
-
 
     @FXML
     private void cerrarVentana(ActionEvent event) {
@@ -138,7 +137,6 @@ public class InventarioVehiculoController implements Initializable {
         }
     }
 
-    
     private void seleccionarVehiculo(){
         Vehiculo auto = tablaVehiculos.getSelectionModel().getSelectedItem();
         if(auto != null){
@@ -156,7 +154,6 @@ public class InventarioVehiculoController implements Initializable {
         if(botonEliminar != null) botonEliminar.setVisible(false);
         if(botonExportar != null) botonExportar.setVisible(false);
     }
-    
     
     @FXML
     private void clicEnEditar(ActionEvent event) {
@@ -202,7 +199,7 @@ public class InventarioVehiculoController implements Initializable {
                     datosTabla.add(fila);
                 }
 
-                GeneradorPDF.generarReporteTabla(archivo, "Inventario General", encabezados, datosTabla);
+                GeneracionPDF.generarReporteTabla(archivo, "Inventario General", encabezados, datosTabla);
 
                 Usuario usuarioSesion = Sesion.getUsuario();
                 if (usuarioSesion != null) {
@@ -217,6 +214,16 @@ public class InventarioVehiculoController implements Initializable {
                 Utilidades.mostrarAlerta("Error", "Error al generar PDF: " + e.getMessage(), Alert.AlertType.ERROR);
                 e.printStackTrace();
             }
+        }
+    }
+    
+    public void setVehiculosExcluidos(List<Vehiculo> listaExcluidos) {
+        if (listaExcluidos != null && !listaExcluidos.isEmpty()) {
+            List<String> vinesOcultos = listaExcluidos.stream()
+                                            .map(Vehiculo::getVIN)
+                                            .collect(Collectors.toList());
+
+            vehiculos.removeIf(obj -> vinesOcultos.contains(((Vehiculo) obj).getVIN()));
         }
     }
 }

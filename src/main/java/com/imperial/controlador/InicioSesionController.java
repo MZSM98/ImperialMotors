@@ -3,6 +3,7 @@ package com.imperial.controlador;
 import com.imperial.dominio.AutenticacionImpl;
 import com.imperial.dominio.BitacoraImpl;
 import com.imperial.modelo.pojo.Usuario;
+import com.imperial.utilidad.RestriccionCampos;
 import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
@@ -22,7 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class InicioSesionController implements Initializable {
-
+    
     @FXML
     private TextField textCorreo;
     @FXML
@@ -31,12 +32,16 @@ public class InicioSesionController implements Initializable {
     private Label labelErrorContrasena;
     @FXML
     private Label labelErrorCorreo;
+    private static final String CAMPO_OBLIGATORIO = "Campo obligatorio";
 
     private static final Map<String, Integer> intentosFallidos = new HashMap<>();
     private static final Map<String, Long> tiempoBloqueo = new HashMap<>();
-
+    
+    public static final String ERROR_INICIO_SESION = "!Ups¡ algo salió mal, "
+            + " no tenemos servicio por el momento, intenta más tarde";
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        aplicarRestricciones();
     }    
 
     @FXML
@@ -46,7 +51,9 @@ public class InicioSesionController implements Initializable {
         
         if (sonDatosValidos(correo, contrasena)){
             if (verificarBloqueo(correo)) {
-                Utilidades.mostrarAlerta("Bloqueo Temporal", "Ha excedido el número de intentos. Espere 1 minuto.", Alert.AlertType.WARNING);
+                Utilidades.mostrarAlerta("Bloqueo Temporal", "Ha"
+                                             + " excedido el número de intentos."
+                                             + " Espere 1 minuto.", Alert.AlertType.WARNING);
                 return;
             }
             validarSesion(correo, contrasena);
@@ -82,20 +89,21 @@ public class InicioSesionController implements Initializable {
         
         if (correo == null || correo.isEmpty()){
             correctos = false;
-            labelErrorCorreo.setText("Campo obligatorio");
+            labelErrorCorreo.setText(CAMPO_OBLIGATORIO);
         }
         
         if (contrasena == null || contrasena.isEmpty()){
             correctos = false;
-            labelErrorContrasena.setText("Campo obligatorio");
+            labelErrorContrasena.setText(CAMPO_OBLIGATORIO);
         }
         
         return correctos;
     }
     
     private void validarSesion(String correo, String contrasena){
+        
         HashMap<String, Object> respuesta = AutenticacionImpl.verificarCredencialesUsuario(correo, contrasena);
-        boolean error = (boolean) respuesta.get("Error");
+        boolean error = (boolean) respuesta.get("error");
         
         if (!error){
             Usuario usuarioSesion = (Usuario)respuesta.get("Usuario");
@@ -141,9 +149,13 @@ public class InicioSesionController implements Initializable {
 
             Sesion.iniciar(usuario, escenario);
 
-
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            Utilidades.mostrarAlerta("Error", ERROR_INICIO_SESION, Alert.AlertType.ERROR);
         }
+    }
+    
+    private void aplicarRestricciones (){
+        RestriccionCampos.limitarLongitud(textContrasena);
+        RestriccionCampos.limitarLongitud(textContrasena);
     }
 }

@@ -22,21 +22,38 @@ import javafx.stage.Stage;
 
 public class FormularioUsuarioController implements Initializable {
 
-    @FXML private TextField textCorreo;
-    @FXML private ComboBox<String> comboRoles; 
-    @FXML private TextField textNombre;
-    @FXML private TextField textContrasena;
-    @FXML private Label labelErrorCorreo;
-    @FXML private Label labelErrorNombre;
-    @FXML private TextField textConfirmarContrasena;
-    @FXML private TextField textApellidoPaterno;
-    @FXML private TextField textApellidoMaterno;
-    @FXML private Label labelErrorApellidoMaterno;
-    @FXML private Label labelErrorApellidoPaterno; 
-    @FXML private Label labelErrorContrasena; 
-    @FXML private Label labelErrorConfirmar; 
-    @FXML private Label labelErrorRol; 
-
+    @FXML
+    private TextField textCorreo;
+    @FXML
+    private ComboBox<String> comboRoles; 
+    @FXML
+    private TextField textNombre;
+    @FXML
+    private TextField textContrasena;
+    @FXML
+    private Label labelErrorCorreo;
+    @FXML
+    private Label labelErrorNombre;
+    @FXML
+    private TextField textConfirmarContrasena;
+    @FXML
+    private TextField textApellidoPaterno;
+    @FXML
+    private TextField textApellidoMaterno;
+    @FXML
+    private Label labelErrorApellidoMaterno;
+    @FXML
+    private Label labelErrorApellidoPaterno; 
+    @FXML
+    private Label labelErrorContrasena; 
+    @FXML
+    private Label labelErrorConfirmar; 
+    @FXML
+    private Label labelErrorRol; 
+    
+    private static final String CAMPO_OBLIGATORIO = "Campos obligatorios";
+    private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    
     private Usuario usuarioEdicion; 
     
     @Override
@@ -135,17 +152,17 @@ public class FormularioUsuarioController implements Initializable {
         boolean esValido = true;
         limpiarErrores();
 
-        if(esVacio(textNombre)) { labelErrorNombre.setText("Campo obligatorio"); esValido = false; }
-        if(esVacio(textApellidoPaterno)) { labelErrorApellidoPaterno.setText("Campo obligatorio"); esValido = false; }
-        if(esVacio(textApellidoMaterno)) { labelErrorApellidoMaterno.setText("Campo obligatorio"); esValido = false; }
-        if(esVacio(textCorreo)) { labelErrorCorreo.setText("Campo obligatorio"); esValido = false; }
-        if(comboRoles.getValue() == null) { labelErrorRol.setText("Debe seleccionar un rol"); esValido = false; }
+        if(esVacio(textNombre)) { labelErrorNombre.setText(CAMPO_OBLIGATORIO); esValido = false; }
+        if(esVacio(textApellidoPaterno)) { labelErrorApellidoPaterno.setText(CAMPO_OBLIGATORIO); esValido = false; }
+        if(esVacio(textApellidoMaterno)) { labelErrorApellidoMaterno.setText(CAMPO_OBLIGATORIO); esValido = false; }
+        if(esVacio(textCorreo)) { labelErrorCorreo.setText(CAMPO_OBLIGATORIO); esValido = false; }
+        if(comboRoles.getValue() == null) { labelErrorRol.setText(CAMPO_OBLIGATORIO); esValido = false; }
 
         boolean validandoPassword = (usuarioEdicion == null) || !textContrasena.getText().isEmpty();
         
         if (validandoPassword) {
             if (esVacio(textContrasena)) {
-                labelErrorContrasena.setText("Campo obligatorio");
+                labelErrorContrasena.setText(CAMPO_OBLIGATORIO);
                 esValido = false;
             } else if (textContrasena.getText().length() < 6) {
                 labelErrorContrasena.setText("Mínimo 6 caracteres");
@@ -153,7 +170,7 @@ public class FormularioUsuarioController implements Initializable {
             }
             
             if (esVacio(textConfirmarContrasena)) {
-                labelErrorConfirmar.setText("Campo obligatorio");
+                labelErrorConfirmar.setText(CAMPO_OBLIGATORIO);
                 esValido = false;
             } else if (!textContrasena.getText().equals(textConfirmarContrasena.getText())) {
                 labelErrorConfirmar.setText("Las contraseñas no coinciden");
@@ -170,7 +187,7 @@ public class FormularioUsuarioController implements Initializable {
     
     private boolean validarFormatos(){
         
-        if(!textCorreo.getText().contains("@") || !textCorreo.getText().contains(".")){
+        if(textCorreo.getText().matches(EMAIL_REGEX)){
             labelErrorCorreo.setText("Formato de correo no válido");
             return false;
         }

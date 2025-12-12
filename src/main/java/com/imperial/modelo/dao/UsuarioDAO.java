@@ -2,6 +2,7 @@
 package com.imperial.modelo.dao;
 
 import com.imperial.modelo.pojo.Usuario;
+import com.imperial.utilidad.Constantes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 public class UsuarioDAO {
 
     private UsuarioDAO(){
-        throw new UnsupportedOperationException("Esta clase no debe ser instanciada...");
+        throw new UnsupportedOperationException(Constantes.ERROR_CLASE_UTILERIA);
     }
     public static int registrarUsuario(Usuario usuario, Connection conexionBD) throws SQLException{
         
@@ -47,7 +48,7 @@ public class UsuarioDAO {
                 PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
                 return sentencia.executeQuery();
         }
-        throw new SQLException("No hay conexion a la base de datos.");
+        throw new SQLException(Constantes.ERROR_BD);
         
     }
     
@@ -61,26 +62,24 @@ public class UsuarioDAO {
             sentencia.setString(1, correo);
             return sentencia.executeQuery().next();
         }
-        throw new SQLException("No hay conexion a la base de datos");
+        throw new SQLException(Constantes.ERROR_BD);
     }
     
     public static int editarUsuario(Usuario usuario, Connection conexionBD) throws SQLException{
         
         if (conexionBD != null ){
-            
             return 0;
         }
-        throw new SQLException();
+        throw new SQLException(Constantes.ERROR_BD);
     }
     
     public static int eliminarUsuario(int idUsuario, Connection conexionBD) throws SQLException{
         
         if(conexionBD != null){
-            
             return 0;
         }
         
-        throw new SQLException();
+        throw new SQLException(Constantes.ERROR_BD);
     }
     
     public static int cambiarEstado(String estado, Connection conexionBD) throws SQLException{
@@ -88,6 +87,6 @@ public class UsuarioDAO {
         if(conexionBD != null){
             return 0;
         }
-        throw new SQLException();
+        throw new SQLException(Constantes.ERROR_BD);
     }
 }

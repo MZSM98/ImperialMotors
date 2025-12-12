@@ -1,6 +1,7 @@
 
 package com.imperial;
 
+import com.imperial.utilidad.Constantes;
 import com.imperial.utilidad.Utilidades;
 import java.io.IOException;
 import javafx.application.Application;
@@ -8,15 +9,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/**
- *
- * @author User
- */
 public class ImperialMotors extends Application {
-
+    
+    
+    
     @Override
     public void start (Stage primaryStage){
         
@@ -26,11 +24,8 @@ public class ImperialMotors extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ioe){
-            System.out.println("No se pudo cargar el inicio");
-            return;
+            Utilidades.mostrarAlerta("Inicio de Sesión", Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.NONE);
         }
-        
-        
     }
     
     public static void main(String[] args) {

@@ -53,3 +53,8 @@
 2025-11-30 22:06:53 [Thread-437] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Edición de cliente: Martin Bolaños Cobos
 2025-11-30 22:42:33 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
 2025-11-30 22:42:42 [Thread-91] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Exportó PDF (Tabla): Inventario Vehicular
+2025-12-12 00:22:12 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 00:23:15 [Thread-283] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Consulta de Reportes/Bitácora
+2025-12-12 00:23:21 [Thread-394] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Consulta de Reportes/Bitácora
+2025-12-12 00:30:25 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
+2025-12-12 00:46:13 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Admin | Accion: Inicio de sesión exitoso
