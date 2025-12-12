@@ -96,3 +96,5 @@
 2025-12-12 06:09:51 [Thread-238] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Generó vista previa: Ventas por Semana
 2025-12-12 06:09:54 [Thread-239] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Generó vista previa: Ventas del Mes
 2025-12-12 06:09:55 [Thread-240] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Consulta de Reportes/Bitácora
+2025-12-12 06:38:10 [JavaFX Application Thread] INFO  com.imperial.modelo.ConexionBD - Configuración de base de datos cargada correctamente. URL: jdbc:mysql://localhost:3306/imperialmotors
+2025-12-12 06:38:11 [Thread-5] INFO  com.imperial.dominio.BitacoraImpl - Usuario ID: 7 | Nombre: Roberto | Accion: Inicio de sesión exitoso

@@ -72,6 +72,10 @@ public class GestionVentasController implements Initializable {
         HashMap<String, Object> respuesta = VentaImpl.obtenerVentas();
         if (!(boolean) respuesta.get("error")) {
             ArrayList<Venta> ventasBD = (ArrayList<Venta>) respuesta.get("ventas");
+
+            if (usuarioSesion != null && "Vendedor".equalsIgnoreCase(usuarioSesion.getRol())) {
+                ventasBD.removeIf(venta -> venta.getIdUsuario() != usuarioSesion.getIdUsuario());
+            }
             listaVentas.clear();
             listaVentas.addAll(ventasBD);
         } else {
@@ -133,4 +137,5 @@ public class GestionVentasController implements Initializable {
             Utilidades.mostrarAlerta("Error", Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
         }
     }
+    
 }   

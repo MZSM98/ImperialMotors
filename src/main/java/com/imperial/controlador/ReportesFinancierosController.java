@@ -7,6 +7,7 @@ import com.imperial.utilidad.Constantes;
 import com.imperial.utilidad.GeneracionPDF;
 import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
+import com.itextpdf.text.DocumentException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -154,9 +155,10 @@ public class ReportesFinancierosController implements Initializable {
                     BitacoraImpl.registrar(usuarioSesion.getIdUsuario(), usuarioSesion.getNombre(), "Exportó PDF: " + comboReporte.getValue());
                 }
                 Utilidades.mostrarAlerta("Éxito", "Reporte guardado con portada y formato profesional.", Alert.AlertType.INFORMATION);
-            } catch (Exception e) {
-                Utilidades.mostrarAlerta("Error", "No se pudo guardar el PDF", Alert.AlertType.ERROR);
-                e.printStackTrace();
+            } catch (DocumentException de) {
+                Utilidades.mostrarAlerta("Error", Constantes.ERROR_CLASE_UTILERIA, Alert.AlertType.ERROR);
+            } catch (IOException ioe){
+                Utilidades.mostrarAlerta("Error", Constantes.ERROR_BD, Alert.AlertType.NONE);
             }
         }
     }
@@ -183,7 +185,13 @@ public class ReportesFinancierosController implements Initializable {
             
         } catch (IOException ioe) {
             Utilidades.mostrarAlerta("Error", Constantes.ERROR_ABRIR_VENTANA, Alert.AlertType.ERROR);
-            ioe.printStackTrace();
+        }
+    }
+    
+    public void configurarVistaVendedor() {
+        if (botonAuditoria != null) {
+            botonAuditoria.setVisible(false); 
+            botonAuditoria.setManaged(false); 
         }
     }
 }
