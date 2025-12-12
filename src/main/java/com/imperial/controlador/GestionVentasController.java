@@ -42,9 +42,10 @@ public class GestionVentasController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        usuarioSesion = Sesion.getUsuario();
         configurarTabla();
         cargarVentas();
-        usuarioSesion = Sesion.getUsuario();
+        
     }    
 
     private void configurarTabla() {
@@ -66,7 +67,7 @@ public class GestionVentasController implements Initializable {
         });
 
         tablaVentas.setItems(listaVentas);
-    }
+    }   
 
     private void cargarVentas() {
         HashMap<String, Object> respuesta = VentaImpl.obtenerVentas();

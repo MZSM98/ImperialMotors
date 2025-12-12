@@ -12,11 +12,23 @@ public class ReporteDAO {
         throw new UnsupportedOperationException(Constantes.ERROR_CLASE_UTILERIA);
     }
 
-    public static ResultSet obtenerVentasPorPeriodo(Connection conexion, String formatoFecha) throws SQLException {
+    public static ResultSet obtenerVentasPorPeriodo(Connection conexion, String formatoFecha, Integer idUsuario) throws SQLException {
         if (conexion != null) {
-            String consulta = "SELECT DATE_FORMAT(fecha, ?) as periodo, SUM(importe) as total FROM venta GROUP BY periodo ORDER BY periodo";
-            PreparedStatement sentencia = conexion.prepareStatement(consulta);
-            sentencia.setString(1, formatoFecha);
+            String consulta;
+            PreparedStatement sentencia;
+            
+            if (idUsuario != null) {
+                // Filtramos por usuario antes de agrupar
+                consulta = "SELECT DATE_FORMAT(fecha, ?) as periodo, SUM(importe) as total FROM venta WHERE idUsuario = ? GROUP BY periodo ORDER BY periodo";
+                sentencia = conexion.prepareStatement(consulta);
+                sentencia.setString(1, formatoFecha);
+                sentencia.setInt(2, idUsuario);
+            } else {
+                // Consulta original (para administradores)
+                consulta = "SELECT DATE_FORMAT(fecha, ?) as periodo, SUM(importe) as total FROM venta GROUP BY periodo ORDER BY periodo";
+                sentencia = conexion.prepareStatement(consulta);
+                sentencia.setString(1, formatoFecha);
+            }
             return sentencia.executeQuery();
         }
         throw new SQLException(Constantes.ERROR_BD);
@@ -31,10 +43,19 @@ public class ReporteDAO {
         throw new SQLException(Constantes.ERROR_BD);
     }
 
-    public static ResultSet obtenerTodasLasVentas(Connection conexion) throws SQLException {
+    public static ResultSet obtenerTodasLasVentas(Connection conexion, Integer idUsuario) throws SQLException {
         if (conexion != null) {
-            String consulta = "SELECT idVenta, fecha, importe FROM venta";
-            PreparedStatement sentencia = conexion.prepareStatement(consulta);
+            String consulta;
+            PreparedStatement sentencia;
+            
+            if (idUsuario != null) {
+                consulta = "SELECT idVenta, fecha, importe FROM venta WHERE idUsuario = ?";
+                sentencia = conexion.prepareStatement(consulta);
+                sentencia.setInt(1, idUsuario);
+            } else {
+                consulta = "SELECT idVenta, fecha, importe FROM venta";
+                sentencia = conexion.prepareStatement(consulta);
+            }
             return sentencia.executeQuery();
         }
         throw new SQLException(Constantes.ERROR_BD);

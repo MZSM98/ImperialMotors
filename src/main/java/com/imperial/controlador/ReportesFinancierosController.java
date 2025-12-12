@@ -66,6 +66,14 @@ public class ReportesFinancierosController implements Initializable {
         contenedorGrafica.getChildren().add(graficaBarras);
     }
 
+    // Método auxiliar para determinar si aplicamos filtro
+    private Integer obtenerIdUsuarioFiltro() {
+        if (usuarioSesion != null && "Vendedor".equals(usuarioSesion.getRol())) {
+            return usuarioSesion.getIdUsuario();
+        }
+        return null; // Retorna null para Admin (ver todo)
+    }
+
     @FXML
     private void clicGenerar(ActionEvent event) {
         String seleccion = comboReporte.getValue();
@@ -94,7 +102,10 @@ public class ReportesFinancierosController implements Initializable {
     }
 
     private void cargarVentas(XYChart.Series<String, Number> serie, String periodo) {
-        HashMap<String, Object> resp = ReporteImpl.obtenerDatosVentas(periodo);
+        // Obtenemos el ID para filtrar
+        Integer idUsuario = obtenerIdUsuarioFiltro();
+        
+        HashMap<String, Object> resp = ReporteImpl.obtenerDatosVentas(periodo, idUsuario);
         if (!(boolean) resp.get("error")) {
             Map<String, Double> datos = (Map<String, Double>) resp.get("datos");
             for (Map.Entry<String, Double> entry : datos.entrySet()) {
@@ -105,6 +116,7 @@ public class ReportesFinancierosController implements Initializable {
     }
 
     private void cargarInventario(XYChart.Series<String, Number> serie) {
+        // El inventario no se filtra por usuario, es global
         HashMap<String, Object> resp = ReporteImpl.obtenerDatosInventario();
         if (!(boolean) resp.get("error")) {
             Map<String, Integer> datos = (Map<String, Integer>) resp.get("datos");
@@ -116,7 +128,10 @@ public class ReportesFinancierosController implements Initializable {
     }
 
     private void cargarKPI(XYChart.Series<String, Number> serie) {
-        HashMap<String, Object> resp = ReporteImpl.analizarAnomaliasYKPI();
+        // Obtenemos el ID para filtrar los KPIs personales
+        Integer idUsuario = obtenerIdUsuarioFiltro();
+        
+        HashMap<String, Object> resp = ReporteImpl.analizarAnomaliasYKPI(idUsuario);
         if (!(boolean) resp.get("error")) {
             double promedio = (double) resp.get("promedio");
             List<String> anomalias = (List<String>) resp.get("anomalias");

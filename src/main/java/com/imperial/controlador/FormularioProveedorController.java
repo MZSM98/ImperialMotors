@@ -4,6 +4,7 @@ import com.imperial.dominio.BitacoraImpl;
 import com.imperial.dominio.ProveedorImpl;
 import com.imperial.modelo.pojo.Proveedor;
 import com.imperial.modelo.pojo.Usuario;
+import com.imperial.utilidad.RestriccionCampos;
 import com.imperial.utilidad.Sesion;
 import com.imperial.utilidad.Utilidades;
 import java.net.URL;
@@ -34,6 +35,8 @@ public class FormularioProveedorController implements Initializable {
 
     private Usuario usuarioSesion;
     private Proveedor proveedorEdicion;
+    private static final int LIMITE_RFC_MORAL = 12;
+    private static final int LIMITE_TELEFONO = 10;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -122,4 +125,12 @@ public class FormularioProveedorController implements Initializable {
         stage.close();
     }
     
+    private void aplicarRestricciones(){
+        RestriccionCampos.longitudDeLetras(textCorreo);
+        RestriccionCampos.longitudDeLetras(textNombre);
+        RestriccionCampos.soloCaracteresValidosCorreo(textCorreo);
+        RestriccionCampos.limitarLongitudCampo(textRFC, LIMITE_RFC_MORAL);
+        RestriccionCampos.limitarLongitudCampo(textTelefono, LIMITE_TELEFONO);
+        RestriccionCampos.soloNumeros(textTelefono);
+    }
 }

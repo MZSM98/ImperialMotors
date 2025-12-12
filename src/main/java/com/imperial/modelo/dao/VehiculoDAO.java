@@ -73,4 +73,13 @@ public class VehiculoDAO {
         throw new SQLException(Constantes.ERROR_BD);
     }
     
+    public static int eliminarVehiculo(Connection conexion, String vin) throws SQLException {
+        if (conexion != null) {
+            String consulta = "DELETE FROM vehiculo WHERE VIN = ?";
+            PreparedStatement sentencia = conexion.prepareStatement(consulta);
+            sentencia.setString(1, vin);
+            return sentencia.executeUpdate();
+        }
+        throw new SQLException(Constantes.ERROR_BD);
+    }
 }

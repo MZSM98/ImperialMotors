@@ -6,6 +6,7 @@ import javafx.scene.control.TextInputControl;
 
 public class RestriccionCampos {
     private static final int LIMITE_CAMPO_TEXTO = 200; 
+    private static final int LIMITE_CAMPO_NUMERO= 20;
     
     private RestriccionCampos(){
         throw new UnsupportedOperationException(Constantes.ERROR_CLASE_UTILERIA);
@@ -19,15 +20,34 @@ public class RestriccionCampos {
             return change;
         }));
     }
+    
+    public static void limitarLongitudCampo(TextInputControl campotexto, int longitud) {
+        campotexto.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() > longitud) {
+                return null; 
+            }
+            return change;
+        }));
+    }
 
     public static void soloLetras(TextInputControl campotexto) {
         aplicarPatron(campotexto, "[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]*");
     }
     
-    public static void limitarCantidadNumeros(TextInputControl campoTexto, int maxLength) {
+    public static void soloNumeros(TextInputControl campoTexto) {
          campoTexto.setTextFormatter(new TextFormatter<>(change -> {
             String newText = change.getControlNewText();
-            if (newText.matches("[0-9]*") && newText.length() <= maxLength) {
+            if (newText.matches("[0-9]*") && newText.length() <= LIMITE_CAMPO_NUMERO) {
+                return change;
+            }
+            return null;
+        }));
+    }
+    
+    public static void longitudDeLetras(TextInputControl campoTexto) {
+         campoTexto.setTextFormatter(new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]*") && newText.length() <= LIMITE_CAMPO_TEXTO) {
                 return change;
             }
             return null;

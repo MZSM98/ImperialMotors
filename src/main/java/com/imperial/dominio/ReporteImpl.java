@@ -15,7 +15,7 @@ public class ReporteImpl {
     private ReporteImpl() {
     }
 
-    public static HashMap<String, Object> obtenerDatosVentas(String tipoPeriodo) {
+    public static HashMap<String, Object> obtenerDatosVentas(String tipoPeriodo, Integer idUsuario) {
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
         String formato = "%Y-%m"; 
 
@@ -26,7 +26,7 @@ public class ReporteImpl {
         }
 
         try {
-            ResultSet rs = ReporteDAO.obtenerVentasPorPeriodo(ConexionBD.abrirConexion(), formato);
+            ResultSet rs = ReporteDAO.obtenerVentasPorPeriodo(ConexionBD.abrirConexion(), formato, idUsuario);
             Map<String, Double> datos = new LinkedHashMap<>();
             while (rs.next()) {
                 datos.put(rs.getString("periodo"), rs.getDouble("total"));
@@ -61,10 +61,10 @@ public class ReporteImpl {
         return respuesta;
     }
 
-    public static HashMap<String, Object> analizarAnomaliasYKPI() {
+    public static HashMap<String, Object> analizarAnomaliasYKPI(Integer idUsuario) {
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
         try {
-            ResultSet rs = ReporteDAO.obtenerTodasLasVentas(ConexionBD.abrirConexion());
+            ResultSet rs = ReporteDAO.obtenerTodasLasVentas(ConexionBD.abrirConexion(), idUsuario);
             List<Double> importes = new ArrayList<>();
             List<String> reporteAnomalias = new ArrayList<>();
             double sumaTotal = 0;
@@ -95,4 +95,4 @@ public class ReporteImpl {
         }
         return respuesta;
     }
-}   
+}

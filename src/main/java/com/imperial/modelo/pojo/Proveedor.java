@@ -49,4 +49,8 @@ public class Proveedor {
         this.correo = correo;
     }
     
+    @Override
+    public String toString(){
+        return nombre;
+    }
 }

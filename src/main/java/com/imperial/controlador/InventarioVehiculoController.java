@@ -84,7 +84,7 @@ public class InventarioVehiculoController implements Initializable {
 
     @FXML
     private void clicEnRegistrar(ActionEvent event) {
-        abrirFormulario();
+        abrirFormulario(null); // null indica registro nuevo
     }
 
     @FXML
@@ -117,21 +117,27 @@ public class InventarioVehiculoController implements Initializable {
         }
     }
     
-    private void abrirFormulario(){
-        try{
+    private void abrirFormulario(Vehiculo vehiculoEdicion) {
+        try {
             FXMLLoader cargador = Utilidades.obtenerVistaMemoria("vista/FXMLFormularioVehiculo.fxml");
             Parent vista = cargador.load();
+            
+            if (vehiculoEdicion != null) {
+                FormularioVehiculoController ctrl = cargador.getController();
+                ctrl.inicializarDatos(vehiculoEdicion); 
+            }
+            
             Scene escena = new Scene(vista);      
             Stage escenario = new Stage();
             Sesion.registrarVentana(escenario); 
             escenario.setScene(escena);
-            escenario.setTitle("Registrar Vehiculo");
+            escenario.setTitle(vehiculoEdicion == null ? "Registrar Vehículo" : "Editar Vehículo");
             escenario.initModality(Modality.APPLICATION_MODAL); 
             escenario.showAndWait(); 
             
-            llenarTablaVehiculos();
+            llenarTablaVehiculos(); // Refrescar al cerrar
             
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             Utilidades.mostrarAlerta("Error", "No se pudo cargar la vista", Alert.AlertType.ERROR);
             ioe.printStackTrace();
         }
@@ -157,10 +163,37 @@ public class InventarioVehiculoController implements Initializable {
     
     @FXML
     private void clicEnEditar(ActionEvent event) {
+        Vehiculo seleccionado = tablaVehiculos.getSelectionModel().getSelectedItem();
+        if (seleccionado != null) {
+            abrirFormulario(seleccionado); // Pasamos el vehículo a editar
+        } else {
+            Utilidades.mostrarAlerta("Selección requerida", "Selecciona un vehículo para editar", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void clicEnEliminar(ActionEvent event) {
+        Vehiculo seleccionado = tablaVehiculos.getSelectionModel().getSelectedItem();
+        if (seleccionado != null) {
+            Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmacion.setTitle("Confirmar Baja");
+            confirmacion.setHeaderText(null);
+            confirmacion.setContentText("¿Desea quitar el automovil con el VIN: " 
+                    + seleccionado.getVIN() + "?\nEsta acción no se puede revertir");
+            
+            if (confirmacion.showAndWait().get() == javafx.scene.control.ButtonType.OK) {
+                HashMap<String, Object> respuesta = VehiculoImpl.eliminarVehiculo(seleccionado.getVIN());
+                
+                if (!(boolean) respuesta.get("error")) {
+                    Utilidades.mostrarAlerta("Éxito", (String) respuesta.get("mensaje"), Alert.AlertType.INFORMATION);
+                    llenarTablaVehiculos(); 
+                } else {
+                    Utilidades.mostrarAlerta("Error", (String) respuesta.get("mensaje"), Alert.AlertType.ERROR);
+                }
+            }
+        } else {
+            Utilidades.mostrarAlerta("Selección requerida", "Selecciona un vehículo para dar de baja", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML

@@ -67,7 +67,11 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Button>
+            <Label fx:id="labelErrorRFC" text="Label" GridPane.rowIndex="2" />
+            <Label fx:id="labelErrorCorreo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="labelErrorNombre" text="Label" GridPane.rowIndex="5" />
          </children>
       </GridPane>
+      <Label fx:id="labelErrorTelefono" layoutX="62.0" layoutY="328.0" text="Label" />
    </children>
 </AnchorPane>

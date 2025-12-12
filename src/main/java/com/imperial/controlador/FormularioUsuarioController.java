@@ -4,6 +4,7 @@ import com.imperial.dominio.BitacoraImpl;
 import com.imperial.dominio.UsuarioImpl;
 import com.imperial.modelo.pojo.Usuario;
 import com.imperial.utilidad.Encriptacion;
+import com.imperial.utilidad.RestriccionCampos;
 import com.imperial.utilidad.Sesion; 
 import com.imperial.utilidad.Utilidades;
 import java.net.URL;
@@ -59,6 +60,7 @@ public class FormularioUsuarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarComboBoxRoles();
+        aplicarRestricciones();
     }    
 
     public void inicializarDatos(Usuario usuario) {
@@ -72,8 +74,8 @@ public class FormularioUsuarioController implements Initializable {
             
             textCorreo.setEditable(false);
             
-            textContrasena.setPromptText("Dejar vacío para mantener actual");
-            textConfirmarContrasena.setPromptText("Dejar vacío para mantener actual");
+            textContrasena.setPromptText("Llene para sustituir");
+            textConfirmarContrasena.setPromptText("Llene para sustituir");
         }
     }
 
@@ -215,5 +217,15 @@ public class FormularioUsuarioController implements Initializable {
     private void cerrarVentana(){
         Stage escenario = (Stage) textCorreo.getScene().getWindow();
         escenario.close();
+    }
+    
+    private void aplicarRestricciones(){
+        RestriccionCampos.longitudDeLetras(textCorreo);
+        RestriccionCampos.longitudDeLetras(textApellidoMaterno);
+        RestriccionCampos.longitudDeLetras(textApellidoPaterno);
+        RestriccionCampos.longitudDeLetras(textNombre);
+        RestriccionCampos.limitarLongitud(textContrasena);
+        RestriccionCampos.limitarLongitud(textConfirmarContrasena);
+        RestriccionCampos.soloCaracteresValidosCorreo(textCorreo);
     }
 }
